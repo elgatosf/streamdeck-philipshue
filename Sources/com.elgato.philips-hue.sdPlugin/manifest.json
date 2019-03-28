@@ -1,0 +1,79 @@
+{
+  "Actions": [
+    {
+      "Icon": "plugin/images/actions/power",
+      "Name": "On / Off",
+      "States": [
+        {
+          "Image": "plugin/images/icons/on",
+          "Name": "On"
+        },
+        {
+          "Image": "plugin/images/icons/off",
+          "Name": "Off"
+        }
+      ],
+      "Tooltip": "Turn lights on or off.",
+      "UUID": "com.elgato.philips-hue.power"
+    },
+    {
+      "Icon": "plugin/images/actions/color",
+      "Name": "Color",
+      "States": [
+        {
+          "Image": "plugin/images/icons/color"
+        }
+      ],
+      "Tooltip": "Set the color of your light.",
+      "UUID": "com.elgato.philips-hue.color"
+    },
+    {
+      "Icon": "plugin/images/actions/brightness",
+      "Name": "Brightness",
+      "States": [
+        {
+          "Image": "plugin/images/icons/brightness"
+        }
+      ],
+      "Tooltip": "Set the brightness of your light.",
+      "UUID": "com.elgato.philips-hue.brightness"
+    },
+    {
+      "Icon": "plugin/images/actions/scene",
+      "Name": "Scene",
+      "States": [
+        {
+          "Image": "plugin/images/icons/scene"
+        }
+      ],
+      "Tooltip": "Set a scene.",
+      "UUID": "com.elgato.philips-hue.scene"
+    }
+  ],
+  "SDKVersion": 2,
+  "Author": "Elgato",
+  "CodePath": "plugin/index.html",
+  "Description": "Control your Philips Hue lights.",
+  "Name": "Phlips Hue",
+  "Icon": "plugin/images/icons/plugin",
+  "Category": "Philips Hue",
+  "CategoryIcon": "plugin/images/actions/category",
+  "PropertyInspectorPath": "pi/index.html",
+  "URL": "https://www.elgato.com/gaming/stream-deck",
+  "Version": "1.0",
+  "DefaultWindowSize": [500, 650],
+  "OS": [
+    {
+        "Platform": "mac",
+        "MinimumVersion" : "10.11"
+    },
+    {
+        "Platform": "windows",
+        "MinimumVersion" : "10"
+    }
+  ],
+  "Software":
+    {
+        "MinimumVersion" : "4.1.1"
+    }
+}

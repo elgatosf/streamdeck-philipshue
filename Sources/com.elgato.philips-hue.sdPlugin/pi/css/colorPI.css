@@ -1,0 +1,16 @@
+/**
+//==============================================================================
+@file       colorPI.css
+@brief      Philips Hue Plugin
+@copyright  (c) 2019, Corsair Memory, Inc.
+            This source code is licensed under the MIT-style license found in the LICENSE file.
+//==============================================================================
+**/
+
+.temperature::-webkit-slider-runnable-track {
+    background-image: linear-gradient(to right,#86c6e8,  #faa04e) !important;
+}
+
+.temperature::-webkit-slider-thumb {
+    background-color: #86c6e8 !important;
+}

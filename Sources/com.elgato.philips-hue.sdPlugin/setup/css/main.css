@@ -1,0 +1,157 @@
+/**
+//==============================================================================
+@file       main.css
+@brief      Philips Hue Plugin
+@copyright  (c) 2019, Corsair Memory, Inc.
+            This source code is licensed under the MIT-style license found in the LICENSE file.
+//==============================================================================
+**/
+
+html, body {
+    margin: 0px;
+    color: rgb(230, 230, 230);
+    background-color: rgb(45, 45, 45);
+    font-family: 'Helvetica Light', 'Helvetica', Arial, sans-serif;
+    height: 100%;
+    -webkit-user-select: none;
+    user-select: none;
+    overflow: hidden;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: rgb(150, 150, 150);
+    font-weight: 100;
+    margin-bottom: 5px;
+}
+
+.header {
+    padding: 25px;
+    padding-bottom: 5px;
+}
+
+#content {
+    padding: 25px;
+    padding-top: 0px;
+    padding-bottom: 15px;
+}
+
+.main {
+    min-width: 400px;
+}
+
+@media (min-width: 600px) {
+    .main {
+        max-width: 500px;
+        height: 100%;
+        width: 100%;
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .center {
+        display: table-cell;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    .border {
+        border: 1px solid rgb(60,60,60);
+        border-radius: 5px;
+        margin: 10px;
+        min-height: 625px;
+    }
+}
+
+p, li {
+    line-height: 1.5;
+    text-align: center;
+}
+
+.status-bar {
+    display: table;
+    width: 100%;
+    border-spacing: 3px;
+    border-collapse: separate;
+}
+
+.status-row {
+    display: table-row;
+}
+
+.status-cell {
+    display: table-cell;
+    background-color: rgb(61, 61, 61);
+    height: 10px;
+}
+
+.status-cell.active {
+    background-color: rgb(0, 125, 255);
+}
+
+.image {
+    width: 250px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+}
+
+.button, .button-transparent {
+    padding: 8px 50px;
+    display: table;
+    margin: 8px auto;
+    cursor: pointer;
+}
+
+.button {
+    background-color: rgb(61, 61, 61);
+    border-radius: 4px;
+}
+
+.button:hover {
+    background-color: rgb(0, 125, 255);
+}
+
+.button-transparent:hover {
+    color: rgb(150, 150, 150);
+}
+
+.hide {
+    display: none;
+}
+
+#loader {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(102, 102, 102);
+    margin: 20px auto;
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+@-webkit-keyframes sk-rotateplane {
+    0% { -webkit-transform: perspective(120px) }
+    50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+    100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+@keyframes sk-rotateplane {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+    } 50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+    } 100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+}

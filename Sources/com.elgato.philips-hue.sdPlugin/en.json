@@ -1,0 +1,75 @@
+{
+  "Name": "Philips Hue",
+  "Category": "Philips Hue",
+  "Description": "Control your Philips Hue lights.",
+  "com.elgato.philips-hue.power": {
+    "Name": "On / Off",
+    "Tooltip": "Turn lights on or off.",
+    "States": [{
+      "Name": "On"
+    },
+    {
+      "Name": "Off"
+    }]
+  },
+  "com.elgato.philips-hue.color": {
+    "Name": "Color",
+    "Tooltip": "Set the color of your light."
+  },
+  "com.elgato.philips-hue.brightness": {
+    "Name": "Brightness",
+    "Tooltip": "Set the brightness of your light."
+  },
+  "com.elgato.philips-hue.scene": {
+    "Name": "Scene",
+    "Tooltip": "Set a scene."
+  },
+  "Localization": {
+    "PI": {
+      "Bridge": "Bridge",
+      "NoBridges": "No Bridges",
+      "AddBridge": "Add New",
+      "Lights": "Lights",
+      "Group": "Group",
+      "LightsTitle": "Lights",
+      "GroupsTitle": "Groups",
+      "NoLights": "No Lights",
+      "NoGroups": "No Groups",
+      "Color": "Color",
+      "Temperature": "Temperature",
+      "Brightness": "Brightness",
+      "Scene": "Scene",
+      "NoScenes": "No Scenes"
+    },
+    "Setup": {
+      "Intro": {
+        "Title" : "Add Bridge",
+        "Description": "Pair with a Philips Hue bridge to control your lights.",
+        "Start": "Discover Bridges",
+        "Close": "Not Now"
+      },
+      "Discovery": {
+        "Title" : "Discovering Bridges...",
+        "TitleNone" : "No Bridges Found",
+        "TitleOne" : "One Bridge Found",
+        "TitleMultiple" : "{{ number }} Bridges Found",
+        "DescriptionFound": "Start pairing now?",
+        "DescriptionNone": "Make sure your bridge is switched on and connected to the network.",
+        "Pair": "Pair",
+        "Close": "Close",
+        "Retry": "Try Again"
+      },
+      "Pairing": {
+        "Title" : "Pairing...",
+        "Description": "Please press the link button on the bridge now.",
+        "Close": "Close",
+        "Retry": "Try Again"
+      },
+      "Save": {
+        "Title" : "Bridge Added",
+        "Description": "The bridge has been paired sucessfully.",
+        "Save": "Done"
+      }
+    }
+  }
+}
