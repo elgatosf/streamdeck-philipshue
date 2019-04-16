@@ -54,7 +54,7 @@
   "Author": "Elgato",
   "CodePath": "plugin/index.html",
   "Description": "Control your Philips Hue lights.",
-  "Name": "Phlips Hue",
+  "Name": "Philips Hue",
   "Icon": "plugin/images/icons/plugin",
   "Category": "Philips Hue",
   "CategoryIcon": "plugin/images/actions/category",
