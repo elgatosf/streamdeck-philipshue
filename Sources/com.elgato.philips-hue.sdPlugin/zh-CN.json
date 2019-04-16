@@ -1,74 +1,74 @@
 {
   "Name": "Philips Hue",
   "Category": "Philips Hue",
-  "Description": "Control your Philips Hue lights.",
+  "Description": "控制您的 Philips Hue 灯。",
   "com.elgato.philips-hue.power": {
-    "Name": "On / Off",
-    "Tooltip": "Turn lights on or off.",
+    "Name": "开/关",
+    "Tooltip": "打开或关闭灯。",
     "States": [{
-      "Name": "On"
+      "Name": "开"
     },
     {
-      "Name": "Off"
+      "Name": "关"
     }]
   },
   "com.elgato.philips-hue.color": {
-    "Name": "Color",
-    "Tooltip": "Set the color of your light."
+    "Name": "颜色",
+    "Tooltip": "设置灯的颜色。"
   },
   "com.elgato.philips-hue.brightness": {
-    "Name": "Brightness",
-    "Tooltip": "Set the brightness of your light."
+    "Name": "亮度",
+    "Tooltip": "设置灯的亮度。"
   },
   "com.elgato.philips-hue.scene": {
-    "Name": "Scene",
-    "Tooltip": "Set a scene."
+    "Name": "场景",
+    "Tooltip": "设置场景。"
   },
   "Localization": {
     "PI": {
-      "Bridge": "Bridge",
-      "NoBridges": "No Bridges",
-      "AddBridge": "Add New",
-      "Lights": "Lights",
-      "Group": "Group",
-      "LightsTitle": "Lights",
-      "GroupsTitle": "Groups",
-      "NoLights": "No Lights",
-      "NoGroups": "No Groups",
-      "Color": "Color",
-      "Temperature": "Temperature",
-      "Brightness": "Brightness",
-      "Scene": "Scene",
-      "NoScenes": "No Scenes"
+      "Bridge": "桥接",
+      "NoBridges": "无需桥接",
+      "AddBridge": "新增",
+      "Lights": "灯",
+      "Group": "组",
+      "LightsTitle": "灯",
+      "GroupsTitle": "组",
+      "NoLights": "没有灯",
+      "NoGroups": "没有组",
+      "Color": "颜色",
+      "Temperature": "温度",
+      "Brightness": "亮度",
+      "Scene": "场景",
+      "NoScenes": "没有场景"
     },
     "Setup": {
       "Intro": {
-        "Title" : "Add Bridge",
-        "Description": "Pair with a Philips Hue bridge to control your lights.",
-        "Start": "Discover Bridges",
-        "Close": "Not Now"
+        "Title" : "添加桥接",
+        "Description": "与 Philips Hue 桥接配对以控制您的灯。",
+        "Start": "发现桥接",
+        "Close": "现在不"
       },
       "Discovery": {
-        "Title" : "Discovering Bridges...",
-        "TitleNone" : "No Bridges Found",
-        "TitleOne" : "One Bridge Found",
-        "TitleMultiple" : "{{ number }} Bridges Found",
-        "DescriptionFound": "Start pairing now?",
-        "DescriptionNone": "Make sure your bridge is switched on and connected to the network.",
-        "Pair": "Pair",
-        "Close": "Close",
-        "Retry": "Try Again"
+        "Title" : "正在发现桥接...",
+        "TitleNone" : "没有找到桥接",
+        "TitleOne" : "找到一个桥接",
+        "TitleMultiple" : "找到 {{ number }} 个桥接",
+        "DescriptionFound": "现在开始配对？",
+        "DescriptionNone": "确保桥接打开并已联网。",
+        "Pair": "配对",
+        "Close": "关闭",
+        "Retry": "重试"
       },
       "Pairing": {
-        "Title" : "Pairing...",
-        "Description": "Please press the link button on the bridge now.",
-        "Close": "Close",
-        "Retry": "Try Again"
+        "Title" : "正在配对...",
+        "Description": "现在请按桥接上的链接按钮。",
+        "Close": "关闭",
+        "Retry": "重试"
       },
       "Save": {
-        "Title" : "Bridge Added",
-        "Description": "The bridge has been paired sucessfully.",
-        "Save": "Done"
+        "Title" : "桥接已添加",
+        "Description": "桥接配对成功。",
+        "Save": "完成"
       }
     }
   }

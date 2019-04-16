@@ -1,10 +1,10 @@
 {
   "Name": "Philips Hue",
   "Category": "Philips Hue",
-  "Description": "Control your Philips Hue lights.",
+  "Description": "Controle sus luces Philips Hue.",
   "com.elgato.philips-hue.power": {
     "Name": "On / Off",
-    "Tooltip": "Turn lights on or off.",
+    "Tooltip": "Encender o apagar las luces.",
     "States": [{
       "Name": "On"
     },
@@ -14,61 +14,61 @@
   },
   "com.elgato.philips-hue.color": {
     "Name": "Color",
-    "Tooltip": "Set the color of your light."
+    "Tooltip": "Ajuste el color de su luz."
   },
   "com.elgato.philips-hue.brightness": {
-    "Name": "Brightness",
-    "Tooltip": "Set the brightness of your light."
+    "Name": "Brillo",
+    "Tooltip": "Ajuste el brillo de su luz."
   },
   "com.elgato.philips-hue.scene": {
-    "Name": "Scene",
-    "Tooltip": "Set a scene."
+    "Name": "Escena",
+    "Tooltip": "Activa una escena."
   },
   "Localization": {
     "PI": {
-      "Bridge": "Bridge",
-      "NoBridges": "No Bridges",
-      "AddBridge": "Add New",
-      "Lights": "Lights",
-      "Group": "Group",
-      "LightsTitle": "Lights",
-      "GroupsTitle": "Groups",
-      "NoLights": "No Lights",
-      "NoGroups": "No Groups",
+      "Bridge": "Puente",
+      "NoBridges": "No hay puentes",
+      "AddBridge": "Añadir",
+      "Lights": "Luces",
+      "Group": "Grupo",
+      "LightsTitle": "Luces",
+      "GroupsTitle": "Grupos",
+      "NoLights": "No hay luces",
+      "NoGroups": "No hay grupos",
       "Color": "Color",
-      "Temperature": "Temperature",
-      "Brightness": "Brightness",
-      "Scene": "Scene",
-      "NoScenes": "No Scenes"
+      "Temperature": "Temperatura",
+      "Brightness": "Brillo",
+      "Scene": "Escena",
+      "NoScenes": "No hay escenas"
     },
     "Setup": {
       "Intro": {
-        "Title" : "Add Bridge",
-        "Description": "Pair with a Philips Hue bridge to control your lights.",
-        "Start": "Discover Bridges",
-        "Close": "Not Now"
+        "Title" : "Añadir puente",
+        "Description": "Enlácese a un puente Philips Hue para controlar sus luces.",
+        "Start": "Detectar puentes",
+        "Close": "Ahora no"
       },
       "Discovery": {
-        "Title" : "Discovering Bridges...",
-        "TitleNone" : "No Bridges Found",
-        "TitleOne" : "One Bridge Found",
-        "TitleMultiple" : "{{ number }} Bridges Found",
-        "DescriptionFound": "Start pairing now?",
-        "DescriptionNone": "Make sure your bridge is switched on and connected to the network.",
-        "Pair": "Pair",
-        "Close": "Close",
-        "Retry": "Try Again"
+        "Title" : "Detectando puentes…",
+        "TitleNone" : "No se han detectado puentes",
+        "TitleOne" : "Se ha detectado un puente",
+        "TitleMultiple" : "{{ number }} puentes detectados",
+        "DescriptionFound": "¿Empezar a enlazar ahora?",
+        "DescriptionNone": "Compruebe que el puente está encendido y conectado a la red.",
+        "Pair": "Enlazar",
+        "Close": "Cerrar",
+        "Retry": "Volver a intentar"
       },
       "Pairing": {
-        "Title" : "Pairing...",
-        "Description": "Please press the link button on the bridge now.",
-        "Close": "Close",
-        "Retry": "Try Again"
+        "Title" : "Enlazando...",
+        "Description": "Pulse ahora el botón de enlace en el puente.",
+        "Close": "Cerrar",
+        "Retry": "Volver a intentar"
       },
       "Save": {
-        "Title" : "Bridge Added",
-        "Description": "The bridge has been paired sucessfully.",
-        "Save": "Done"
+        "Title" : "Puente añadido",
+        "Description": "El puente se ha enlazado correctamente.",
+        "Save": "OK"
       }
     }
   }

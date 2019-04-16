@@ -1,74 +1,74 @@
 {
   "Name": "Philips Hue",
   "Category": "Philips Hue",
-  "Description": "Control your Philips Hue lights.",
+  "Description": "Philips Hueの照明をコントロールします。",
   "com.elgato.philips-hue.power": {
-    "Name": "On / Off",
-    "Tooltip": "Turn lights on or off.",
+    "Name": "オン/オフ",
+    "Tooltip": "照明をオン、またはオフにします。",
     "States": [{
-      "Name": "On"
+      "Name": "オン"
     },
     {
-      "Name": "Off"
+      "Name": "オフ"
     }]
   },
   "com.elgato.philips-hue.color": {
-    "Name": "Color",
-    "Tooltip": "Set the color of your light."
+    "Name": "カラー",
+    "Tooltip": "照明のカラーを設定します。"
   },
   "com.elgato.philips-hue.brightness": {
-    "Name": "Brightness",
-    "Tooltip": "Set the brightness of your light."
+    "Name": "明るさ",
+    "Tooltip": "照明の明るさを調整します。"
   },
   "com.elgato.philips-hue.scene": {
-    "Name": "Scene",
-    "Tooltip": "Set a scene."
+    "Name": "シーン",
+    "Tooltip": "シーンを設定します。"
   },
   "Localization": {
     "PI": {
-      "Bridge": "Bridge",
-      "NoBridges": "No Bridges",
-      "AddBridge": "Add New",
-      "Lights": "Lights",
-      "Group": "Group",
-      "LightsTitle": "Lights",
-      "GroupsTitle": "Groups",
-      "NoLights": "No Lights",
-      "NoGroups": "No Groups",
-      "Color": "Color",
-      "Temperature": "Temperature",
-      "Brightness": "Brightness",
-      "Scene": "Scene",
-      "NoScenes": "No Scenes"
+      "Bridge": "ブリッジ",
+      "NoBridges": "ブリッジがありません",
+      "AddBridge": "新規を追加",
+      "Lights": "照明",
+      "Group": "グループ",
+      "LightsTitle": "照明",
+      "GroupsTitle": "グループ",
+      "NoLights": "照明がありません",
+      "NoGroups": "グループがありません",
+      "Color": "カラー",
+      "Temperature": "温度",
+      "Brightness": "明るさ",
+      "Scene": "シーン",
+      "NoScenes": "シーンがありません"
     },
     "Setup": {
       "Intro": {
-        "Title" : "Add Bridge",
-        "Description": "Pair with a Philips Hue bridge to control your lights.",
-        "Start": "Discover Bridges",
-        "Close": "Not Now"
+        "Title" : "ブリッジを追加",
+        "Description": "照明をコントロールするには、Philips Hueのブリッジを使ってペアリングしてください。",
+        "Start": "ブリッジを検出",
+        "Close": "今はしない"
       },
       "Discovery": {
-        "Title" : "Discovering Bridges...",
-        "TitleNone" : "No Bridges Found",
-        "TitleOne" : "One Bridge Found",
-        "TitleMultiple" : "{{ number }} Bridges Found",
-        "DescriptionFound": "Start pairing now?",
-        "DescriptionNone": "Make sure your bridge is switched on and connected to the network.",
-        "Pair": "Pair",
-        "Close": "Close",
-        "Retry": "Try Again"
+        "Title" : "ブリッジを検出中…",
+        "TitleNone" : "ブリッジが見つかりません",
+        "TitleOne" : "１件のブリッジを検出しました",
+        "TitleMultiple" : "{{ number }}件のブリッジを検出しました",
+        "DescriptionFound": "今すぐペアリングしますか？",
+        "DescriptionNone": "ブリッジがオンになっていて、ネットワークに接続されていることを確認してください。",
+        "Pair": "ペアリング",
+        "Close": "閉じる",
+        "Retry": "やり直す"
       },
       "Pairing": {
-        "Title" : "Pairing...",
-        "Description": "Please press the link button on the bridge now.",
-        "Close": "Close",
-        "Retry": "Try Again"
+        "Title" : "ペアリング中…",
+        "Description": "今すぐブリッジの接続ボタンを押してください。",
+        "Close": "閉じる",
+        "Retry": "やり直す"
       },
       "Save": {
-        "Title" : "Bridge Added",
-        "Description": "The bridge has been paired sucessfully.",
-        "Save": "Done"
+        "Title" : "ブリッジが追加されました",
+        "Description": "ブリッジのペアリングを完了しました。",
+        "Save": "完了"
       }
     }
   }
