@@ -60,7 +60,7 @@
   "CategoryIcon": "plugin/images/actions/category",
   "PropertyInspectorPath": "pi/index.html",
   "URL": "https://www.elgato.com/gaming/stream-deck",
-  "Version": "1.0",
+  "Version": "1.1",
   "DefaultWindowSize": [500, 650],
   "OS": [
     {
@@ -74,6 +74,6 @@
   ],
   "Software":
     {
-        "MinimumVersion" : "4.1.1"
+        "MinimumVersion" : "4.2"
     }
 }
