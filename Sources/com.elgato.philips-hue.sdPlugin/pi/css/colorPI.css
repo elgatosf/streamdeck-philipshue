@@ -8,7 +8,7 @@
 **/
 
 .temperature::-webkit-slider-runnable-track {
-    background-image: linear-gradient(to right,#86c6e8,  #faa04e) !important;
+    background-image: linear-gradient(to right, #faa04e, #86c6e8) !important;
 }
 
 .temperature::-webkit-slider-thumb {

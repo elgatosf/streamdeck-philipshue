@@ -104,6 +104,7 @@ p, li {
     margin-left: auto;
     margin-right: auto;
     padding-top: 5px;
+    padding-bottom: 20px;
 }
 
 .button, .button-transparent {

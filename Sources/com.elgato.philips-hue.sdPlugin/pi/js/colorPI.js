@@ -94,13 +94,16 @@ function ColorPI(inContext, inLanguage) {
             var colorPicker = "<div type='range' class='sdpi-item'> \
                                    <div class='sdpi-item-label' id='temperature-label'>" + localization["Temperature"] + "</div> \
                                    <div class='sdpi-item-value'> \
-                                        <input class='temperature' type='range' id='color-input' min='0' max='100' value='" + settings.color + "'> \
+                                        <input class='temperature floating-tooltip' data-suffix='K' type='range' id='color-input' min='2000' max='6500' value='" + settings.color + "'> \
                                    </div> \
                               </div>";
         }
 
         // Add color picker
         document.getElementById('placeholder').innerHTML = colorPicker;
+
+        // Initialize the tooltips
+        initToolTips();
 
         // Add event listener
         document.getElementById("color-input").addEventListener("change", colorChanged);

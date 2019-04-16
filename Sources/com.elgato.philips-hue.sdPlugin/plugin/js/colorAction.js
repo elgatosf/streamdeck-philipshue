@@ -99,8 +99,13 @@ function ColorAction(inContext, inSettings) {
 						var min = 153.0;
 						var max = 500.0;
 
+						var minK = 2000.0;
+						var maxK = 6500.0;
+
 						// Convert light color
-						var temperature = Math.round(inSettings.color / 100.0 * (max - min) + min);
+						var percentage = (inSettings.color - minK) / (maxK - minK);
+						var invertedPercentage = -1 * (percentage - 1.0);
+						var temperature = Math.round(invertedPercentage * (max - min) + min);
 
 						// Set light or group state
 						obj.setTemperature(temperature, function (inSuccess, inError) {
@@ -185,7 +190,7 @@ function ColorAction(inContext, inSettings) {
 				}
 				else {
 						// Set white as the default temperature
-						settings.color = '50';
+						settings.color = '4250';
 				}
 
 				// Save the settings

@@ -30,12 +30,13 @@ function BrightnessPI(inContext, inLanguage) {
     var brightnessSlider = "<div type='range' class='sdpi-item'> \
                                 <div class='sdpi-item-label' id='brightness-label'></div> \
                                 <div class='sdpi-item-value'> \
-                                    <span>1</span> \
-                                    <input type='range' id='brightness-input' min='1' max='100' value='" + settings.brightness + "'> \
-                                    <span>100</span> \
+                                    <input class='floating-tooltip' data-suffix='%' type='range' id='brightness-input' min='1' max='100' value='" + settings.brightness + "'> \
                                 </div> \
                            </div>";
     document.getElementById('placeholder').innerHTML = brightnessSlider;
+
+    // Initialize the tooltips
+    initToolTips();
 
     // Add event listener
     document.getElementById("brightness-input").addEventListener("change", brightnessChanged);
