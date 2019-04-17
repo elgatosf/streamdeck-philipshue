@@ -189,8 +189,11 @@ function Cache() {
 																						sceneCache.type = inScene.getType();
 																						sceneCache.group = inScene.getGroup();
 
-																						// Add scene to cache
-																						instance.data[bridge.getID()].groups["g-" + inScene.getGroup()].scenes[inScene.getID()] = sceneCache;
+																						// If scenes group is in cache
+                                            if ("g-" + inScene.getGroup() in instance.data[bridge.getID()].groups) {
+                                                // Add scene to cache
+																						    instance.data[bridge.getID()].groups["g-" + inScene.getGroup()].scenes[inScene.getID()] = sceneCache;
+                                            }
 																				});
 
 																				// Inform keys that updated cache is available
