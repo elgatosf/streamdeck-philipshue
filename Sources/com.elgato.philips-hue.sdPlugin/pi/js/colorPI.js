@@ -86,13 +86,13 @@ function ColorPI(inContext, inLanguage) {
         // Add full color picker or only temperature slider
         if (lightCache.xy != null) {
             var colorPicker = "<div type='color' class='sdpi-item'> \
-                                  <div class='sdpi-item-label' id='color-label'>" + localization["Color"] + "</div> \
+                                  <div class='sdpi-item-label' id='color-label'>" + instance.localization["Color"] + "</div> \
                                   <input type='color' class='sdpi-item-value' id='color-input' value='" + settings.color + "'> \
                                </div>";
         }
         else {
             var colorPicker = "<div type='range' class='sdpi-item'> \
-                                   <div class='sdpi-item-label' id='temperature-label'>" + localization["Temperature"] + "</div> \
+                                   <div class='sdpi-item-label' id='temperature-label'>" + instance.localization["Temperature"] + "</div> \
                                    <div class='sdpi-item-value'> \
                                         <input class='temperature floating-tooltip' data-suffix='K' type='range' id='color-input' min='2000' max='6500' value='" + settings.color + "'> \
                                    </div> \

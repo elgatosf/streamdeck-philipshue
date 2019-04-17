@@ -33,9 +33,9 @@ function ScenePI(inContext, inLanguage) {
 				piLocalize.call(instance);
 
         // Localize the scene select
-        document.getElementById("lights-label").innerHTML = localization["Group"];
-        document.getElementById("scene-label").innerHTML = localization["Scene"];
-        document.getElementById("no-scenes").innerHTML = localization["NoScenes"];
+        document.getElementById("lights-label").innerHTML = instance.localization["Group"];
+        document.getElementById("scene-label").innerHTML = instance.localization["Scene"];
+        document.getElementById("no-scenes").innerHTML = instance.localization["NoScenes"];
 		};
 
     // Add scene select

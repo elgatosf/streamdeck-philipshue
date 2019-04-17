@@ -23,7 +23,7 @@ function BrightnessPI(inContext, inLanguage) {
 				piLocalize.call(instance);
 
         // Localize the brightess label
-        document.getElementById("brightness-label").innerHTML = localization["Brightness"];
+        document.getElementById("brightness-label").innerHTML = instance.localization["Brightness"];
 		};
 
     // Add brightness slider

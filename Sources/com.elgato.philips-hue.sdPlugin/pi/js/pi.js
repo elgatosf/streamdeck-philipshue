@@ -23,7 +23,7 @@ function PI(inContext, inLanguage) {
     getLocalization(inLanguage, function(inStatus, inLocalization) {
         if (inStatus) {
             // Save public localization
-            localization = inLocalization['PI'];
+            instance.localization = inLocalization['PI'];
 
             // Localize the PI
             instance.localize();
@@ -36,24 +36,24 @@ function PI(inContext, inLanguage) {
     // Localize the UI
     this.localize = function () {
         // Check if localizations were loaded
-        if (localization == null) {
+        if (instance.localization == null) {
             return;
         }
 
         // Localize the bridge select
-        document.getElementById("bridge-label").innerHTML = localization["Bridge"];
-        document.getElementById("no-bridges").innerHTML = localization["NoBridges"];
-        document.getElementById("add-bridge").innerHTML = localization["AddBridge"];
+        document.getElementById("bridge-label").innerHTML = instance.localization["Bridge"];
+        document.getElementById("no-bridges").innerHTML = instance.localization["NoBridges"];
+        document.getElementById("add-bridge").innerHTML = instance.localization["AddBridge"];
 
         // Localize the light and group select
-        document.getElementById("lights-label").innerHTML = localization["Lights"];
-        document.getElementById("lights").label = localization["LightsTitle"];
-        document.getElementById("no-lights").innerHTML = localization["NoLights"];
-        document.getElementById("no-groups").innerHTML = localization["NoGroups"];
+        document.getElementById("lights-label").innerHTML = instance.localization["Lights"];
+        document.getElementById("lights").label = instance.localization["LightsTitle"];
+        document.getElementById("no-lights").innerHTML = instance.localization["NoLights"];
+        document.getElementById("no-groups").innerHTML = instance.localization["NoGroups"];
 
         // Groups label is removed for scenes PI
         if (document.getElementById("groups") != null) {
-            document.getElementById("groups").label = localization["GroupsTitle"];
+            document.getElementById("groups").label = instance.localization["GroupsTitle"];
         }
     };
 
