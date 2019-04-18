@@ -27,14 +27,19 @@ function Bridge(ip = null, id = null, username = null) {
             xhr.timeout = 2500;
             xhr.onload = function () {
                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                    var result = xhr.response[0];
-                    if ('success' in result) {
-                        username = result['success']['username'];
-                        callback(true, result);
+                    if (xhr.response != undefined && xhr.response != null) {
+                        var result = xhr.response[0];
+                        if ('success' in result) {
+                            username = result['success']['username'];
+                            callback(true, result);
+                        }
+                        else {
+                            var message = result['error']['description'];
+                            callback(false, message);
+                        }
                     }
                     else {
-                        var message = result['error']['description'];
-                        callback(false, message);
+                        callback(false, "Bridge response is undefined or null.");
                     }
                 }
                 else {
@@ -82,13 +87,18 @@ function Bridge(ip = null, id = null, username = null) {
         xhr.onload = function () {
             if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                 var result = xhr.response;
-                if ('name' in result) {
-                    var name = result['name'];
-                    callback(true, name);
+                if (result != undefined && result != null) {
+                    if ('name' in result) {
+                        var name = result['name'];
+                        callback(true, name);
+                    }
+                    else {
+                        var message = result[0]['error']['description'];
+                        callback(false, message);
+                    }
                 }
                 else {
-                    var message = result[0]['error']['description'];
-                    callback(false, message);
+                    callback(false, "Bridge response is undefined or null.");
                 }
             }
             else {
@@ -127,25 +137,30 @@ function Bridge(ip = null, id = null, username = null) {
         xhr.onload = function () {
             if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                 var result = xhr.response;
-                if (!Array.isArray(result)) {
-                    var objects = [];
-                    Object.keys(result).forEach(function (key) {
-                        value = result[key];
-                        if (type == "light") {
-                            objects.push(new Light(instance, key, value.name, value.type, value.state.on, value.state.bri, value.state.xy, value.state.ct));
-                        }
-                        else if (type == "group") {
-                            objects.push(new Group(instance, key, value.name, value.type, value.state.all_on, value.action.bri, value.action.xy, value.action.ct));
-                        }
-                        else if (type == "scene") {
-                            objects.push(new Scene(instance, key, value.name, value.type, value.group));
-                        }
-                    });
-                    callback(true, objects);
+                if (result != undefined && result != null) {
+                    if (!Array.isArray(result)) {
+                        var objects = [];
+                        Object.keys(result).forEach(function (key) {
+                            value = result[key];
+                            if (type == "light") {
+                                objects.push(new Light(instance, key, value.name, value.type, value.state.on, value.state.bri, value.state.xy, value.state.ct));
+                            }
+                            else if (type == "group") {
+                                objects.push(new Group(instance, key, value.name, value.type, value.state.all_on, value.action.bri, value.action.xy, value.action.ct));
+                            }
+                            else if (type == "scene") {
+                                objects.push(new Scene(instance, key, value.name, value.type, value.group));
+                            }
+                        });
+                        callback(true, objects);
+                    }
+                    else {
+                        var message = result[0]['error']['description'];
+                        callback(false, message);
+                    }
                 }
                 else {
-                    var message = result[0]['error']['description'];
-                    callback(false, message);
+                    callback(false, "Bridge response is undefined or null.");
                 }
             }
             else {
@@ -186,11 +201,16 @@ Bridge.discover = function(callback) {
     xhr.timeout = 10000;
     xhr.onload = function () {
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-            var bridges = [];
-            xhr.response.forEach(function (bridge) {
-                bridges.push(new Bridge(bridge.internalipaddress, bridge.id));
-            });
-            callback(true, bridges);
+            if (xhr.response != undefined && xhr.response != null) {
+                var bridges = [];
+                xhr.response.forEach(function (bridge) {
+                    bridges.push(new Bridge(bridge.internalipaddress, bridge.id));
+                });
+                callback(true, bridges);
+            }
+            else {
+                callback(false, "Meethue server response is undefined or null.");
+            }
         }
         else {
             callback(false, 'Unable to discover bridges.');
@@ -420,14 +440,19 @@ function MeetHue(bridge = null, id = null, name = null, type = null) {
         xhr.timeout = 2500;
         xhr.onload = function () {
             if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                var result = xhr.response[0];
-                if ('success' in result) {
-                    username = result['success']['username'];
-                    callback(true, result);
+                if (xhr.response != undefined && xhr.response != null) {
+                    var result = xhr.response[0];
+                    if ('success' in result) {
+                        username = result['success']['username'];
+                        callback(true, result);
+                    }
+                    else {
+                        var message = result['error']['description'];
+                        callback(false, message);
+                    }
                 }
                 else {
-                    var message = result['error']['description'];
-                    callback(false, message);
+                    callback(false, "Bridge response is undefined or null.");
                 }
             }
             else {
