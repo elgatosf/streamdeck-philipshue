@@ -136,7 +136,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
                 var light = bridgeCache.lights[inLightID];
 
                 // Check if this is a color action and the lights supports colors
-                if (!(instance instanceof ColorPI && light.temperature == null)) {
+                if (!(instance instanceof ColorPI && light.temperature == null && light.xy == null)) {
                     // Add the light
                     var option = "<option value='l-" + light.id + "' class='lights'>" + light.name + "</option>";
                     document.getElementById("no-lights").insertAdjacentHTML('beforebegin', option);
@@ -169,7 +169,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
                 var group = bridgeCache.groups[inGroupID];
 
                 // Check if this is a color action and the lights supports colors
-                if (!(instance instanceof ColorPI && group.temperature == null)) {
+                if (!(instance instanceof ColorPI && group.temperature == null && group.xy == null)) {
                     // Add the group
                     var option = "<option value='g-" + group.id + "' class='groups'>" + group.name + "</option>";
                     document.getElementById("no-groups").insertAdjacentHTML('beforebegin', option);
