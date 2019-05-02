@@ -7,7 +7,7 @@
 **/
 //==============================================================================
 
-function PI(inContext, inLanguage) {
+function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init PI
     var instance = this;
 
@@ -223,7 +223,7 @@ function PI(inContext, inLanguage) {
     function bridgeChanged(inEvent) {
         if (inEvent.target.value == "add") {
             // Open setup window
-            window.open("../setup/index.html?language=" + inLanguage);
+            window.open("../setup/index.html?language=" + inLanguage + "&streamDeckVersion=" + inStreamDeckVersion + "&pluginVersion=" + inPluginVersion);
 
             // Select the first in case user cancels the setup
             document.getElementById("bridge-select").selectedIndex = 0;

@@ -25,6 +25,8 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     var actionInfo = JSON.parse(inActionInfo);
     var info = JSON.parse(inInfo);
 
+    var streamDeckVersion = info['application']['version'];
+    var pluginVersion = info['plugin']['version'];
     // Save global settings
     settings = actionInfo['payload']['settings'];
 
@@ -49,16 +51,16 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
 
     // Create actions
     if (action == "com.elgato.philips-hue.power") {
-        var pi = new PowerPI(inUUID, language);
+        var pi = new PowerPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
     else if (action == "com.elgato.philips-hue.color") {
-        var pi = new ColorPI(inUUID, language);
+        var pi = new ColorPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
     else if (action == "com.elgato.philips-hue.brightness") {
-        var pi = new BrightnessPI(inUUID, language);
+        var pi = new BrightnessPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
     else if (action == "com.elgato.philips-hue.scene") {
-        var pi = new ScenePI(inUUID, language);
+        var pi = new ScenePI(inUUID, language, streamDeckVersion, pluginVersion);
     }
 
     websocket.onmessage = function (evt) {

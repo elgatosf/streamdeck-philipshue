@@ -7,12 +7,12 @@
 **/
 //==============================================================================
 
-function ScenePI(inContext, inLanguage) {
+function ScenePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init ScenePI
     var instance = this;
 
     // Inherit from PI
-    PI.call(this, inContext, inLanguage);
+    PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
 
     // Hide lights from light select
     document.getElementById('lights').style.display = "none";

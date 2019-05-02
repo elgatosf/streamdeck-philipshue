@@ -7,12 +7,12 @@
 **/
 //==============================================================================
 
-function ColorPI(inContext, inLanguage) {
+function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init ColorPI
     var instance = this;
 
     // Inherit from PI
-    PI.call(this, inContext, inLanguage);
+    PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
 
     // Add event listener
     document.getElementById("light-select").addEventListener("change", lightChanged);

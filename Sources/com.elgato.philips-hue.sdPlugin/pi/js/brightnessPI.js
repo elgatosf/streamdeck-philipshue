@@ -7,12 +7,12 @@
 **/
 //==============================================================================
 
-function BrightnessPI(inContext, inLanguage) {
+function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init BrightnessPI
     var instance = this;
 
     // Inherit from PI
-    PI.call(this, inContext, inLanguage);
+    PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
 
     // Before overwriting parrent method, save a copy of it
 		var piLocalize = this.localize;

@@ -7,10 +7,10 @@
 **/
 //==============================================================================
 
-function PowerPI(inContext, inLanguage) {
+function PowerPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init powerPI
     var instance = this;
 
     // Inherit from PI
-    PI.call(this, inContext, inLanguage);
+    PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
 }
