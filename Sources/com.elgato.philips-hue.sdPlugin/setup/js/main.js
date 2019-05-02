@@ -44,7 +44,7 @@ window.onload = function() {
         }
     });
 
-    // Get the language
+    // Get the url parameter
     var url = new URL(window.location.href);
     var language = url.searchParams.get("language");
 
