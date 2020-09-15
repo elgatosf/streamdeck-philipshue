@@ -50,6 +50,9 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
 								else if (actions[inContext] instanceof ColorAction) {
 										var action = "com.elgato.philips-hue.color";
 								}
+								else if (actions[inContext] instanceof CycleAction) {
+										var action = "com.elgato.philips-hue.cycle";
+								}
 								else if (actions[inContext] instanceof BrightnessAction) {
 										var action = "com.elgato.philips-hue.brightness";
 								}
@@ -107,6 +110,9 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
 								else if(action == "com.elgato.philips-hue.color") {
 										actions[context] = new ColorAction(context, settings);
 								}
+								else if(action == "com.elgato.philips-hue.cycle") {
+										actions[context] = new CycleAction(context, settings);
+								}
 								else if(action == "com.elgato.philips-hue.brightness") {
 										actions[context] = new BrightnessAction(context, settings);
 								}
@@ -157,7 +163,7 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
 
 						if (piEvent == "valueChanged") {
 								// Only color, brightness and scene support live preview
-								if(action != "com.elgato.philips-hue.power") {
+								if(action != "com.elgato.philips-hue.power" && action != "com.elgato.philips-hue.cycle") {
 										// Send manual onKeyUp event to action
 										if (context in actions) {
 												actions[context].onKeyUp(context);

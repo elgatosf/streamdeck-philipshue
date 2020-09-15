@@ -61,6 +61,9 @@ function Action(inContext, inSettings) {
 				else if (instance instanceof ColorAction) {
 						var action = "com.elgato.philips-hue.color";
 				}
+				else if (instance instanceof CycleAction) {
+						var action = "com.elgato.philips-hue.cycle";
+				}
 				else if (instance instanceof BrightnessAction) {
 						var action = "com.elgato.philips-hue.brightness";
 				}
