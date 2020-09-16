@@ -13,7 +13,7 @@ function CycleAction(inContext, inSettings) {
 		var instance = this;
 
 		// Index of current active Color
-		var currentColor = 0;
+		var currentColor = -1;
 
 		// Inherit from Action
 		Action.call(this, inContext, inSettings);
@@ -132,7 +132,7 @@ function CycleAction(inContext, inSettings) {
 				}
 		};
 
-		// Before overwriting parrent method, save a copy of it
+		// Before overwriting parent method, save a copy of it
 		var actionNewCacheAvailable = this.newCacheAvailable;
 
 		// Public function called when new cache is available
