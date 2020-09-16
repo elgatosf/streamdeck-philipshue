@@ -15,28 +15,29 @@ function ScenePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
 
     // Hide lights from light select
-    document.getElementById('lights').style.display = "none";
+    document.getElementById('lights').style.display = 'none';
 
     // Remove groups label from lights select
     var groups = document.getElementById('groups');
     var groupsChildren = document.getElementById('groups').children;
-    var lightSelect = document.getElementById("light-select");
+    var lightSelect = document.getElementById('light-select');
+
     lightSelect.removeChild(groups);
     lightSelect.appendChild(groupsChildren[0]);
 
     // Before overwriting parrent method, save a copy of it
-		var piLocalize = this.localize;
+    var piLocalize = this.localize;
 
-		// Localize the UI
-		this.localize = function () {
-				// Call PIs localize method
-				piLocalize.call(instance);
+    // Localize the UI
+    this.localize = function() {
+        // Call PIs localize method
+        piLocalize.call(instance);
 
         // Localize the scene select
-        document.getElementById("lights-label").innerHTML = instance.localization["Group"];
-        document.getElementById("scene-label").innerHTML = instance.localization["Scene"];
-        document.getElementById("no-scenes").innerHTML = instance.localization["NoScenes"];
-		};
+        document.getElementById('lights-label').innerHTML = instance.localization['Group'];
+        document.getElementById('scene-label').innerHTML = instance.localization['Scene'];
+        document.getElementById('no-scenes').innerHTML = instance.localization['NoScenes'];
+    };
 
     // Add scene select
     var sceneSelect = "<div class='sdpi-item'> \
@@ -48,12 +49,12 @@ function ScenePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     document.getElementById('placeholder').innerHTML = sceneSelect;
 
     // Add event listener
-    document.getElementById("scene-select").addEventListener("change", sceneChanged);
+    document.getElementById('scene-select').addEventListener('change', sceneChanged);
 
     // Scenes changed
     function sceneChanged(inEvent) {
-        if (inEvent.target.value == "no-scenes") {
-            return;
+        if (inEvent.target.value === 'no-scenes') {
+            // do nothing
         }
         else {
             // Save the new scene settings
@@ -66,7 +67,7 @@ function ScenePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     }
 
     // Show all scenes
-    this.loadScenes = function () {
+    this.loadScenes = function() {
         // Check if any bridge is configured
         if (!('bridge' in settings)) {
             return;
@@ -86,14 +87,14 @@ function ScenePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         }
 
         // Check if the light was set to a group
-        if (!(settings.light.indexOf("g-") != -1)) {
+        if (!(settings.light.indexOf('g-') !== -1)) {
             return;
         }
 
         // Check if the configured group is in the cache
-				if (!(settings.light in bridgeCache.groups)) {
-						return;
-				}
+        if (!(settings.light in bridgeCache.groups)) {
+            return;
+        }
 
         // Find the configured group
         var groupCache = bridgeCache.groups[settings.light];
@@ -107,7 +108,7 @@ function ScenePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         // Check if the group has at least one scene
         if (Object.keys(groupCache.scenes).length > 0) {
             // Hide the 'No Scenes' option
-            document.getElementById("no-scenes").style.display = 'none';
+            document.getElementById('no-scenes').style.display = 'none';
 
             // Sort the scenes alphabatically
             var sceneIDsSorted = Object.keys(groupCache.scenes).sort(function(a, b) {
@@ -115,27 +116,27 @@ function ScenePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
             });
 
             // Add the scenes
-            sceneIDsSorted.forEach(function (inSceneID) {
+            sceneIDsSorted.forEach(function(inSceneID) {
                 // Add the scene
                 var scene = groupCache.scenes[inSceneID];
                 var option = "<option value='" + scene.id + "' class='scenes'>" + scene.name + "</option>";
-                document.getElementById("no-scenes").insertAdjacentHTML('beforebegin', option);
+                document.getElementById('no-scenes').insertAdjacentHTML('beforebegin', option);
             });
         }
         else {
             // Show the 'No Scenes' option
-            document.getElementById("no-scenes").style.display = 'block';
+            document.getElementById('no-scenes').style.display = 'block';
         }
 
         // Check if scene is already setup
-        if (settings.scene != undefined) {
+        if (settings.scene !== undefined) {
             // Check if the configured scene is in this group
             if (!(settings.scene in groupCache.scenes)) {
                 return;
             }
 
             // Select the currently configured scene
-            document.getElementById("scene-select").value = settings.scene;
+            document.getElementById('scene-select').value = settings.scene;
         }
     }
 }

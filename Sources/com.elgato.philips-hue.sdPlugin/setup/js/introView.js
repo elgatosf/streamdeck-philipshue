@@ -9,9 +9,6 @@
 
 // Load the intro view
 function loadIntroView() {
-    // Init loadIntroView
-    var instance = this;
-
     // Set the status bar
     setStatusBar('intro');
 
@@ -26,30 +23,27 @@ function loadIntroView() {
     document.getElementById('content').innerHTML = content;
 
     // Add event listener
-    document.getElementById("start").addEventListener("click", startPairing);
-    document.addEventListener("enterPressed", startPairing);
+    document.getElementById('start').addEventListener('click', startPairing);
+    document.addEventListener('enterPressed', startPairing);
 
-    document.getElementById("close").addEventListener("click", close);
-    document.addEventListener("escPressed", close);
-
+    document.getElementById('close').addEventListener('click', close);
+    document.addEventListener('escPressed', close);
 
     // Load the pairing view
     function startPairing() {
         unloadIntroView();
         loadDiscoveryView();
-    };
-
+    }
 
     // Close the window
     function close() {
         window.close();
-    };
-
+    }
 
     // Unload view
     function unloadIntroView() {
         // Remove event listener
-        document.removeEventListener("enterPressed", startPairing);
-        document.removeEventListener("escPressed", close);
+        document.removeEventListener('enterPressed', startPairing);
+        document.removeEventListener('escPressed', close);
     }
 }

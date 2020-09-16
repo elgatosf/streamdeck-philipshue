@@ -12,23 +12,19 @@ function Bridge(ip = null, id = null, username = null) {
     // Init Bridge
     var instance = this;
 
-    // Private variables
-    var ip = ip;
-    var id = id;
-    var username = username;
-
     // Public function to pair with a bridge
     this.pair = function(callback) {
         if (ip) {
-            var url = "http://" + ip + "/api";
+            var url = 'http://' + ip + '/api';
             var xhr = new XMLHttpRequest();
             xhr.responseType = 'json';
-            xhr.open("POST", url, true);
+            xhr.open('POST', url, true);
             xhr.timeout = 2500;
-            xhr.onload = function () {
-                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                    if (xhr.response != undefined && xhr.response != null) {
+            xhr.onload = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    if (xhr.response !== undefined && xhr.response != null) {
                         var result = xhr.response[0];
+
                         if ('success' in result) {
                             username = result['success']['username'];
                             callback(true, result);
@@ -39,21 +35,24 @@ function Bridge(ip = null, id = null, username = null) {
                         }
                     }
                     else {
-                        callback(false, "Bridge response is undefined or null.");
+                        callback(false, 'Bridge response is undefined or null.');
                     }
                 }
                 else {
                     callback(false, 'Could not connect to the bridge.');
                 }
             };
-            xhr.onerror = function () {
+
+            xhr.onerror = function() {
                 callback(false, 'Unable to connect to the bridge.');
             };
-            xhr.ontimeout = function () {
+
+            xhr.ontimeout = function() {
                 callback(false, 'Connection to the bridge timed out.');
             };
-            var obj = new Object();
-            obj.devicetype = "stream_deck";
+
+            var obj = {};
+            obj.devicetype = 'stream_deck';
             var data = JSON.stringify(obj);
             xhr.send(data);
         }
@@ -63,31 +62,33 @@ function Bridge(ip = null, id = null, username = null) {
     };
 
     // Public function to retrieve the username
-    this.getUsername = function () {
+    this.getUsername = function() {
         return username;
     };
 
     // Public function to retrieve the IP address
-    this.getIP = function () {
+    this.getIP = function() {
         return ip;
     };
 
     // Public function to retrieve the ID
-    this.getID = function () {
+    this.getID = function() {
         return id;
     };
 
     // Public function to retrieve the name
-    this.getName = function (callback) {
-        var url = "http://" + ip + "/api/" + username + "/config";
+    this.getName = function(callback) {
+        var url = 'http://' + ip + '/api/' + username + '/config';
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
-        xhr.open("GET", url, true);
+        xhr.open('GET', url, true);
         xhr.timeout = 5000;
-        xhr.onload = function () {
-            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+
+        xhr.onload = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 var result = xhr.response;
-                if (result != undefined && result != null) {
+
+                if (result !== undefined && result != null) {
                     if ('name' in result) {
                         var name = result['name'];
                         callback(true, name);
@@ -98,32 +99,37 @@ function Bridge(ip = null, id = null, username = null) {
                     }
                 }
                 else {
-                    callback(false, "Bridge response is undefined or null.");
+                    callback(false, 'Bridge response is undefined or null.');
                 }
             }
             else {
                 callback(false, 'Could not connect to the bridge.');
             }
         };
-        xhr.onerror = function () {
+
+        xhr.onerror = function() {
             callback(false, 'Unable to connect to the bridge.');
         };
-        xhr.ontimeout = function () {
+
+        xhr.ontimeout = function() {
             callback(false, 'Connection to the bridge timed out.');
         };
+
         xhr.send();
     };
 
     // Private function to retrieve objects
     function getMeetHues(type, callback) {
-        if (type == "light") {
-            var url = "http://" + ip + "/api/" + username + "/lights";
+        var url;
+
+        if (type === 'light') {
+            url = 'http://' + ip + '/api/' + username + '/lights';
         }
-        else if (type == "group") {
-            var url = "http://" + ip + "/api/" + username + "/groups";
+        else if (type === 'group') {
+            url = 'http://' + ip + '/api/' + username + '/groups';
         }
-        else if (type == "scene") {
-            var url = "http://" + ip + "/api/" + username + "/scenes";
+        else if (type === 'scene') {
+            url = 'http://' + ip + '/api/' + username + '/scenes';
         }
         else {
             callback(false, 'Type does not exist.');
@@ -132,26 +138,30 @@ function Bridge(ip = null, id = null, username = null) {
 
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
-        xhr.open("GET", url, true);
+        xhr.open('GET', url, true);
         xhr.timeout = 5000;
-        xhr.onload = function () {
-            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        xhr.onload = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 var result = xhr.response;
-                if (result != undefined && result != null) {
+
+                if (result !== undefined && result != null) {
                     if (!Array.isArray(result)) {
                         var objects = [];
-                        Object.keys(result).forEach(function (key) {
+
+                        Object.keys(result).forEach(function(key) {
                             value = result[key];
-                            if (type == "light") {
+
+                            if (type === 'light') {
                                 objects.push(new Light(instance, key, value.name, value.type, value.state.on, value.state.bri, value.state.xy, value.state.ct));
                             }
-                            else if (type == "group") {
+                            else if (type === 'group') {
                                 objects.push(new Group(instance, key, value.name, value.type, value.state.all_on, value.action.bri, value.action.xy, value.action.ct));
                             }
-                            else if (type == "scene") {
+                            else if (type === 'scene') {
                                 objects.push(new Scene(instance, key, value.name, value.type, value.group));
                             }
                         });
+
                         callback(true, objects);
                     }
                     else {
@@ -160,21 +170,24 @@ function Bridge(ip = null, id = null, username = null) {
                     }
                 }
                 else {
-                    callback(false, "Bridge response is undefined or null.");
+                    callback(false, 'Bridge response is undefined or null.');
                 }
             }
             else {
-                callback(false, "Unable to get objects of type " + type + ".");
+                callback(false, 'Unable to get objects of type ' + type + '.');
             }
         };
-        xhr.onerror = function () {
+
+        xhr.onerror = function() {
             callback(false, 'Unable to connect to the bridge.');
         };
-        xhr.ontimeout = function () {
+
+        xhr.ontimeout = function() {
             callback(false, 'Connection to the bridge timed out.');
         };
+
         xhr.send();
-    };
+    }
 
     // Public function to retrieve the lights
     this.getLights = function(callback) {
@@ -190,52 +203,58 @@ function Bridge(ip = null, id = null, username = null) {
     this.getScenes = function(callback) {
         getMeetHues('scene', callback);
     };
-};
+}
 
 // Static function to discover bridges
 Bridge.discover = function(callback) {
-    var url = "https://discovery.meethue.com";
+    var url = 'https://discovery.meethue.com';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.open("GET", url, true);
+    xhr.open('GET', url, true);
     xhr.timeout = 10000;
-    xhr.onload = function () {
-        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-            if (xhr.response != undefined && xhr.response != null) {
+
+    xhr.onload = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            if (xhr.response !== undefined && xhr.response != null) {
                 var bridges = [];
-                xhr.response.forEach(function (bridge) {
+
+                xhr.response.forEach(function(bridge) {
                     bridges.push(new Bridge(bridge.internalipaddress, bridge.id));
                 });
+
                 callback(true, bridges);
             }
             else {
-                callback(false, "Meethue server response is undefined or null.");
+                callback(false, 'Meethue server response is undefined or null.');
             }
         }
         else {
             callback(false, 'Unable to discover bridges.');
         }
     };
-    xhr.onerror = function () {
+
+    xhr.onerror = function() {
         callback(false, 'Unable to connect to the internet.');
     };
-    xhr.ontimeout = function () {
+
+    xhr.ontimeout = function() {
         callback(false, 'Connection to the internet timed out.');
     };
+
     xhr.send();
 };
 
 // Static function to convert hex to rgb
-Bridge.hex2rgb = function (inHex) {
+Bridge.hex2rgb = function(inHex) {
     // Remove hash if it exists
-    if (inHex.charAt(0) == '#') {
+    if (inHex.charAt(0) === '#') {
         inHex = inHex.substr(1);
     }
 
-    // Split hex into RGB compontents
+    // Split hex into RGB components
     var rgbArray = inHex.match(/.{1,2}/g);
 
-    // Convert RGB copontent into decimals
+    // Convert RGB component into decimals
     var red = parseInt(rgbArray[0], 16);
     var green = parseInt(rgbArray[1], 16);
     var blue = parseInt(rgbArray[2], 16);
@@ -244,12 +263,12 @@ Bridge.hex2rgb = function (inHex) {
 }
 
 // Static function to convert rgb to hex
-Bridge.rgb2hex = function (inRGB) {
-    return "#" + ((1 << 24) + (inRGB.r << 16) + (inRGB.g << 8) + inRGB.b).toString(16).slice(1);
+Bridge.rgb2hex = function(inRGB) {
+    return '#' + ((1 << 24) + (inRGB.r << 16) + (inRGB.g << 8) + inRGB.b).toString(16).slice(1);
 }
 
 // Static function to convert rgb to hsv
-Bridge.rgb2hsv = function (inRGB) {
+Bridge.rgb2hsv = function(inRGB) {
     // Calculate the brightness and saturation value
     var max = Math.max(inRGB.r, inRGB.g, inRGB.b);
     var min = Math.min(inRGB.r, inRGB.g, inRGB.b);
@@ -259,6 +278,7 @@ Bridge.rgb2hsv = function (inRGB) {
 
     // Calculate the hue value
     var h;
+
     switch (max) {
         case min:
             h = 0;
@@ -281,7 +301,7 @@ Bridge.rgb2hsv = function (inRGB) {
 }
 
 // Static function to convert hsv to rgb
-Bridge.hsv2rgb = function (inHSV) {
+Bridge.hsv2rgb = function(inHSV) {
     var r = null;
     var g = null;
     var b = null;
@@ -331,33 +351,29 @@ Bridge.hsv2rgb = function (inHSV) {
     var green = Math.round(g * 255);
     var blue = Math.round(b * 255);
 
-    return { "r": red, "g": green, "b": blue };
+    return { 'r': red, 'g': green, 'b': blue };
 }
 
 // Static function to convert hex to hsv
-Bridge.hex2hsv = function (inHex) {
+Bridge.hex2hsv = function(inHex) {
     // Convert hex to rgb
     var rgb = Bridge.hex2rgb(inHex);
 
     // Convert rgb to hsv
-    var hsv = Bridge.rgb2hsv(rgb);
-
-    return hsv;
+    return Bridge.rgb2hsv(rgb);
 }
 
 // Static function to convert hsv to hex
-Bridge.hsv2hex = function (inHSV) {
+Bridge.hsv2hex = function(inHSV) {
     // Convert hsv to rgb
     var rgb = Bridge.hsv2rgb(inHSV);
 
     // Convert rgb to hex
-    var hex = Bridge.rgb2hex(rgb);
-
-    return hex;
+    return Bridge.rgb2hex(rgb);
 }
 
 // Static function to convert hex to xy
-Bridge.hex2xy = function (inHex) {
+Bridge.hex2xy = function(inHex) {
     // Convert hex to rgb
     var rgb = Bridge.hex2rgb(inHex);
 
@@ -376,6 +392,7 @@ Bridge.hex2xy = function (inHex) {
 
     // Convert XYZ zo XY
     var xy = [x / (x + y + z), y / (x + y + z)];
+
     if (isNaN(xy[0])) {
       xy[0] = 0.0;
     }
@@ -393,7 +410,6 @@ function MeetHue(bridge = null, id = null, name = null, type = null) {
     var instance = this;
 
     // Private variables
-    var bridge = bridge;
     var id = id;
     var name = name;
     var type = type;
@@ -402,32 +418,32 @@ function MeetHue(bridge = null, id = null, name = null, type = null) {
     var url = null;
 
     // Public function to retrieve the type
-    this.getType = function () {
+    this.getType = function() {
         return type;
     };
 
     // Public function to retrieve the name
-    this.getName = function () {
+    this.getName = function() {
         return name;
     };
 
     // Public function to retrieve the ID
-    this.getID = function () {
+    this.getID = function() {
         return id;
     };
 
     // Public function to retrieve the URL
-    this.getURL = function () {
+    this.getURL = function() {
         return url;
     };
 
     // Public function to set the URL
-    this.setURL = function (inURL) {
+    this.setURL = function(inURL) {
         url = inURL;
     }
 
     // Public function to set light state
-    this.setState = function (state, callback) {
+    this.setState = function(state, callback) {
         // Check if the URL was set
         if (instance.getURL() == null) {
             callback(false, 'URL is not set.');
@@ -436,12 +452,14 @@ function MeetHue(bridge = null, id = null, name = null, type = null) {
 
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
-        xhr.open("PUT", instance.getURL(), true);
+        xhr.open('PUT', instance.getURL(), true);
         xhr.timeout = 2500;
-        xhr.onload = function () {
-            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                if (xhr.response != undefined && xhr.response != null) {
+
+        xhr.onload = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                if (xhr.response !== undefined && xhr.response != null) {
                     var result = xhr.response[0];
+
                     if ('success' in result) {
                         username = result['success']['username'];
                         callback(true, result);
@@ -452,23 +470,23 @@ function MeetHue(bridge = null, id = null, name = null, type = null) {
                     }
                 }
                 else {
-                    callback(false, "Bridge response is undefined or null.");
+                    callback(false, 'Bridge response is undefined or null.');
                 }
             }
             else {
                 callback(false, 'Could not set state.');
             }
         };
-        xhr.onerror = function () {
+        xhr.onerror = function() {
             callback(false, 'Unable to connect to the bridge.');
         };
-        xhr.ontimeout = function () {
+        xhr.ontimeout = function() {
             callback(false, 'Connection to the bridge timed out.');
         };
         var data = JSON.stringify(state);
         xhr.send(data);
     };
-};
+}
 
 // Prototype which represents a scene
 function Scene(bridge = null, id = null, name = null, type = null, group = null) {
@@ -479,30 +497,27 @@ function Scene(bridge = null, id = null, name = null, type = null, group = null)
     MeetHue.call(this, bridge, id, name, type);
 
     // Set the URL
-    this.setURL("http://" + bridge.getIP() + "/api/" + bridge.getUsername() + "/groups/" + 0 + "/action");
-
-    // Private variables
-    var group = group;
+    this.setURL('http://' + bridge.getIP() + '/api/' + bridge.getUsername() + '/groups/' + 0 + '/action');
 
     // Public function to retrieve the group
-    this.getGroup = function () {
+    this.getGroup = function() {
         return group;
     };
 
     // Public function to set the scene
     this.on = function(callback) {
         // Define state object
-        var state = new Object();
+        var state = {};
         state.scene = id;
 
         // Send new state
         instance.setState(state, callback);
     };
-};
+}
 
-// Prototype which represents an elumination
-function Elumination(bridge = null, id = null, name = null, type = null, power = null, brightness = null, xy = null, temperature = null) {
-    // Init Elumination
+// Prototype which represents an illumination
+function Illumination(bridge = null, id = null, name = null, type = null, power = null, brightness = null, xy = null, temperature = null) {
+    // Init Illumination
     var instance = this;
 
     // Inherit from MeetHue
@@ -515,29 +530,29 @@ function Elumination(bridge = null, id = null, name = null, type = null, power =
     var temperature = temperature;
 
     // Public function to retrieve the power state
-    this.getPower = function () {
+    this.getPower = function() {
         return power;
     };
 
     // Public function to retrieve the brightness
-    this.getBrightness = function () {
+    this.getBrightness = function() {
         return brightness;
     };
 
     // Public function to retrieve xy
-    this.getXY = function () {
+    this.getXY = function() {
         return xy;
     };
 
     // Public function to retrieve the temperature
-    this.getTemperature = function () {
+    this.getTemperature = function() {
         return temperature;
     };
 
     // Public function to set the power status of the light
     this.setPower = function(power, callback) {
         // Define state object
-        var state = new Object();
+        var state = {};
         state.on = power;
 
         // Send new state
@@ -547,7 +562,7 @@ function Elumination(bridge = null, id = null, name = null, type = null, power =
     // Public function to set the brightness
     this.setBrightness = function(brightness, callback) {
         // Define state object
-        var state = new Object();
+        var state = {};
         state.bri = brightness;
 
         // To modify the brightness, the light needs to be on
@@ -560,7 +575,7 @@ function Elumination(bridge = null, id = null, name = null, type = null, power =
     // Public function set the xy value
     this.setXY = function(xy, callback) {
         // Define state object
-        var state = new Object();
+        var state = {};
         state.xy = xy;
 
         // To modify the color, the light needs to be on
@@ -573,7 +588,7 @@ function Elumination(bridge = null, id = null, name = null, type = null, power =
     // Public function set the temperatue value
     this.setTemperature = function(temperature, callback) {
         // Define state object
-        var state = new Object();
+        var state = {};
         state.ct = temperature;
 
         // To modify the temperature, the light needs to be on
@@ -582,29 +597,22 @@ function Elumination(bridge = null, id = null, name = null, type = null, power =
         // Send new state
         instance.setState(state, callback);
     };
-};
+}
 
 // Prototype which represents a light
 function Light(bridge = null, id = null, name = null, type = null, power = null, brightness = null, xy = null, temperature = null) {
-    // Init Light
-    var instance = this;
-
-    // Inherit from Elumination
-    Elumination.call(this, bridge, id, name, type, power, brightness, xy, temperature);
+    // Inherit from Illumination
+    Illumination.call(this, bridge, id, name, type, power, brightness, xy, temperature);
 
     // Set the URL
-    this.setURL("http://" + bridge.getIP() + "/api/" + bridge.getUsername() + "/lights/" + id + "/state");
-};
-
+    this.setURL('http://' + bridge.getIP() + '/api/' + bridge.getUsername() + '/lights/' + id + '/state');
+}
 
 // Prototype which represents a group
 function Group(bridge = null, id = null, name = null, type = null, power = null, brightness = null, xy = null, temperature = null) {
-    // Init Group
-    var instance = this;
-
-    // Inherit from Elumination
-    Elumination.call(this, bridge, id, name, type, power, brightness, xy, temperature);
+    // Inherit from Illumination
+    Illumination.call(this, bridge, id, name, type, power, brightness, xy, temperature);
 
     // Set the URL
-    this.setURL("http://" + bridge.getIP() + "/api/" + bridge.getUsername() + "/groups/" + id + "/action");
-};
+    this.setURL('http://' + bridge.getIP() + '/api/' + bridge.getUsername() + '/groups/' + id + '/action');
+}

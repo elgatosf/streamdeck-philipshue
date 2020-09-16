@@ -9,203 +9,204 @@
 
 // Protoype for a data cache
 function Cache() {
-		// Init Cache
-		var instance = this;
+    // Init Cache
+    var instance = this;
 
-		// Refresh time of the cache  in seconds
+    // Refresh time of the cache  in seconds
     var autoRefreshTime = 60;
 
-		// Private timer instance
-		var timer = null;
+    // Private timer instance
+    var timer = null;
 
-		// Private bridge discovery
-		var discovery = null;
+    // Private bridge discovery
+    var discovery = null;
 
-		// Public variable containing the cached data
-		this.data = {};
+    // Public variable containing the cached data
+    this.data = {};
 
-		// Public function to start polling
-		this.startPolling = function () {
-				// Log to the global log file
-				log("Start polling to create cache");
+    // Public function to start polling
+    this.startPolling = function() {
+        // Log to the global log file
+        log('Start polling to create cache');
 
-				// Start a timer
-				instance.refresh();
-				timer = setInterval(instance.refresh, autoRefreshTime * 1000);
-		}
+        // Start a timer
+        instance.refresh();
+        timer = setInterval(instance.refresh, autoRefreshTime * 1000);
+    }
 
-		// Public function to stop polling
-		this.stopPolling = function () {
-				// Log to the global log file
-				log("Stop polling to create cache");
+    // Public function to stop polling
+    this.stopPolling = function() {
+        // Log to the global log file
+        log('Stop polling to create cache');
 
-				// Invalidate the timer
-				clearInterval(timer);
-				timer = null;
-		}
+        // Invalidate the timer
+        clearInterval(timer);
+        timer = null;
+    }
 
-		// Private function to discover all bridges on the network
-		function buildDiscovery(inCallback) {
-				// Check if discovery ran already
-				if (discovery != null) {
-						inCallback(true);
-						return;
-				}
+    // Private function to discover all bridges on the network
+    function buildDiscovery(inCallback) {
+        // Check if discovery ran already
+        if (discovery != null) {
+            inCallback(true);
+            return;
+        }
 
-				// Init discovery variable to indicate that it ran already
-				discovery = {};
+        // Init discovery variable to indicate that it ran already
+        discovery = {};
 
-				// Run discovery
-				Bridge.discover(function (inSuccess, inBridges) {
-						// If the discovery was not successful
-						if (!inSuccess) {
-								log(inBridges);
-								inCallback(false);
-								return;
-						}
+        // Run discovery
+        Bridge.discover(function(inSuccess, inBridges) {
+            // If the discovery was not successful
+            if (!inSuccess) {
+                log(inBridges);
+                inCallback(false);
+                return;
+            }
 
-						// For all discovered bridges
-						inBridges.forEach(function (inBridge) {
-								// Add new bridge to discovery object
-								discovery[inBridge.getID()] = { 'ip': inBridge.getIP()};
-						});
-						inCallback(true);
-				});
-		}
+            // For all discovered bridges
+            inBridges.forEach(function(inBridge) {
+                // Add new bridge to discovery object
+                discovery[inBridge.getID()] = { 'ip': inBridge.getIP()};
+            });
 
-		// Private function to build a cache
-		this.refresh = function () {
-				// Build discovery if necessary
-				buildDiscovery(function (inSuccess) {
-						// If discovery was not successful
-						if (!inSuccess) {
-								return;
-						}
+            inCallback(true);
+        });
+    }
 
-						// If no bridge is paired
-						if (globalSettings.bridges == undefined) {
-								return;
-						}
+    // Private function to build a cache
+    this.refresh = function() {
+        // Build discovery if necessary
+        buildDiscovery(function(inSuccess) {
+            // If discovery was not successful
+            if (!inSuccess) {
+                return;
+            }
 
-						// Iterate through all bridges that were discovered
-						Object.keys(discovery).forEach(function (inBridgeID) {
-								// If the discovered bridge is not paired
-								if (!(inBridgeID in globalSettings.bridges)) {
-										return;
-								}
+            // If no bridge is paired
+            if (globalSettings.bridges === undefined) {
+                return;
+            }
 
-								// Create a bridge instance
-								var bridge = new Bridge(discovery[inBridgeID].ip, inBridgeID, globalSettings.bridges[inBridgeID].username);
+            // Iterate through all bridges that were discovered
+            Object.keys(discovery).forEach(function(inBridgeID) {
+                // If the discovered bridge is not paired
+                if (!(inBridgeID in globalSettings.bridges)) {
+                    return;
+                }
 
-								// Create bridge cache
-								var bridgeCache = { 'lights': {}, 'groups': {} };
-								bridgeCache.id = bridge.getID();
-								bridgeCache.ip = bridge.getIP();
-								bridgeCache.username = bridge.getUsername();
+                // Create a bridge instance
+                var bridge = new Bridge(discovery[inBridgeID].ip, inBridgeID, globalSettings.bridges[inBridgeID].username);
 
-								// Load the bridge name
-								bridge.getName(function (inSuccess, inName) {
-										// If getName was not successful
-										if (!inSuccess) {
-												log(inName);
-												return;
-										}
+                // Create bridge cache
+                var bridgeCache = { 'lights': {}, 'groups': {} };
+                bridgeCache.id = bridge.getID();
+                bridgeCache.ip = bridge.getIP();
+                bridgeCache.username = bridge.getUsername();
 
-										// Save the name
-										bridgeCache.name = inName;
+                // Load the bridge name
+                bridge.getName(function(inSuccess, inName) {
+                    // If getName was not successful
+                    if (!inSuccess) {
+                        log(inName);
+                        return;
+                    }
 
-										// Add bridge to the cache
-										instance.data[bridge.getID()] = bridgeCache;
+                    // Save the name
+                    bridgeCache.name = inName;
 
-										// Request all lights of the bridge
-										bridge.getLights(function (inSuccess, inLights) {
-												// If getLights was not successful
-												if (!inSuccess) {
-														log(inLights);
-														return;
-												}
+                    // Add bridge to the cache
+                    instance.data[bridge.getID()] = bridgeCache;
 
-												// Create cache for each light
-												inLights.forEach(function (inLight) {
-														// Create light cache
-														var lightCache = {};
-														lightCache.id = inLight.getID();
-														lightCache.name = inLight.getName();
-														lightCache.type = inLight.getType();
-														lightCache.power = inLight.getPower();
-														lightCache.brightness = inLight.getBrightness();
-														lightCache.xy = inLight.getXY();
-														lightCache.temperature = inLight.getTemperature();
+                    // Request all lights of the bridge
+                    bridge.getLights(function(inSuccess, inLights) {
+                        // If getLights was not successful
+                        if (!inSuccess) {
+                            log(inLights);
+                            return;
+                        }
 
-														// Add light to cache
-														instance.data[bridge.getID()].lights['l-' + inLight.getID()] = lightCache;
-												});
+                        // Create cache for each light
+                        inLights.forEach(function(inLight) {
+                            // Create light cache
+                            var lightCache = {};
+                            lightCache.id = inLight.getID();
+                            lightCache.name = inLight.getName();
+                            lightCache.type = inLight.getType();
+                            lightCache.power = inLight.getPower();
+                            lightCache.brightness = inLight.getBrightness();
+                            lightCache.xy = inLight.getXY();
+                            lightCache.temperature = inLight.getTemperature();
 
-												// Request all groups of the bridge
-												bridge.getGroups(function (inSuccess, inGroups) {
-														// If getGroups was not successful
-														if (!inSuccess) {
-																log(inGroups);
-																return;
-														}
+                            // Add light to cache
+                            instance.data[bridge.getID()].lights['l-' + inLight.getID()] = lightCache;
+                        });
 
-														// Create cache for each group
-														inGroups.forEach(function (inGroup) {
-																// Create group cache
-																var groupCache = {};
-																groupCache.id = inGroup.getID();
-																groupCache.name = inGroup.getName();
-																groupCache.type = inGroup.getType();
-																groupCache.power = inGroup.getPower();
-																groupCache.brightness = inGroup.getBrightness();
-																groupCache.xy = inGroup.getXY();
-																groupCache.temperature = inGroup.getTemperature();
-																groupCache.scenes = {};
+                        // Request all groups of the bridge
+                        bridge.getGroups(function(inSuccess, inGroups) {
+                            // If getGroups was not successful
+                            if (!inSuccess) {
+                                log(inGroups);
+                                return;
+                            }
 
-																// Add group to cache
-																instance.data[bridge.getID()].groups['g-' + inGroup.getID()] = groupCache;
+                            // Create cache for each group
+                            inGroups.forEach(function(inGroup) {
+                                // Create group cache
+                                var groupCache = {};
+                                groupCache.id = inGroup.getID();
+                                groupCache.name = inGroup.getName();
+                                groupCache.type = inGroup.getType();
+                                groupCache.power = inGroup.getPower();
+                                groupCache.brightness = inGroup.getBrightness();
+                                groupCache.xy = inGroup.getXY();
+                                groupCache.temperature = inGroup.getTemperature();
+                                groupCache.scenes = {};
 
-																// If this is the last group
-																if (Object.keys(instance.data[bridge.getID()].groups).length == inGroups.length) {
-																		// Request all scenes of the bridge
-																		bridge.getScenes(function (inSuccess, inScenes) {
-																				// If getScenes was not successful
-																				if (!inSuccess) {
-																					log(inScenes);
-																					return;
-																				}
+                                // Add group to cache
+                                instance.data[bridge.getID()].groups['g-' + inGroup.getID()] = groupCache;
 
-																				// Create cache for each scene
-																				inScenes.forEach(function (inScene) {
+                                // If this is the last group
+                                if (Object.keys(instance.data[bridge.getID()].groups).length === inGroups.length) {
+                                    // Request all scenes of the bridge
+                                    bridge.getScenes(function(inSuccess, inScenes) {
+                                        // If getScenes was not successful
+                                        if (!inSuccess) {
+                                        	log(inScenes);
+                                        	return;
+                                        }
+
+                                        // Create cache for each scene
+                                        inScenes.forEach(function(inScene) {
                                             // Check if this is a group scene
-                                            if (inScene.getType() != "GroupScene") {
+                                            if (inScene.getType() !== 'GroupScene') {
                                                 return;
                                             }
 
-																						// Create scene cache
-																						var sceneCache = {};
-																						sceneCache.id = inScene.getID();
-																						sceneCache.name = inScene.getName();
-																						sceneCache.type = inScene.getType();
-																						sceneCache.group = inScene.getGroup();
+                                            // Create scene cache
+                                            var sceneCache = {};
+                                            sceneCache.id = inScene.getID();
+                                            sceneCache.name = inScene.getName();
+                                            sceneCache.type = inScene.getType();
+                                            sceneCache.group = inScene.getGroup();
 
-																						// If scenes group is in cache
-                                            if ("g-" + inScene.getGroup() in instance.data[bridge.getID()].groups) {
+                                            // If scenes group is in cache
+                                            if ('g-' + inScene.getGroup() in instance.data[bridge.getID()].groups) {
                                                 // Add scene to cache
-																						    instance.data[bridge.getID()].groups["g-" + inScene.getGroup()].scenes[inScene.getID()] = sceneCache;
+                                                instance.data[bridge.getID()].groups['g-' + inScene.getGroup()].scenes[inScene.getID()] = sceneCache;
                                             }
-																				});
+                                        });
 
-																				// Inform keys that updated cache is available
-																				var event = new CustomEvent('newCacheAvailable');
-																				document.dispatchEvent(event);
-																		});
-																}
-														});
-												});
-										});
-								});
-						});
-				});
-		};
-};
+                                        // Inform keys that updated cache is available
+                                        var event = new CustomEvent('newCacheAvailable');
+                                        document.dispatchEvent(event);
+                                    });
+                                }
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    };
+}

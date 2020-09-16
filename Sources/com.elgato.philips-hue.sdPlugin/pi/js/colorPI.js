@@ -15,7 +15,7 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
 
     // Add event listener
-    document.getElementById("light-select").addEventListener("change", lightChanged);
+    document.getElementById('light-select').addEventListener('change', lightChanged);
 
     // Color changed
     function colorChanged(inEvent) {
@@ -23,18 +23,17 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         var color = inEvent.target.value;
 
         // If the color is hex
-        if (color.charAt(0) == '#') {
+        if (color.charAt(0) === '#') {
             // Convert the color to HSV
             var hsv = Bridge.hex2hsv(color);
 
             // Check if the color is valid
-            if (hsv.v != 1) {
+            if (hsv.v !== 1) {
                 // Remove brightness component
                 hsv.v = 1;
-                var correctedHSV = Bridge.hsv2hex(hsv);
 
                 // Set the color to the corrected color
-                color = correctedHSV;
+                color = Bridge.hsv2hex(hsv);
             }
         }
 
@@ -47,13 +46,13 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     }
 
     // Light changed
-    function lightChanged(inEvent) {
+    function lightChanged() {
         // Get the light value manually
         // Because it is not set if this function was triggered via a CustomEvent
-        var lightID = document.getElementById("light-select").value;
+        var lightID = document.getElementById('light-select').value;
 
         // Don't show any color picker if no light or group is set
-        if (lightID == "no-lights" || lightID == "no-groups") {
+        if (lightID === 'no-lights' || lightID === 'no-groups') {
             return;
         }
 
@@ -71,28 +70,32 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         var bridgeCache = cache[settings.bridge];
 
         // Check if the selected light or group is in the cache
-				if (!(lightID in bridgeCache.lights || lightID in bridgeCache.groups)) {
-						return;
-				}
+        if (!(lightID in bridgeCache.lights || lightID in bridgeCache.groups)) {
+            return;
+        }
 
         // Get light or group cache
+        var lightCache;
+
         if (lightID.indexOf('l') !== -1) {
-            var lightCache = bridgeCache.lights[lightID];
+            lightCache = bridgeCache.lights[lightID];
         }
         else {
-            var lightCache = bridgeCache.groups[lightID];
+            lightCache = bridgeCache.groups[lightID];
         }
 
         // Add full color picker or only temperature slider
+        var colorPicker;
+
         if (lightCache.xy != null) {
-            var colorPicker = "<div type='color' class='sdpi-item'> \
-                                  <div class='sdpi-item-label' id='color-label'>" + instance.localization["Color"] + "</div> \
+            colorPicker = "<div type='color' class='sdpi-item'> \
+                                  <div class='sdpi-item-label' id='color-label'>" + instance.localization['Color'] + "</div> \
                                   <input type='color' class='sdpi-item-value' id='color-input' value='" + settings.color + "'> \
                                </div>";
         }
         else {
-            var colorPicker = "<div type='range' class='sdpi-item'> \
-                                   <div class='sdpi-item-label' id='temperature-label'>" + instance.localization["Temperature"] + "</div> \
+            colorPicker = "<div type='range' class='sdpi-item'> \
+                                   <div class='sdpi-item-label' id='temperature-label'>" + instance.localization['Temperature'] + "</div> \
                                    <div class='sdpi-item-value'> \
                                         <input class='temperature floating-tooltip' data-suffix='K' type='range' id='color-input' min='2000' max='6500' value='" + settings.color + "'> \
                                    </div> \
@@ -106,6 +109,6 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         initToolTips();
 
         // Add event listener
-        document.getElementById("color-input").addEventListener("change", colorChanged);
+        document.getElementById('color-input').addEventListener('change', colorChanged);
     }
 }
