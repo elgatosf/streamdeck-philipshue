@@ -118,6 +118,8 @@ function CyclePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
                             </div> \
                         </div>";
             }
+
+            return "";
         };
 
         // Add a new color picker to document
