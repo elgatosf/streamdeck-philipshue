@@ -16,6 +16,10 @@
     "Name": "Farbe",
     "Tooltip": "Stelle die Farbe des Lichts ein."
   },
+  "com.elgato.philips-hue.cycle": {
+    "Name": "Farben durchschalten",
+    "Tooltip": "Wechsel zwischen mehreren Farben des Lichts."
+  },
   "com.elgato.philips-hue.brightness": {
     "Name": "Helligkeit",
     "Tooltip": "Stelle die Helligkeit des Lichts ein."
@@ -36,6 +40,7 @@
       "NoLights": "Keine Lampen",
       "NoGroups": "Keine Gruppen",
       "Color": "Farbe",
+      "Colors": "Farben",
       "Temperature": "Temperatur",
       "Brightness": "Helligkeit",
       "Scene": "Szene",

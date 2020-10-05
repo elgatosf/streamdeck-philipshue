@@ -272,6 +272,9 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         else if (instance instanceof ColorPI) {
             var action = "com.elgato.philips-hue.color";
         }
+        else if (instance instanceof CyclePI) {
+            var action = "com.elgato.philips-hue.cycle";
+        }
         else if (instance instanceof BrightnessPI) {
             var action = "com.elgato.philips-hue.brightness";
         }

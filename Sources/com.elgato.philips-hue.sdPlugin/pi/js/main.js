@@ -56,6 +56,9 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     else if (action == "com.elgato.philips-hue.color") {
         var pi = new ColorPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
+    else if (action == "com.elgato.philips-hue.cycle") {
+        var pi = new CyclePI(inUUID, language, streamDeckVersion, pluginVersion);
+    }
     else if (action == "com.elgato.philips-hue.brightness") {
         var pi = new BrightnessPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
