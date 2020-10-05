@@ -9,9 +9,6 @@
 
 // Load the pairing view
 function loadPairingView() {
-    // Init loadPairingView
-    var instance = this;
-
     // Time used to automatically pair bridges
     var autoPairingTimeout = 30;
 
@@ -34,7 +31,6 @@ function loadPairingView() {
     // Start the pairing
     autoPairing();
 
-
     // For n seconds try to connect to the bridge automatically
     function autoPairing() {
         // Define local timer counter
@@ -56,7 +52,7 @@ function loadPairingView() {
                 timer = null;
 
                 // Hide the loader animation
-                document.getElementById('loader').classList.add("hide");
+                document.getElementById('loader').classList.add('hide');
 
                 // Show manual user controls instead
                 var controls = "<div class='button' id='retry'>" + localization['Pairing']['Retry'] + "</div> \
@@ -64,15 +60,14 @@ function loadPairingView() {
                 document.getElementById('controls').innerHTML = controls;
 
                 // Add event listener
-                document.getElementById("retry").addEventListener("click", retry);
-                document.addEventListener("enterPressed", retry);
+                document.getElementById('retry').addEventListener('click', retry);
+                document.addEventListener('enterPressed', retry);
 
-                document.getElementById("close").addEventListener("click", close);
-                document.addEventListener("escPressed", close);
+                document.getElementById('close').addEventListener('click', close);
+                document.addEventListener('escPressed', close);
             }
         }, 1000)
     }
-
 
     // Try to pair with all discovered bridges
     function pair() {
@@ -90,19 +85,16 @@ function loadPairingView() {
         });
     }
 
-
     // Retry pairing by reloading the view
     function retry() {
         unloadPairingView();
         loadPairingView();
     }
 
-
     // Close the window
     function close() {
         window.close();
     }
-
 
     // Unload view
     function unloadPairingView() {
@@ -111,7 +103,7 @@ function loadPairingView() {
         timer = null;
 
         // Remove event listener
-        document.removeEventListener("escPressed", retry);
-        document.removeEventListener("enterPressed", close);
+        document.removeEventListener('escPressed', retry);
+        document.removeEventListener('enterPressed', close);
     }
 }

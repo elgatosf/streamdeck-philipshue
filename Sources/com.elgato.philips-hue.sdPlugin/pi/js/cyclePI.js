@@ -170,6 +170,7 @@ function CyclePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
 
             // Add new picker value to settings
             var colorIndex = curColors - 1;
+
             if (!settings.colors[colorIndex]) {
                 if (lightCache.xy != null) {
                     settings.colors[colorIndex] = defaultColor;

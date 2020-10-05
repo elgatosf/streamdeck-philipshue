@@ -15,9 +15,9 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     this.localization = {};
 
     // Add event listener
-    document.getElementById("bridge-select").addEventListener("change", bridgeChanged);
-    document.getElementById("light-select").addEventListener("change", lightsChanged);
-    document.addEventListener("saveBridge", setupCallback);
+    document.getElementById('bridge-select').addEventListener('change', bridgeChanged);
+    document.getElementById('light-select').addEventListener('change', lightsChanged);
+    document.addEventListener('saveBridge', setupCallback);
 
     // Load the localizations
     getLocalization(inLanguage, function(inStatus, inLocalization) {
@@ -34,31 +34,31 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     });
 
     // Localize the UI
-    this.localize = function () {
+    this.localize = function() {
         // Check if localizations were loaded
         if (instance.localization == null) {
             return;
         }
 
         // Localize the bridge select
-        document.getElementById("bridge-label").innerHTML = instance.localization["Bridge"];
-        document.getElementById("no-bridges").innerHTML = instance.localization["NoBridges"];
-        document.getElementById("add-bridge").innerHTML = instance.localization["AddBridge"];
+        document.getElementById('bridge-label').innerHTML = instance.localization['Bridge'];
+        document.getElementById('no-bridges').innerHTML = instance.localization['NoBridges'];
+        document.getElementById('add-bridge').innerHTML = instance.localization['AddBridge'];
 
         // Localize the light and group select
-        document.getElementById("lights-label").innerHTML = instance.localization["Lights"];
-        document.getElementById("lights").label = instance.localization["LightsTitle"];
-        document.getElementById("no-lights").innerHTML = instance.localization["NoLights"];
-        document.getElementById("no-groups").innerHTML = instance.localization["NoGroups"];
+        document.getElementById('lights-label').innerHTML = instance.localization['Lights'];
+        document.getElementById('lights').label = instance.localization['LightsTitle'];
+        document.getElementById('no-lights').innerHTML = instance.localization['NoLights'];
+        document.getElementById('no-groups').innerHTML = instance.localization['NoGroups'];
 
         // Groups label is removed for scenes PI
-        if (document.getElementById("groups") != null) {
-            document.getElementById("groups").label = instance.localization["GroupsTitle"];
+        if (document.getElementById('groups') != null) {
+            document.getElementById('groups').label = instance.localization['GroupsTitle'];
         }
     };
 
     // Show all paired bridges
-    this.loadBridges = function () {
+    this.loadBridges = function() {
         // Remove previously shown bridges
         var bridges = document.getElementsByClassName('bridges');
         while (bridges.length > 0) {
@@ -68,24 +68,24 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         // Check if any bridge is paired
         if (Object.keys(cache).length > 0) {
             // Hide the 'No Bridges' option
-            document.getElementById("no-bridges").style.display = 'none';
+            document.getElementById('no-bridges').style.display = 'none';
 
-            // Sort the bridges alphabatically
+            // Sort the bridges alphabetically
             var bridgeIDsSorted = Object.keys(cache).sort(function(a, b) {
                 return cache[a].name.localeCompare(cache[b].name);
             });
 
             // Add the bridges
-            bridgeIDsSorted.forEach(function (inBridgeID) {
+            bridgeIDsSorted.forEach(function(inBridgeID) {
                 // Add the group
                 var option = "<option value='" + inBridgeID + "' class='bridges'>" + cache[inBridgeID].name + "</option>";
-                document.getElementById("no-bridges").insertAdjacentHTML('beforebegin', option);
+                document.getElementById('no-bridges').insertAdjacentHTML('beforebegin', option);
             });
 
             // Check if the bridge is already configured
-            if (settings.bridge != undefined) {
+            if (settings.bridge !== undefined) {
                 // Select the currently configured bridge
-                document.getElementById("bridge-select").value = settings.bridge;
+                document.getElementById('bridge-select').value = settings.bridge;
             }
 
             // Load the lights
@@ -93,11 +93,11 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         }
         else {
             // Show the 'No Bridges' option
-            document.getElementById("no-bridges").style.display = 'block';
+            document.getElementById('no-bridges').style.display = 'block';
         }
 
         // Show PI
-        document.getElementById("pi").style.display = "block";
+        document.getElementById('pi').style.display = 'block';
     }
 
     // Show all lights
@@ -124,28 +124,28 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         // Check if the bridge has at least one light
         if (Object.keys(bridgeCache.lights).length > 0) {
             // Hide the 'No Light' option
-            document.getElementById("no-lights").style.display = 'none';
+            document.getElementById('no-lights').style.display = 'none';
 
-            // Sort the lights alphabatically
+            // Sort the lights alphabetically
             var lightIDsSorted = Object.keys(bridgeCache.lights).sort(function(a, b) {
                 return bridgeCache.lights[a].name.localeCompare(bridgeCache.lights[b].name);
             });
 
             // Add the lights
-            lightIDsSorted.forEach(function (inLightID) {
+            lightIDsSorted.forEach(function(inLightID) {
                 var light = bridgeCache.lights[inLightID];
 
                 // Check if this is a color action and the lights supports colors
                 if (!(instance instanceof ColorPI && light.temperature == null && light.xy == null)) {
                     // Add the light
                     var option = "<option value='l-" + light.id + "' class='lights'>" + light.name + "</option>";
-                    document.getElementById("no-lights").insertAdjacentHTML('beforebegin', option);
+                    document.getElementById('no-lights').insertAdjacentHTML('beforebegin', option);
                 }
             });
         }
         else {
             // Show the 'No Light' option
-            document.getElementById("no-lights").style.display = 'block';
+            document.getElementById('no-lights').style.display = 'block';
         }
 
         // Remove previously shown groups
@@ -157,43 +157,43 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         // Check if the bridge has at least one group
         if (Object.keys(bridgeCache.groups).length > 0) {
             // Hide the 'No Group' option
-            document.getElementById("no-groups").style.display = 'none';
+            document.getElementById('no-groups').style.display = 'none';
 
-            // Sort the groups alphabatically
+            // Sort the groups alphabetically
             var groupIDsSorted = Object.keys(bridgeCache.groups).sort(function(a, b) {
                 return bridgeCache.groups[a].name.localeCompare(bridgeCache.groups[b].name);
             });
 
             // Add the groups
-            groupIDsSorted.forEach(function (inGroupID) {
+            groupIDsSorted.forEach(function(inGroupID) {
                 var group = bridgeCache.groups[inGroupID];
 
                 // Check if this is a color action and the lights supports colors
                 if (!(instance instanceof ColorPI && group.temperature == null && group.xy == null)) {
                     // Add the group
                     var option = "<option value='g-" + group.id + "' class='groups'>" + group.name + "</option>";
-                    document.getElementById("no-groups").insertAdjacentHTML('beforebegin', option);
+                    document.getElementById('no-groups').insertAdjacentHTML('beforebegin', option);
                 }
             });
         }
         else {
             // Show the 'No Group' option
-            document.getElementById("no-groups").style.display = 'block';
+            document.getElementById('no-groups').style.display = 'block';
         }
 
         // Check if a light is already setup
-        if (settings.light != undefined) {
+        if (settings.light !== undefined) {
             // Check if the configured light or group is part of the bridge cache
             if (!(settings.light in bridgeCache.lights || settings.light in bridgeCache.groups)) {
                 return;
             }
 
             // Select the currently configured light or group
-            document.getElementById("light-select").value = settings.light;
+            document.getElementById('light-select').value = settings.light;
 
             // Dispatch light change event manually
             // So that the colorPI can set the correct color picker at initialization
-            document.getElementById("light-select").dispatchEvent(new CustomEvent('change', {'detail': {'manual': true}} ));
+            document.getElementById('light-select').dispatchEvent(new CustomEvent('change', {'detail': {'manual': true}} ));
         }
 
         // If this is a scene PI
@@ -210,7 +210,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         instance.saveSettings();
 
         // Check if global settings need to be initialized
-        if (globalSettings.bridges == undefined) {
+        if (globalSettings.bridges === undefined) {
             globalSettings.bridges = {};
         }
 
@@ -221,16 +221,15 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
 
     // Bridge select changed
     function bridgeChanged(inEvent) {
-        if (inEvent.target.value == "add") {
+        if (inEvent.target.value === 'add') {
             // Open setup window
-            window.open("../setup/index.html?language=" + inLanguage + "&streamDeckVersion=" + inStreamDeckVersion + "&pluginVersion=" + inPluginVersion);
+            window.open('../setup/index.html?language=' + inLanguage + '&streamDeckVersion=' + inStreamDeckVersion + '&pluginVersion=' + inPluginVersion);
 
             // Select the first in case user cancels the setup
-            document.getElementById("bridge-select").selectedIndex = 0;
+            document.getElementById('bridge-select').selectedIndex = 0;
         }
-        else if (inEvent.target.value == "no-bridges") {
-            // If no bridge was selected, cancel
-            return;
+        else if (inEvent.target.value === 'no-bridges') {
+            // If no bridge was selected, do nothing
         }
         else {
             settings.bridge = inEvent.target.value;
@@ -241,14 +240,13 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
 
     // Light select changed
     function lightsChanged(inEvent) {
-        if (inEvent.target.value == "no-lights" || inEvent.target.value == "no-groups") {
-            // If no light or group was selected, cancel
-            return;
+        if (inEvent.target.value === 'no-lights' || inEvent.target.value === 'no-groups') {
+            // If no light or group was selected, do nothing
         }
-        else if (inEvent.detail != undefined) {
+        else if (inEvent.detail !== undefined) {
             // If the light was changed via code
-            if (inEvent.detail.manual == true) {
-                return;
+            if (inEvent.detail.manual === true) {
+                // do nothing
             }
         }
         else {
@@ -265,33 +263,35 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
 
     // Private function to return the action identifier
     function getAction() {
+        var action
+
         // Find out type of action
         if (instance instanceof PowerPI) {
-            var action = "com.elgato.philips-hue.power";
+            action = 'com.elgato.philips-hue.power';
         }
         else if (instance instanceof ColorPI) {
-            var action = "com.elgato.philips-hue.color";
+            action = 'com.elgato.philips-hue.color';
         }
         else if (instance instanceof CyclePI) {
-            var action = "com.elgato.philips-hue.cycle";
+            action = 'com.elgato.philips-hue.cycle';
         }
         else if (instance instanceof BrightnessPI) {
-            var action = "com.elgato.philips-hue.brightness";
+            action = 'com.elgato.philips-hue.brightness';
         }
         else if (instance instanceof ScenePI) {
-            var action = "com.elgato.philips-hue.scene";
+            action = 'com.elgato.philips-hue.scene';
         }
 
         return action;
     }
 
     // Public function to save the settings
-    this.saveSettings = function () {
+    this.saveSettings = function() {
         saveSettings(getAction(), inContext, settings);
     }
 
     // Public function to send data to the plugin
-    this.sendToPlugin = function (inData) {
+    this.sendToPlugin = function(inData) {
         sendToPlugin(getAction(), inContext, inData);
     }
 }

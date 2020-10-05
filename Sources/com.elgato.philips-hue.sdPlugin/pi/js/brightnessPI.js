@@ -14,17 +14,17 @@ function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersio
     // Inherit from PI
     PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
 
-    // Before overwriting parrent method, save a copy of it
-		var piLocalize = this.localize;
+    // Before overwriting parent method, save a copy of it
+    var piLocalize = this.localize;
 
-		// Localize the UI
-		this.localize = function () {
-				// Call PIs localize method
-				piLocalize.call(instance);
+    // Localize the UI
+    this.localize = function() {
+        // Call PIs localize method
+        piLocalize.call(instance);
 
-        // Localize the brightess label
-        document.getElementById("brightness-label").innerHTML = instance.localization["Brightness"];
-		};
+        // Localize the brightness label
+        document.getElementById('brightness-label').innerHTML = instance.localization['Brightness'];
+    };
 
     // Add brightness slider
     var brightnessSlider = "<div type='range' class='sdpi-item'> \
@@ -39,7 +39,7 @@ function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersio
     initToolTips();
 
     // Add event listener
-    document.getElementById("brightness-input").addEventListener("change", brightnessChanged);
+    document.getElementById('brightness-input').addEventListener('change', brightnessChanged);
 
     // Brightness changed
     function brightnessChanged(inEvent) {
@@ -47,7 +47,7 @@ function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersio
         settings.brightness = inEvent.target.value;
         instance.saveSettings();
 
-        // Inform the plugin that a new brightess is set
+        // Inform the plugin that a new brightness is set
         instance.sendToPlugin({ 'piEvent': 'valueChanged' });
     }
 }
