@@ -16,6 +16,10 @@
     "Name": "색상",
     "Tooltip": "조명 색상을 설정하세요."
   },
+  "com.elgato.philips-hue.cycle": {
+    "Name": "Color Cycle",
+    "Tooltip": "Cycle between colors of your light."
+  },
   "com.elgato.philips-hue.brightness": {
     "Name": "밝기",
     "Tooltip": "조명의 밝기를 조절합니다"
@@ -36,6 +40,7 @@
       "NoLights": "조명 없음",
       "NoGroups": "그룹 없음",
       "Color": "색상",
+      "Colors": "Colors",
       "Temperature": "온도",
       "Brightness": "밝기",
       "Scene": "장면",

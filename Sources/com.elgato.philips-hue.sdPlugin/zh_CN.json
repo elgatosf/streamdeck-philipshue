@@ -16,6 +16,10 @@
     "Name": "颜色",
     "Tooltip": "设置灯的颜色。"
   },
+  "com.elgato.philips-hue.cycle": {
+    "Name": "Color Cycle",
+    "Tooltip": "Cycle between colors of your light."
+  },
   "com.elgato.philips-hue.brightness": {
     "Name": "亮度",
     "Tooltip": "设置灯的亮度。"
@@ -36,6 +40,7 @@
       "NoLights": "没有灯",
       "NoGroups": "没有组",
       "Color": "颜色",
+      "Colors": "Colors",
       "Temperature": "温度",
       "Brightness": "亮度",
       "Scene": "场景",
