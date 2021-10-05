@@ -58,6 +58,9 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
                 else if (actions[inContext] instanceof BrightnessAction) {
                     action = 'com.elgato.philips-hue.brightness';
                 }
+                else if (actions[inContext] instanceof BrightnessRelAction) {
+                    action = 'com.elgato.philips-hue.brightness-rel';
+                }
                 else if (actions[inContext] instanceof SceneAction) {
                     action = 'com.elgato.philips-hue.scene';
                 }
@@ -118,6 +121,9 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
                 }
                 else if(action === 'com.elgato.philips-hue.brightness') {
                     actions[context] = new BrightnessAction(context, settings);
+                }
+                else if(action === 'com.elgato.philips-hue.brightness-rel') {
+                    actions[context] = new BrightnessRelAction(context, settings);
                 }
                 else if(action === 'com.elgato.philips-hue.scene') {
                     actions[context] = new SceneAction(context, settings);

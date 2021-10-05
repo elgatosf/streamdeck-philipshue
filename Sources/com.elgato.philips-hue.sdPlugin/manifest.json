@@ -50,6 +50,17 @@
       "UUID": "com.elgato.philips-hue.brightness"
     },
     {
+      "Icon": "plugin/images/actions/brightness",
+      "Name": "Brightness Relative",
+      "States": [
+        {
+          "Image": "plugin/images/icons/brightness"
+        }
+      ],
+      "Tooltip": "Set the brightness of your light.",
+      "UUID": "com.elgato.philips-hue.brightness-rel"
+    },
+    {
       "Icon": "plugin/images/actions/scene",
       "Name": "Scene",
       "States": [
