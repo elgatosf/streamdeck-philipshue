@@ -43,7 +43,7 @@ function loadManualView() {
 
     // Check ip address
     function check() {
-        let ip = document.getElementById('ip').value;
+        let ip = document.getElementById('ip').value.trim();
 
         // check if input is empty
         if (!ip) {
