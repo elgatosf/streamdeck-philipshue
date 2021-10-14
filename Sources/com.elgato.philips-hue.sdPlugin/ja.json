@@ -51,6 +51,7 @@
         "Title" : "ブリッジを追加",
         "Description": "照明をコントロールするには、Philips Hueのブリッジを使ってペアリングしてください。",
         "Start": "ブリッジを検出",
+        "Manual": "Add Bridge manually",
         "Close": "今はしない"
       },
       "Discovery": {
@@ -63,6 +64,18 @@
         "Pair": "ペアリング",
         "Close": "閉じる",
         "Retry": "やり直す"
+      },
+      "Manual": {
+        "Title": "Bridge manuell hinzufügen",
+        "Description": "Fügen Sie Ihre Philips Hue-Bridge manuell über die IP-Adresse in Ihrem Netzwerk hinzu, falls Auto-Discovery bei Ihnen nicht unterstützt wird.",
+        "IPAddress": "IP Adresse der Bridge",
+        "Check": "Eingabe überprüfen",
+        "Close": "Schließen",
+        "Error": {
+          "Empty": "Bitte tragen Sie eine IP Adresse in das Eingabefeld ein.",
+          "Invalid": "Die eingetragene IP Adresse hat ein ungültiges Format. Bitte überprüfen Sie Ihre Eingabe.",
+          "Unreachable": "Die Bridge ist unter der IP Adresse nicht erreichbar. Bitte überprüfen Sie Ihre Eingabe."
+        }
       },
       "Pairing": {
         "Title" : "ペアリング中…",
