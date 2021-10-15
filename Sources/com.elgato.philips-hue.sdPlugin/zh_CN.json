@@ -17,8 +17,8 @@
     "Tooltip": "设置灯的颜色。"
   },
   "com.elgato.philips-hue.cycle": {
-    "Name": "Color Cycle",
-    "Tooltip": "Cycle between colors of your light."
+    "Name": "颜色循环",
+    "Tooltip": "在灯光颜色之间循环。"
   },
   "com.elgato.philips-hue.brightness": {
     "Name": "亮度",
@@ -30,9 +30,9 @@
   },
   "Localization": {
     "PI": {
-      "Bridge": "桥接",
-      "NoBridges": "无需桥接",
-      "AddBridge": "新增",
+      "Bridge": "桥接器",
+      "NoBridges": "没有桥接器",
+      "AddBridge": "添加",
       "Lights": "灯",
       "Group": "组",
       "LightsTitle": "灯",
@@ -40,7 +40,7 @@
       "NoLights": "没有灯",
       "NoGroups": "没有组",
       "Color": "颜色",
-      "Colors": "Colors",
+      "Colors": "颜色",
       "Temperature": "温度",
       "Brightness": "亮度",
       "Scene": "场景",
@@ -48,19 +48,19 @@
     },
     "Setup": {
       "Intro": {
-        "Title" : "添加桥接",
-        "Description": "与 Philips Hue 桥接配对以控制您的灯。",
-        "Start": "发现桥接",
+        "Title" : "添加桥接器",
+        "Description": "与 Philips Hue 桥接器配对以控制您的灯。",
+        "Start": "寻找桥接器",
         "Manual": "Add Bridge manually",
-        "Close": "现在不"
+        "Close": "不是现在"
       },
       "Discovery": {
-        "Title" : "正在发现桥接...",
-        "TitleNone" : "没有找到桥接",
-        "TitleOne" : "找到一个桥接",
-        "TitleMultiple" : "找到 {{ number }} 个桥接",
-        "DescriptionFound": "现在开始配对？",
-        "DescriptionNone": "确保桥接打开并已联网。",
+        "Title" : "正在寻找桥接器...",
+        "TitleNone" : "没有找到桥接器",
+        "TitleOne" : "找到一个桥接器",
+        "TitleMultiple" : "找到 {{ number }} 个桥接器",
+        "DescriptionFound": "要现在开始配对吗？",
+        "DescriptionNone": "确保桥接器已打开并已联网。",
         "Pair": "配对",
         "Close": "关闭",
         "Retry": "重试"
@@ -79,13 +79,13 @@
       },
       "Pairing": {
         "Title" : "正在配对...",
-        "Description": "现在请按桥接上的链接按钮。",
+        "Description": "现在请按下桥接器上的连接按钮。",
         "Close": "关闭",
         "Retry": "重试"
       },
       "Save": {
-        "Title" : "桥接已添加",
-        "Description": "桥接配对成功。",
+        "Title" : "桥接器已添加",
+        "Description": "已与桥接器配对成功。",
         "Save": "完成"
       }
     }

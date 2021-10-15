@@ -71,15 +71,15 @@
         "Retry": "Try Again"
       },
       "Manual": {
-        "Title": "Add Bridge manually",
-        "Description": "Add your Philips Hue bridge manually via IP address in your network, if auto-discovery is not supported.",
+        "Title": "Add bridge manually",
+        "Description": "Add your Philips Hue-Bridge manually (via IP-Address)to your network, in cases where Auto-Discovery is not supported.",
         "IPAddress": "IP address of the bridge",
         "Check": "Validate input",
         "Close": "Close",
         "Error": {
-          "Empty": "Please enter an IP address in the input field.",
+          "Empty": "Please add the ip address of your bridge.",
           "Invalid": "The entered IP address has an invalid format. Please check your input.",
-          "Unreachable": "The bridge is not accessible by the IP address. Please check your input."
+          "Unreachable": "Bridge is not reachable. Please check the ip address."
         }
       },
       "Pairing": {
