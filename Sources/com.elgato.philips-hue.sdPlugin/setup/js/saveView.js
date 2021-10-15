@@ -9,9 +9,6 @@
 
 // Load the save view
 function loadSaveView() {
-    // Init loadSaveView
-    var instance = this;
-
     // Set the status bar
     setStatusBar('save');
 
@@ -19,24 +16,25 @@ function loadSaveView() {
     document.getElementById('title').innerHTML = localization['Save']['Title'];
 
     // Fill the content area
-    var content = "<p>" + localization['Save']['Description'] + "</p> \
-                   <img class='image' src='images/bridge_paired.png'> \
-                   <div class='button' id='close'>" + localization['Save']['Save'] + "</div>";
-    document.getElementById('content').innerHTML = content;
+    document.getElementById('content').innerHTML = `
+        <p>${localization['Save']['Description']}</p>
+        <img class="image" src="images/bridge_paired.png" alt="${localization['Save']['Title']}">
+        <div class="button" id="close">${localization['Save']['Save']}</div>
+    `;
 
     // Add event listener
     document.getElementById('close').addEventListener('click', close);
     document.addEventListener('enterPressed', close);
 
     // Safe the bridge
-    var detail = {
+    let detail = {
         'detail': {
             'id': bridge.getID(),
             'username': bridge.getUsername()
         }
     };
 
-    var event = new CustomEvent('saveBridge', detail);
+    let event = new CustomEvent('saveBridge', detail);
     window.opener.document.dispatchEvent(event);
 
     // Close this window

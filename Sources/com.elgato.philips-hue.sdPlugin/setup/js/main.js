@@ -7,19 +7,19 @@
 **/
 //==============================================================================
 
-// Global variable containting the localizations
+// Global variable containing the localizations
 var localization = null;
 
-// Global variable containting the discovered bridges
+// Global variable containing the discovered bridges
 var bridges = [];
 
-// Global variable containting the paired bridge
+// Global variable containing the paired bridge
 var bridge = null;
 
 // Global function to set the status bar to the correct view
 function setStatusBar(view) {
     // Remove active status from all status cells
-    var statusCells = document.getElementsByClassName('status-cell');
+    let statusCells = document.getElementsByClassName('status-cell');
     Array.from(statusCells).forEach(function(cell) {
         cell.classList.remove('active');
     });
@@ -32,20 +32,19 @@ function setStatusBar(view) {
 window.onload = function() {
     // Bind enter and ESC keys
     document.addEventListener('keydown', function(e) {
-        var key = e.which || e.keyCode;
-        if (key === 13) {
-            var event = new CustomEvent('enterPressed');
+        if (e.key === 'Enter') {
+            let event = new CustomEvent('enterPressed');
             document.dispatchEvent(event);
         }
-        else if (key === 27) {
-            var event = new CustomEvent('escPressed');
+        else if (e.key === 'Esc' || e.key === 'Escape') {
+            let event = new CustomEvent('escPressed');
             document.dispatchEvent(event);
         }
     });
 
     // Get the url parameter
-    var url = new URL(window.location.href);
-    var language = url.searchParams.get('language');
+    let url = new URL(window.location.href);
+    let language = url.searchParams.get('language');
 
     // Load the localizations
     getLocalization(language, function(inStatus, inLocalization) {
@@ -57,7 +56,7 @@ window.onload = function() {
             loadIntroView();
         }
         else {
-            document.getElementById('content').innerHTML = '<p>' + inLocalization + '</p>';
+            document.getElementById('content').innerHTML = `<p>${inLocalization}</p>`;
         }
     });
 };

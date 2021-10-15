@@ -56,6 +56,7 @@
         "Title" : "Bridge hinzufügen",
         "Description": "Mit einer Philips Hue-Bridge koppeln, um deine Lichter zu steuern.",
         "Start": "Bridges suchen",
+        "Manual": "Bridge manuell hinzufügen",
         "Close": "Nicht jetzt"
       },
       "Discovery": {
@@ -68,6 +69,18 @@
         "Pair": "Koppeln",
         "Close": "Schließen",
         "Retry": "Erneut versuchen"
+      },
+      "Manual": {
+        "Title": "Bridge manuell hinzufügen",
+        "Description": "Fügen Sie Ihre Philips Hue-Bridge manuell über die IP-Adresse in Ihrem Netzwerk hinzu, falls Auto-Discovery bei Ihnen nicht unterstützt wird.",
+        "IPAddress": "IP Adresse der Bridge",
+        "Check": "Eingabe überprüfen",
+        "Close": "Schließen",
+        "Error": {
+          "Empty": "Bitte tragen Sie eine IP Adresse in das Eingabefeld ein.",
+          "Invalid": "Die eingetragene IP Adresse hat ein ungültiges Format. Bitte überprüfen Sie Ihre Eingabe.",
+          "Unreachable": "Die Bridge ist unter der IP Adresse nicht erreichbar. Bitte überprüfen Sie Ihre Eingabe."
+        }
       },
       "Pairing": {
         "Title" : "Wird gekoppelt …",

@@ -16,15 +16,19 @@ function loadIntroView() {
     document.getElementById('title').innerHTML = localization['Intro']['Title'];
 
     // Fill the content area
-    var content = "<p>" + localization['Intro']['Description'] + "</p> \
-                   <img class='image' src='images/bridge.png'> \
-                   <div class='button' id='start'>" + localization['Intro']['Start'] + "</div> \
-                   <div class='button-transparent' id='close'>" + localization['Intro']['Close'] + "</div>";
-    document.getElementById('content').innerHTML = content;
+    document.getElementById('content').innerHTML = `
+        <p>${localization['Intro']['Description']}</p>
+        <img class="image" src="images/bridge.png" alt="${localization['Intro']['Title']}">
+        <div class="button-main block" id="start">${localization['Intro']['Start']}</div>
+        <div class="button block" id="manual">${localization['Intro']['Manual']}</div>
+        <div class="button-transparent" id="close">${localization['Intro']['Close']}</div>
+    `;
 
     // Add event listener
     document.getElementById('start').addEventListener('click', startPairing);
     document.addEventListener('enterPressed', startPairing);
+
+    document.getElementById('manual').addEventListener('click', startManual);
 
     document.getElementById('close').addEventListener('click', close);
     document.addEventListener('escPressed', close);
@@ -33,6 +37,12 @@ function loadIntroView() {
     function startPairing() {
         unloadIntroView();
         loadDiscoveryView();
+    }
+
+    // Load the manual view
+    function startManual() {
+        unloadIntroView();
+        loadManualView();
     }
 
     // Close the window

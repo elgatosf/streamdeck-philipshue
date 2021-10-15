@@ -10,10 +10,10 @@
 // Load the pairing view
 function loadPairingView() {
     // Time used to automatically pair bridges
-    var autoPairingTimeout = 30;
+    let autoPairingTimeout = 30;
 
     // Define local timer
-    var timer = null;
+    let timer = null;
 
     // Set the status bar
     setStatusBar('pairing');
@@ -22,11 +22,12 @@ function loadPairingView() {
     document.getElementById('title').innerHTML = localization['Pairing']['Title'];
 
     // Fill the content area
-    var content = "<p>" + localization['Pairing']['Description'] + "</p> \
-                   <img class='image' src='images/bridge_pressed.png'> \
-                   <div id='loader'></div> \
-                   <div id='controls'></div>";
-    document.getElementById('content').innerHTML = content;
+    document.getElementById('content').innerHTML = `
+        <p>${localization['Pairing']['Description']}</p>
+        <img class="image" src="images/bridge_pressed.png" alt="${localization['Pairing']['Title']}">
+        <div id="loader"></div>
+        <div id="controls"></div>
+    `;
 
     // Start the pairing
     autoPairing();
@@ -34,7 +35,7 @@ function loadPairingView() {
     // For n seconds try to connect to the bridge automatically
     function autoPairing() {
         // Define local timer counter
-        var timerCounter = 0;
+        let timerCounter = 0;
 
         // Start a new timer to auto connect to the bridges
         timer = setInterval(function() {
@@ -55,9 +56,10 @@ function loadPairingView() {
                 document.getElementById('loader').classList.add('hide');
 
                 // Show manual user controls instead
-                var controls = "<div class='button' id='retry'>" + localization['Pairing']['Retry'] + "</div> \
-                               <div class='button-transparent' id='close'>" + localization['Pairing']['Close'] + "</div>";
-                document.getElementById('controls').innerHTML = controls;
+                document.getElementById('controls').innerHTML = `
+                    <div class="button" id="retry">${localization['Pairing']['Retry']}</div>
+                    <div class="button-transparent" id="close">${localization['Pairing']['Close']}</div>
+                `;
 
                 // Add event listener
                 document.getElementById('retry').addEventListener('click', retry);

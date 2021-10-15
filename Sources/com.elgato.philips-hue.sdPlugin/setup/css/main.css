@@ -8,7 +8,7 @@
 **/
 
 html, body {
-    margin: 0px;
+    margin: 0;
     color: rgb(230, 230, 230);
     background-color: rgb(45, 45, 45);
     font-family: 'Helvetica Light', 'Helvetica', Arial, sans-serif;
@@ -34,14 +34,11 @@ h2 {
 }
 
 .header {
-    padding: 25px;
-    padding-bottom: 5px;
+    padding: 25px 25px 5px;
 }
 
 #content {
-    padding: 25px;
-    padding-top: 0px;
-    padding-bottom: 15px;
+    padding: 0 25px 15px;
 }
 
 .main {
@@ -108,19 +105,57 @@ p, li {
     padding-bottom: 20px;
 }
 
-.button, .button-transparent {
+label {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+input {
+    width: 65%;
+    color: #fff;
+    border: 1px solid rgb(141, 141, 141);
+    background-color: rgb(61, 61, 61);
+    border-radius: 4px;
+    padding: 8px;
+    margin: 8px auto 16px;
+    text-align: center;
+    font-size: 1rem;
+    display: block;
+    box-sizing: border-box;
+}
+
+input:focus, input:active {
+    border-color: rgb(0, 125, 255);
+}
+
+.button, .button-main, .button-transparent {
     padding: 8px 50px;
     display: table;
     margin: 8px auto;
     cursor: pointer;
+    border-radius: 4px;
+}
+
+.button.block, .button-main.block {
+    width: 65%;
+    padding: 8px 16px;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .button {
     background-color: rgb(61, 61, 61);
-    border-radius: 4px;
 }
 
-.button:hover {
+.button-main {
+    background-color: rgb(83, 83, 83);
+}
+
+.button:hover, .button-main:hover  {
     background-color: rgb(0, 125, 255);
 }
 
@@ -130,6 +165,18 @@ p, li {
 
 .hide {
     display: none;
+}
+
+.error-container > div {
+    color: #fff;
+    background-color: rgba(255, 0, 0, .2);
+    border: 1px solid rgba(255, 0, 0, .5);
+    border-radius: 4px;
+    text-align: center;
+    width: 80%;
+    box-sizing: border-box;
+    margin: 0 auto 24px;
+    padding: 8px;
 }
 
 #loader {
