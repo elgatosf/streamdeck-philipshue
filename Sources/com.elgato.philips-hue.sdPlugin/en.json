@@ -24,6 +24,10 @@
     "Name": "Brightness",
     "Tooltip": "Set the brightness of your light."
   },
+  "com.elgato.philips-hue.brightness-rel": {
+    "Name": "Brightness Relative",
+    "Tooltip": "Adjust the brightness of the light relative to the current brightness."
+  },
   "com.elgato.philips-hue.scene": {
     "Name": "Scene",
     "Tooltip": "Set a scene."
@@ -43,6 +47,7 @@
       "Colors": "Colors",
       "Temperature": "Temperature",
       "Brightness": "Brightness",
+      "Steps": "Steps",
       "Scene": "Scene",
       "NoScenes": "No Scenes"
     },

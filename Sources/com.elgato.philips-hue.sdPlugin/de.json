@@ -24,6 +24,10 @@
     "Name": "Helligkeit",
     "Tooltip": "Stelle die Helligkeit des Lichts ein."
   },
+  "com.elgato.philips-hue.brightness-rel": {
+    "Name": "Rel. Helligkeit",
+    "Tooltip": "Stelle die Helligkeit des Lichts relativ zur aktuellen Helligkeit ein."
+  },
   "com.elgato.philips-hue.scene": {
     "Name": "Szene",
     "Tooltip": "Stelle eine Szene ein."
@@ -43,6 +47,7 @@
       "Colors": "Farben",
       "Temperature": "Temperatur",
       "Brightness": "Helligkeit",
+      "Steps": "Schritte",
       "Scene": "Szene",
       "NoScenes": "Keine Szenen"
     },
