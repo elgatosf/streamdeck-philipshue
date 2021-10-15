@@ -18,7 +18,7 @@
   },
   "com.elgato.philips-hue.cycle": {
     "Name": "Farben durchschalten",
-    "Tooltip": "Wechsel zwischen mehreren Farben des Lichts."
+    "Tooltip": "Wechsle zwischen mehreren Lichtfarben."
   },
   "com.elgato.philips-hue.brightness": {
     "Name": "Helligkeit",

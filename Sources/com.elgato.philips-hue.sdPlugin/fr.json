@@ -17,8 +17,8 @@
     "Tooltip": "Réglez la couleur de la lumière."
   },
   "com.elgato.philips-hue.cycle": {
-    "Name": "Color Cycle",
-    "Tooltip": "Cycle between colors of your light."
+    "Name": "Cycle de couleurs",
+    "Tooltip": "Activez les différentes couleurs de votre lumière de façon cyclique."
   },
   "com.elgato.philips-hue.brightness": {
     "Name": "Luminosité",
@@ -40,7 +40,7 @@
       "NoLights": "Aucune lumière",
       "NoGroups": "Aucun groupe",
       "Color": "Couleur",
-      "Colors": "Colors",
+      "Colors": "Couleurs",
       "Temperature": "Température",
       "Brightness": "Luminosité",
       "Scene": "Scène",

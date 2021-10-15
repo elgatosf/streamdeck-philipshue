@@ -17,8 +17,8 @@
     "Tooltip": "Ajuste el color de su luz."
   },
   "com.elgato.philips-hue.cycle": {
-    "Name": "Color Cycle",
-    "Tooltip": "Cycle between colors of your light."
+    "Name": "Transición de color",
+    "Tooltip": "Hacer transición entre los colores de tu luz."
   },
   "com.elgato.philips-hue.brightness": {
     "Name": "Brillo",
@@ -40,7 +40,7 @@
       "NoLights": "No hay luces",
       "NoGroups": "No hay grupos",
       "Color": "Color",
-      "Colors": "Colors",
+      "Colors": "Colores",
       "Temperature": "Temperatura",
       "Brightness": "Brillo",
       "Scene": "Escena",
