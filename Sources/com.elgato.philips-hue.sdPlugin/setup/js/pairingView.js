@@ -1,11 +1,9 @@
-//==============================================================================
 /**
-@file       pairingView.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      pairingView.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Load the pairing view
 function loadPairingView() {
@@ -38,7 +36,7 @@ function loadPairingView() {
         let timerCounter = 0;
 
         // Start a new timer to auto connect to the bridges
-        timer = setInterval(function() {
+        timer = setInterval(() => {
             if (timerCounter < autoPairingTimeout) {
                 // Try to connect for n seconds
                 pair();
@@ -73,8 +71,8 @@ function loadPairingView() {
 
     // Try to pair with all discovered bridges
     function pair() {
-        bridges.forEach(function(item) {
-            item.pair(function(status, data) {
+        bridges.forEach(item => {
+            item.pair((status, data) => {
                 if (status) {
                     // Pairing was successful
                     bridge = item;

@@ -1,11 +1,9 @@
-//==============================================================================
 /**
-@file       introView.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      introView.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Load the intro view
 function loadIntroView() {
