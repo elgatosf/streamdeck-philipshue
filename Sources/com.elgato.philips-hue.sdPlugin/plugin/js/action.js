@@ -1,43 +1,41 @@
-//==============================================================================
 /**
-@file       action.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      action.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
-// Protype which represents an action
+// Prototype which represents an action
 function Action(inContext, inSettings) {
     // Init Action
-    var instance = this;
+    let instance = this;
 
     // Private variable containing the context of the action
-    var context = inContext;
+    let context = inContext;
 
     // Private variable containing the settings of the action
-    var settings = inSettings;
+    let settings = inSettings;
 
     // Set the default values
     setDefaults();
 
     // Public function returning the context
-    this.getContext = function() {
+    this.getContext = () => {
         return context;
     };
 
     // Public function returning the settings
-    this.getSettings = function() {
+    this.getSettings = () => {
         return settings;
     };
 
     // Public function for settings the settings
-    this.setSettings = function(inSettings) {
+    this.setSettings = inSettings => {
         settings = inSettings;
     };
 
     // Public function called when new cache is available
-    this.newCacheAvailable = function(inCallback) {
+    this.newCacheAvailable = inCallback => {
         // Set default settings
         setDefaults(inCallback);
     };
@@ -55,7 +53,7 @@ function Action(inContext, inSettings) {
         }
 
         // Find out type of action
-        var action;
+        let action;
         if (instance instanceof PowerAction) {
             action = 'com.elgato.philips-hue.power';
         }
@@ -68,9 +66,6 @@ function Action(inContext, inSettings) {
         else if (instance instanceof BrightnessAction) {
             action = 'com.elgato.philips-hue.brightness';
         }
-        else if (instance instanceof BrightnessRelAction) {
-            action = 'com.elgato.philips-hue.brightness-rel';
-        }
         else if (instance instanceof SceneAction) {
             action = 'com.elgato.philips-hue.scene';
         }
@@ -78,7 +73,7 @@ function Action(inContext, inSettings) {
         // If no bridge is set for this action
         if (!('bridge' in settings)) {
             // Sort the bridges alphabetically
-            var bridgeIDsSorted = Object.keys(cache.data).sort(function(a, b) {
+            let bridgeIDsSorted = Object.keys(cache.data).sort((a, b) => {
                 return cache.data[a].name.localeCompare(cache.data[b].name);
             });
 
@@ -90,7 +85,7 @@ function Action(inContext, inSettings) {
         }
 
         // Find the configured bridge
-        var bridgeCache = cache.data[settings.bridge];
+        let bridgeCache = cache.data[settings.bridge];
 
         // If no light is set for this action
         if (!('light' in settings)) {
@@ -98,7 +93,7 @@ function Action(inContext, inSettings) {
             // If the bridge has at least one group
             if (Object.keys(bridgeCache.groups).length > 0) {
                 // Sort the groups automatically
-                var groupIDsSorted = Object.keys(bridgeCache.groups).sort(function(a, b) {
+                let groupIDsSorted = Object.keys(bridgeCache.groups).sort((a, b) => {
                     return bridgeCache.groups[a].name.localeCompare(bridgeCache.groups[b].name);
                 });
 
@@ -110,7 +105,7 @@ function Action(inContext, inSettings) {
             }
             else if (Object.keys(bridgeCache.lights).length > 0) {
                 // Sort the lights automatically
-                var lightIDsSorted = Object.keys(bridgeCache.lights).sort(function(a, b) {
+                let lightIDsSorted = Object.keys(bridgeCache.lights).sort((a, b) => {
                     return bridgeCache.lights[a].name.localeCompare(bridgeCache.lights[b].name);
                 });
 

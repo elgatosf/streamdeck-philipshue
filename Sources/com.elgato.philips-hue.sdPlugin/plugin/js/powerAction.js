@@ -1,16 +1,14 @@
-//==============================================================================
 /**
-@file       powerAction.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      powerAction.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Prototype which represents a power action
 function PowerAction(inContext, inSettings) {
     // Init PowerAction
-    var instance = this;
+    let instance = this;
 
     // Inherit from Action
     Action.call(this, inContext, inSettings);
@@ -19,7 +17,7 @@ function PowerAction(inContext, inSettings) {
     updateState();
 
     // Public function called on key up event
-    this.onKeyUp = function(inContext, inSettings, inCoordinates, inUserDesiredState, inState) {
+    this.onKeyUp = (inContext, inSettings, inCoordinates, inUserDesiredState, inState) => {
         // Check if any bridge is configured
         if (!('bridge' in inSettings)) {
             log('No bridge configured');
@@ -35,7 +33,7 @@ function PowerAction(inContext, inSettings) {
         }
 
         // Find the configured bridge
-        var bridgeCache = cache.data[inSettings.bridge];
+        let bridgeCache = cache.data[inSettings.bridge];
 
         // Check if any light is configured
         if (!('light' in inSettings)) {
@@ -46,16 +44,16 @@ function PowerAction(inContext, inSettings) {
 
         // Check if the configured light or group is in the cache
         if (!(inSettings.light in bridgeCache.lights || inSettings.light in bridgeCache.groups)) {
-            log('Light or group ' + inSettings.light + ' not found in cache');
+            log(`Light or group ${inSettings.light} not found in cache`);
             showAlert(inContext);
             return;
         }
 
         // Create a bridge instance
-        var bridge = new Bridge(bridgeCache.ip, bridgeCache.id, bridgeCache.username);
+        let bridge = new Bridge(bridgeCache.ip, bridgeCache.id, bridgeCache.username);
 
         // Create a light or group object
-        var objCache, obj;
+        let objCache, obj;
         if (inSettings.light.indexOf('l-') !== -1) {
             objCache = bridgeCache.lights[inSettings.light];
             obj = new Light(bridge, objCache.id);
@@ -66,7 +64,7 @@ function PowerAction(inContext, inSettings) {
         }
 
         // Check for multi action
-        var targetState;
+        let targetState;
         if (inUserDesiredState !== undefined) {
             targetState = !inUserDesiredState;
         }
@@ -75,7 +73,7 @@ function PowerAction(inContext, inSettings) {
         }
 
         // Set light or group state
-        obj.setPower(targetState, function(success, error) {
+        obj.setPower(targetState, (success, error) => {
             if (success) {
                 setActionState(inContext, targetState ? 0 : 1);
                 objCache.power = targetState;
@@ -89,12 +87,12 @@ function PowerAction(inContext, inSettings) {
     };
 
     // Before overwriting parent method, save a copy of it
-    var actionNewCacheAvailable = this.newCacheAvailable;
+    let actionNewCacheAvailable = this.newCacheAvailable;
 
     // Public function called when new cache is available
-    this.newCacheAvailable = function(inCallback) {
+    this.newCacheAvailable = inCallback => {
         // Call actions newCacheAvailable method
-        actionNewCacheAvailable.call(instance, function() {
+        actionNewCacheAvailable.call(instance, () => {
             // Update the state
             updateState();
 
@@ -105,8 +103,8 @@ function PowerAction(inContext, inSettings) {
 
     function updateState() {
         // Get the settings and the context
-        var settings = instance.getSettings();
-        var context = instance.getContext();
+        let settings = instance.getSettings();
+        let context = instance.getContext();
 
         // Check if any bridge is configured
         if (!('bridge' in settings)) {
@@ -119,7 +117,7 @@ function PowerAction(inContext, inSettings) {
         }
 
         // Find the configured bridge
-        var bridgeCache = cache.data[settings.bridge];
+        let bridgeCache = cache.data[settings.bridge];
 
         // Check if a light was set for this action
         if (!('light' in settings)) {
@@ -132,7 +130,7 @@ function PowerAction(inContext, inSettings) {
         }
 
         // Find out if it is a light or a group
-        var objCache;
+        let objCache;
         if (settings.light.indexOf('l-') !== -1) {
             objCache = bridgeCache.lights[settings.light];
         }
@@ -141,7 +139,7 @@ function PowerAction(inContext, inSettings) {
         }
 
         // Set the target state
-        var targetState = objCache.power;
+        let targetState = objCache.power;
 
         // Set the new action state
         setActionState(context, targetState ? 0 : 1);

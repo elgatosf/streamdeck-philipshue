@@ -1,16 +1,14 @@
-//==============================================================================
 /**
-@file       colorAction.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      colorAction.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Prototype which represents a color action
 function ColorAction(inContext, inSettings) {
     // Init ColorAction
-    var instance = this;
+    let instance = this;
 
     // Inherit from Action
     Action.call(this, inContext, inSettings);
@@ -19,7 +17,7 @@ function ColorAction(inContext, inSettings) {
     setDefaults();
 
     // Public function called on key up event
-    this.onKeyUp = function(inContext, inSettings, inCoordinates, inUserDesiredState, inState) {
+    this.onKeyUp = (inContext, inSettings, inCoordinates, inUserDesiredState, inState) => {
         // If onKeyUp was triggered manually, load settings
         if (inSettings === undefined) {
             inSettings = instance.getSettings();
@@ -34,13 +32,13 @@ function ColorAction(inContext, inSettings) {
 
         // Check if the configured bridge is in the cache
         if (!(inSettings.bridge in cache.data)) {
-            log('Bridge ' + inSettings.bridge + ' not found in cache');
+            log(`Bridge ${inSettings.bridge} not found in cache`);
             showAlert(inContext);
             return;
         }
 
         // Find the configured bridge
-        var bridgeCache = cache.data[inSettings.bridge];
+        let bridgeCache = cache.data[inSettings.bridge];
 
         // Check if any light is configured
         if (!('light' in inSettings)) {
@@ -51,7 +49,7 @@ function ColorAction(inContext, inSettings) {
 
         // Check if the configured light or group is in the cache
         if (!(inSettings.light in bridgeCache.lights || inSettings.light in bridgeCache.groups)) {
-            log('Light or group ' + inSettings.light + ' not found in cache');
+            log(`Light or group ${inSettings.light} not found in cache`);
             showAlert(inContext);
             return;
         }
@@ -64,10 +62,10 @@ function ColorAction(inContext, inSettings) {
         }
 
         // Create a bridge instance
-        var bridge = new Bridge(bridgeCache.ip, bridgeCache.id, bridgeCache.username);
+        let bridge = new Bridge(bridgeCache.ip, bridgeCache.id, bridgeCache.username);
 
         // Create a light or group object
-        var objCache, obj;
+        let objCache, obj;
         if (inSettings.light.indexOf('l') !== -1) {
             objCache = bridgeCache.lights[inSettings.light];
             obj = new Light(bridge, objCache.id);
@@ -80,10 +78,10 @@ function ColorAction(inContext, inSettings) {
         // Check if this is a color or temperature light
         if (inSettings.color.indexOf('#') !== -1) {
             // Convert light color to hardware independent XY color
-            var xy = Bridge.hex2xy(inSettings.color);
+            let xy = Bridge.hex2xy(inSettings.color);
 
             // Set light or group state
-            obj.setXY(xy, function(inSuccess, inError) {
+            obj.setXY(xy, (inSuccess, inError) => {
                 if (inSuccess) {
                     objCache.xy = xy;
                 }
@@ -94,22 +92,20 @@ function ColorAction(inContext, inSettings) {
             });
         }
         else {
-            // ***** Note *****
-            // Some lights do not support the full range
-            // **********
-            var min = 153.0;
-            var max = 500.0;
+            // Note: Some lights do not support the full range
+            let min = 153.0;
+            let max = 500.0;
 
-            var minK = 2000.0;
-            var maxK = 6500.0;
+            let minK = 2000.0;
+            let maxK = 6500.0;
 
             // Convert light color
-            var percentage = (inSettings.color - minK) / (maxK - minK);
-            var invertedPercentage = -1 * (percentage - 1.0);
-            var temperature = Math.round(invertedPercentage * (max - min) + min);
+            let percentage = (inSettings.color - minK) / (maxK - minK);
+            let invertedPercentage = -1 * (percentage - 1.0);
+            let temperature = Math.round(invertedPercentage * (max - min) + min);
 
             // Set light or group state
-            obj.setTemperature(temperature, function(inSuccess, inError) {
+            obj.setTemperature(temperature, (inSuccess, inError) => {
                 if (inSuccess) {
                     objCache.ct = temperature;
                 }
@@ -122,12 +118,12 @@ function ColorAction(inContext, inSettings) {
     };
 
     // Before overwriting parent method, save a copy of it
-    var actionNewCacheAvailable = this.newCacheAvailable;
+    let actionNewCacheAvailable = this.newCacheAvailable;
 
     // Public function called when new cache is available
-    this.newCacheAvailable = function(inCallback) {
+    this.newCacheAvailable = inCallback => {
         // Call actions newCacheAvailable method
-        actionNewCacheAvailable.call(instance, function() {
+        actionNewCacheAvailable.call(instance, () => {
             // Set defaults
             setDefaults();
 
@@ -139,8 +135,8 @@ function ColorAction(inContext, inSettings) {
     // Private function to set the defaults
     function setDefaults() {
         // Get the settings and the context
-        var settings = instance.getSettings();
-        var context = instance.getContext();
+        let settings = instance.getSettings();
+        let context = instance.getContext();
 
         // Check if any bridge is configured
         if (!('bridge' in settings)) {
@@ -153,7 +149,7 @@ function ColorAction(inContext, inSettings) {
         }
 
         // Find the configured bridge
-        var bridgeCache = cache.data[settings.bridge];
+        let bridgeCache = cache.data[settings.bridge];
 
         // Check if a light was set for this action
         if (!('light' in settings)) {
@@ -166,7 +162,7 @@ function ColorAction(inContext, inSettings) {
         }
 
         // Get a light or group cache
-        var lightCache;
+        let lightCache;
         if (settings.light.indexOf('l-') !== -1) {
             lightCache = bridgeCache.lights[settings.light];
         }
