@@ -1,15 +1,13 @@
-//==============================================================================
 /**
-@file       pi.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      pi.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init PI
-    var instance = this;
+    let instance = this;
 
     // Public localizations for the UI
     this.localization = {};
@@ -20,7 +18,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     document.addEventListener('saveBridge', setupCallback);
 
     // Load the localizations
-    getLocalization(inLanguage, function(inStatus, inLocalization) {
+    getLocalization(inLanguage, (inStatus, inLocalization) => {
         if (inStatus) {
             // Save public localization
             instance.localization = inLocalization['PI'];
@@ -34,7 +32,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     });
 
     // Localize the UI
-    this.localize = function() {
+    this.localize = () => {
         // Check if localizations were loaded
         if (instance.localization == null) {
             return;
@@ -58,9 +56,9 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     };
 
     // Show all paired bridges
-    this.loadBridges = function() {
+    this.loadBridges = () => {
         // Remove previously shown bridges
-        var bridges = document.getElementsByClassName('bridges');
+        let bridges = document.getElementsByClassName('bridges');
         while (bridges.length > 0) {
             bridges[0].parentNode.removeChild(bridges[0]);
         }
@@ -71,14 +69,16 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
             document.getElementById('no-bridges').style.display = 'none';
 
             // Sort the bridges alphabetically
-            var bridgeIDsSorted = Object.keys(cache).sort(function(a, b) {
+            let bridgeIDsSorted = Object.keys(cache).sort((a, b) => {
                 return cache[a].name.localeCompare(cache[b].name);
             });
 
             // Add the bridges
-            bridgeIDsSorted.forEach(function(inBridgeID) {
+            bridgeIDsSorted.forEach(inBridgeID => {
                 // Add the group
-                var option = "<option value='" + inBridgeID + "' class='bridges'>" + cache[inBridgeID].name + "</option>";
+                let option = `
+                  <option value='${inBridgeID}' class='bridges'>${cache[inBridgeID].name}</option>
+                `;
                 document.getElementById('no-bridges').insertAdjacentHTML('beforebegin', option);
             });
 
@@ -113,10 +113,10 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         }
 
         // Find the configured bridge
-        var bridgeCache = cache[settings.bridge];
+        let bridgeCache = cache[settings.bridge];
 
         // Remove previously shown lights
-        var lights = document.getElementsByClassName('lights');
+        let lights = document.getElementsByClassName('lights');
         while (lights.length > 0) {
             lights[0].parentNode.removeChild(lights[0]);
         }
@@ -127,18 +127,20 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
             document.getElementById('no-lights').style.display = 'none';
 
             // Sort the lights alphabetically
-            var lightIDsSorted = Object.keys(bridgeCache.lights).sort(function(a, b) {
+            let lightIDsSorted = Object.keys(bridgeCache.lights).sort((a, b) => {
                 return bridgeCache.lights[a].name.localeCompare(bridgeCache.lights[b].name);
             });
 
             // Add the lights
-            lightIDsSorted.forEach(function(inLightID) {
-                var light = bridgeCache.lights[inLightID];
+            lightIDsSorted.forEach(inLightID => {
+                let light = bridgeCache.lights[inLightID];
 
                 // Check if this is a color action and the lights supports colors
                 if (!(instance instanceof ColorPI && light.temperature == null && light.xy == null)) {
                     // Add the light
-                    var option = "<option value='l-" + light.id + "' class='lights'>" + light.name + "</option>";
+                    let option = `
+                      <option value='l-${light.id}' class='lights'>${light.name}</option>
+                    `;
                     document.getElementById('no-lights').insertAdjacentHTML('beforebegin', option);
                 }
             });
@@ -149,7 +151,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         }
 
         // Remove previously shown groups
-        var groups = document.getElementsByClassName('groups');
+        let groups = document.getElementsByClassName('groups');
         while (groups.length > 0) {
             groups[0].parentNode.removeChild(groups[0]);
         }
@@ -160,18 +162,20 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
             document.getElementById('no-groups').style.display = 'none';
 
             // Sort the groups alphabetically
-            var groupIDsSorted = Object.keys(bridgeCache.groups).sort(function(a, b) {
+            let groupIDsSorted = Object.keys(bridgeCache.groups).sort((a, b) => {
                 return bridgeCache.groups[a].name.localeCompare(bridgeCache.groups[b].name);
             });
 
             // Add the groups
-            groupIDsSorted.forEach(function(inGroupID) {
-                var group = bridgeCache.groups[inGroupID];
+            groupIDsSorted.forEach(inGroupID => {
+                let group = bridgeCache.groups[inGroupID];
 
                 // Check if this is a color action and the lights supports colors
                 if (!(instance instanceof ColorPI && group.temperature == null && group.xy == null)) {
                     // Add the group
-                    var option = "<option value='g-" + group.id + "' class='groups'>" + group.name + "</option>";
+                    let option = `
+                      <option value='g-${group.id}' class='groups'>${group.name}</option>
+                    `;
                     document.getElementById('no-groups').insertAdjacentHTML('beforebegin', option);
                 }
             });
@@ -227,7 +231,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     function bridgeChanged(inEvent) {
         if (inEvent.target.value === 'add') {
             // Open setup window
-            window.open('../setup/index.html?language=' + inLanguage + '&streamDeckVersion=' + inStreamDeckVersion + '&pluginVersion=' + inPluginVersion);
+            window.open(`../setup/index.html?language=${inLanguage}&streamDeckVersion=${inStreamDeckVersion}&pluginVersion=${inPluginVersion}`);
 
             // Select the first in case user cancels the setup
             document.getElementById('bridge-select').selectedIndex = 0;
@@ -267,7 +271,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
 
     // Private function to return the action identifier
     function getAction() {
-        var action
+        let action
 
         // Find out type of action
         if (instance instanceof PowerPI) {
@@ -293,12 +297,12 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     }
 
     // Public function to save the settings
-    this.saveSettings = function() {
+    this.saveSettings = () => {
         saveSettings(getAction(), inContext, settings);
     }
 
     // Public function to send data to the plugin
-    this.sendToPlugin = function(inData) {
+    this.sendToPlugin = inData => {
         sendToPlugin(getAction(), inContext, inData);
     }
 }
