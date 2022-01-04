@@ -215,7 +215,11 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         }
 
         // Add new bridge to the global settings
-        globalSettings.bridges[inEvent.detail.id] = { 'username': inEvent.detail.username };
+        globalSettings.bridges[inEvent.detail.id] = {
+            ip: inEvent.detail.ip,
+            id: inEvent.detail.id,
+            username: inEvent.detail.username,
+        };
         saveGlobalSettings(inContext);
     }
 
