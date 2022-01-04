@@ -83,19 +83,21 @@
   "PropertyInspectorPath": "pi/index.html",
   "URL": "https://www.elgato.com/gaming/stream-deck",
   "Version": "1.5",
-  "DefaultWindowSize": [500, 650],
+  "DefaultWindowSize": [
+    500,
+    650
+  ],
   "OS": [
     {
-        "Platform": "mac",
-        "MinimumVersion" : "10.11"
+      "Platform": "mac",
+      "MinimumVersion": "10.11"
     },
     {
-        "Platform": "windows",
-        "MinimumVersion" : "10"
+      "Platform": "windows",
+      "MinimumVersion": "10"
     }
   ],
-  "Software":
-    {
-        "MinimumVersion" : "4.2"
-    }
+  "Software": {
+    "MinimumVersion": "4.2"
+  }
 }

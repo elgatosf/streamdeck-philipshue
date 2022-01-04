@@ -5,12 +5,14 @@
   "com.elgato.philips-hue.power": {
     "Name": "On / Off",
     "Tooltip": "Encender o apagar las luces.",
-    "States": [{
-      "Name": "On"
-    },
-    {
-      "Name": "Off"
-    }]
+    "States": [
+      {
+        "Name": "On"
+      },
+      {
+        "Name": "Off"
+      }
+    ]
   },
   "com.elgato.philips-hue.color": {
     "Name": "Color",
@@ -48,17 +50,17 @@
     },
     "Setup": {
       "Intro": {
-        "Title" : "Añadir puente",
+        "Title": "Añadir puente",
         "Description": "Enlácese a un puente Philips Hue para controlar sus luces.",
         "Start": "Detectar puentes",
         "Manual": "Add Bridge manually",
         "Close": "Ahora no"
       },
       "Discovery": {
-        "Title" : "Detectando puentes…",
-        "TitleNone" : "No se han detectado puentes",
-        "TitleOne" : "Se ha detectado un puente",
-        "TitleMultiple" : "{{ number }} puentes detectados",
+        "Title": "Detectando puentes…",
+        "TitleNone": "No se han detectado puentes",
+        "TitleOne": "Se ha detectado un puente",
+        "TitleMultiple": "{{ number }} puentes detectados",
         "DescriptionFound": "¿Empezar a enlazar ahora?",
         "DescriptionNone": "Compruebe que el puente está encendido y conectado a la red.",
         "Pair": "Enlazar",
@@ -78,13 +80,13 @@
         }
       },
       "Pairing": {
-        "Title" : "Enlazando...",
+        "Title": "Enlazando...",
         "Description": "Pulse ahora el botón de enlace en el puente.",
         "Close": "Cerrar",
         "Retry": "Volver a intentar"
       },
       "Save": {
-        "Title" : "Puente añadido",
+        "Title": "Puente añadido",
         "Description": "El puente se ha enlazado correctamente.",
         "Save": "OK"
       }

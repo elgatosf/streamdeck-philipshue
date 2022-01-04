@@ -5,12 +5,10 @@
   "com.elgato.philips-hue.power": {
     "Name": "Ein/Aus",
     "Tooltip": "Schalte das Licht ein oder aus.",
-    "States": [{
-      "Name": "Ein"
-    },
-    {
-      "Name": "Aus"
-    }]
+    "States": [
+      {"Name": "Ein"},
+      {"Name": "Aus"}
+    ]
   },
   "com.elgato.philips-hue.color": {
     "Name": "Farbe",
@@ -53,17 +51,17 @@
     },
     "Setup": {
       "Intro": {
-        "Title" : "Bridge hinzufügen",
+        "Title": "Bridge hinzufügen",
         "Description": "Mit einer Philips Hue-Bridge koppeln, um deine Lichter zu steuern.",
         "Start": "Bridges suchen",
         "Manual": "Bridge manuell hinzufügen",
         "Close": "Nicht jetzt"
       },
       "Discovery": {
-        "Title" : "Bridges werden gesucht …",
-        "TitleNone" : "Keine Bridges gefunden",
-        "TitleOne" : "Eine Bridge gefunden",
-        "TitleMultiple" : "{{ number }} Bridges gefunden",
+        "Title": "Bridges werden gesucht …",
+        "TitleNone": "Keine Bridges gefunden",
+        "TitleOne": "Eine Bridge gefunden",
+        "TitleMultiple": "{{ number }} Bridges gefunden",
         "DescriptionFound": "Jetzt koppeln?",
         "DescriptionNone": "Vergewissere dich, dass die Bridge eingeschaltet und mit dem Netzwerk verbunden ist.",
         "Pair": "Koppeln",
@@ -83,13 +81,13 @@
         }
       },
       "Pairing": {
-        "Title" : "Wird gekoppelt …",
+        "Title": "Wird gekoppelt …",
         "Description": "Drücke auf der Bridge jetzt die Taste zum Verbinden.",
         "Close": "Schließen",
         "Retry": "Erneut versuchen"
       },
       "Save": {
-        "Title" : "Bridge hinzugefügt",
+        "Title": "Bridge hinzugefügt",
         "Description": "Die Bridge wurde erfolgreich hinzugefügt.",
         "Save": "Fertig"
       }
