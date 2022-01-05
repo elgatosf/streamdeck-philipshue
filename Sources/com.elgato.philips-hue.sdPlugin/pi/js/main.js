@@ -1,11 +1,9 @@
-//==============================================================================
 /**
-@file       main.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      main.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Global web socket
 var websocket = null;
@@ -22,27 +20,27 @@ var cache = {};
 // Setup the websocket and handle communication
 function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, inActionInfo) {
     // Parse parameter from string to object
-    var actionInfo = JSON.parse(inActionInfo);
-    var info = JSON.parse(inInfo);
+    let actionInfo = JSON.parse(inActionInfo);
+    let info = JSON.parse(inInfo);
 
-    var streamDeckVersion = info['application']['version'];
-    var pluginVersion = info['plugin']['version'];
+    let streamDeckVersion = info['application']['version'];
+    let pluginVersion = info['plugin']['version'];
 
     // Save global settings
     settings = actionInfo['payload']['settings'];
 
     // Retrieve language
-    var language = info['application']['language'];
+    let language = info['application']['language'];
 
     // Retrieve action identifier
-    var action = actionInfo['action'];
+    let action = actionInfo['action'];
 
     // Open the web socket to Stream Deck
     // Use 127.0.0.1 because Windows needs 300ms to resolve localhost
-    websocket = new WebSocket('ws://127.0.0.1:' + inPort);
+    websocket = new WebSocket(`ws://127.0.0.1:${inPort}`);
 
     // WebSocket is connected, send message
-    websocket.onopen = function() {
+    websocket.onopen = () => {
         // Register property inspector to Stream Deck
         registerPluginOrPI(inRegisterEvent, inUUID);
 
@@ -51,8 +49,8 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     };
 
     // Create actions
-    var pi;
-    
+    let pi;
+
     if (action === 'com.elgato.philips-hue.power') {
         pi = new PowerPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
@@ -65,28 +63,25 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     else if (action === 'com.elgato.philips-hue.brightness') {
         pi = new BrightnessPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
-    else if (action === 'com.elgato.philips-hue.brightness-rel') {
-        pi = new BrightnessRelPI(inUUID, language, streamDeckVersion, pluginVersion);
-    }
     else if (action === 'com.elgato.philips-hue.scene') {
         pi = new ScenePI(inUUID, language, streamDeckVersion, pluginVersion);
     }
 
-    websocket.onmessage = function(evt) {
+    websocket.onmessage = msg => {
         // Received message from Stream Deck
-        var jsonObj = JSON.parse(evt.data);
-        var event = jsonObj['event'];
-        var jsonPayload = jsonObj['payload'];
+        let jsonObj = JSON.parse(msg.data);
+        let event = jsonObj['event'];
+        let jsonPayload = jsonObj['payload'];
 
-        if(event === 'didReceiveGlobalSettings') {
+        if (event === 'didReceiveGlobalSettings') {
             // Set global plugin settings
             globalSettings = jsonPayload['settings'];
         }
-        else if(event === 'didReceiveSettings') {
+        else if (event === 'didReceiveSettings') {
             // Save global settings after default was set
             settings = jsonPayload['settings'];
         }
-        else if(event === 'sendToPropertyInspector') {
+        else if (event === 'sendToPropertyInspector') {
             // Save global cache
             cache = jsonPayload;
 

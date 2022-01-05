@@ -1,11 +1,9 @@
-//==============================================================================
 /**
-@file       main.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      main.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Global web socket
 var websocket = null;
@@ -19,17 +17,17 @@ var globalSettings = {};
 // Setup the websocket and handle communication
 function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
     // Create array of currently used actions
-    var actions = {};
+    let actions = {};
 
     // Create a cache
     cache = new Cache();
 
     // Open the web socket to Stream Deck
     // Use 127.0.0.1 because Windows needs 300ms to resolve localhost
-    websocket = new WebSocket('ws://127.0.0.1:' + inPort);
+    websocket = new WebSocket(`ws://127.0.0.1:${inPort}`);
 
     // Web socket is connected
-    websocket.onopen = function() {
+    websocket.onopen = () => {
         // Register plugin to Stream Deck
         registerPluginOrPI(inRegisterEvent, inPluginUUID);
 
@@ -38,12 +36,12 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
     }
 
     // Add event listener
-    document.addEventListener('newCacheAvailable', function() {
+    document.addEventListener('newCacheAvailable', () => {
         // When a new cache is available
-        Object.keys(actions).forEach(function(inContext) {
+        Object.keys(actions).forEach(inContext => {
             // Inform all used actions that a new cache is available
-            actions[inContext].newCacheAvailable(function() {
-                var action;
+            actions[inContext].newCacheAvailable(() => {
+                let action;
 
                 // Find out type of action
                 if (actions[inContext] instanceof PowerAction) {
@@ -72,23 +70,23 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
     }, false);
 
     // Web socked received a message
-    websocket.onmessage = function(inEvent) {
+    websocket.onmessage = inEvent => {
         // Parse parameter from string to object
-        var jsonObj = JSON.parse(inEvent.data);
+        let jsonObj = JSON.parse(inEvent.data);
 
         // Extract payload information
-        var event = jsonObj['event'];
-        var action = jsonObj['action'];
-        var context = jsonObj['context'];
-        var jsonPayload = jsonObj['payload'];
-        var settings;
+        let event = jsonObj['event'];
+        let action = jsonObj['action'];
+        let context = jsonObj['context'];
+        let jsonPayload = jsonObj['payload'];
+        let settings;
 
         // Key up event
-        if(event === 'keyUp') {
+        if (event === 'keyUp') {
             settings = jsonPayload['settings'];
-            var coordinates = jsonPayload['coordinates'];
-            var userDesiredState = jsonPayload['userDesiredState'];
-            var state = jsonPayload['state'];
+            let coordinates = jsonPayload['coordinates'];
+            let userDesiredState = jsonPayload['userDesiredState'];
+            let state = jsonPayload['state'];
 
             // Send onKeyUp event to actions
             if (context in actions) {
@@ -98,11 +96,11 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
             // Refresh the cache
             cache.refresh();
         }
-        else if(event === 'willAppear') {
+        else if (event === 'willAppear') {
             settings = jsonPayload['settings'];
 
             // If this is the first visible action
-            if(Object.keys(actions).length === 0) {
+            if (Object.keys(actions).length === 0) {
                 // Start polling
                 cache.startPolling();
             }
@@ -110,49 +108,49 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
             // Add current instance is not in actions array
             if (!(context in actions)) {
                 // Add current instance to array
-                if(action === 'com.elgato.philips-hue.power') {
+                if (action === 'com.elgato.philips-hue.power') {
                     actions[context] = new PowerAction(context, settings);
                 }
-                else if(action === 'com.elgato.philips-hue.color') {
+                else if (action === 'com.elgato.philips-hue.color') {
                     actions[context] = new ColorAction(context, settings);
                 }
-                else if(action === 'com.elgato.philips-hue.cycle') {
+                else if (action === 'com.elgato.philips-hue.cycle') {
                     actions[context] = new CycleAction(context, settings);
                 }
-                else if(action === 'com.elgato.philips-hue.brightness') {
+                else if (action === 'com.elgato.philips-hue.brightness') {
                     actions[context] = new BrightnessAction(context, settings);
                 }
-                else if(action === 'com.elgato.philips-hue.brightness-rel') {
+                else if (action === 'com.elgato.philips-hue.brightness-rel') {
                     actions[context] = new BrightnessRelAction(context, settings);
                 }
-                else if(action === 'com.elgato.philips-hue.scene') {
+                else if (action === 'com.elgato.philips-hue.scene') {
                     actions[context] = new SceneAction(context, settings);
                 }
             }
         }
-        else if(event === 'willDisappear') {
+        else if (event === 'willDisappear') {
             // Remove current instance from array
             if (context in actions) {
                 delete actions[context];
             }
 
             // If this is the last visible action
-            if(Object.keys(actions).length === 0) {
+            if (Object.keys(actions).length === 0) {
                 // Stop polling
                 cache.stopPolling();
             }
         }
-        else if(event === 'didReceiveGlobalSettings') {
+        else if (event === 'didReceiveGlobalSettings') {
             // Set global settings
             globalSettings = jsonPayload['settings'];
 
             // If at least one action is active
-            if(Object.keys(actions).length > 0) {
+            if (Object.keys(actions).length > 0) {
                 // Refresh the cache
                 cache.refresh();
             }
         }
-        else if(event === 'didReceiveSettings') {
+        else if (event === 'didReceiveSettings') {
             settings = jsonPayload['settings'];
 
             // Set settings
@@ -163,16 +161,16 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
             // Refresh the cache
             cache.refresh();
         }
-        else if(event === 'propertyInspectorDidAppear') {
+        else if (event === 'propertyInspectorDidAppear') {
             // Send cache to PI
             sendToPropertyInspector(action, context, cache.data);
         }
-        else if(event === 'sendToPlugin') {
-            var piEvent = jsonPayload['piEvent'];
+        else if (event === 'sendToPlugin') {
+            let piEvent = jsonPayload['piEvent'];
 
             if (piEvent === 'valueChanged') {
                 // Only color, brightness and scene support live preview
-                if(action !== 'com.elgato.philips-hue.power' && action !== 'com.elgato.philips-hue.cycle') {
+                if (action !== 'com.elgato.philips-hue.power' && action !== 'com.elgato.philips-hue.cycle') {
                     // Send manual onKeyUp event to action
                     if (context in actions) {
                         actions[context].onKeyUp(context);

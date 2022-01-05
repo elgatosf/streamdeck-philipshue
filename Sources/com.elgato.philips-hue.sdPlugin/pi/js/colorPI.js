@@ -1,15 +1,13 @@
-//==============================================================================
 /**
-@file       colorPI.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      colorPI.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init ColorPI
-    var instance = this;
+    let instance = this;
 
     // Inherit from PI
     PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
@@ -20,12 +18,12 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Color changed
     function colorChanged(inEvent) {
         // Get the selected color
-        var color = inEvent.target.value;
+        let color = inEvent.target.value;
 
         // If the color is hex
         if (color.charAt(0) === '#') {
             // Convert the color to HSV
-            var hsv = Bridge.hex2hsv(color);
+            let hsv = Bridge.hex2hsv(color);
 
             // Check if the color is valid
             if (hsv.v !== 1) {
@@ -42,14 +40,16 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         instance.saveSettings();
 
         // Inform the plugin that a new color is set
-        instance.sendToPlugin({ 'piEvent': 'valueChanged' });
+        instance.sendToPlugin({
+            piEvent: 'valueChanged',
+        });
     }
 
     // Light changed
     function lightChanged() {
         // Get the light value manually
         // Because it is not set if this function was triggered via a CustomEvent
-        var lightID = document.getElementById('light-select').value;
+        let lightID = document.getElementById('light-select').value;
 
         // Don't show any color picker if no light or group is set
         if (lightID === 'no-lights' || lightID === 'no-groups') {
@@ -67,7 +67,7 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         }
 
         // Find the configured bridge
-        var bridgeCache = cache[settings.bridge];
+        let bridgeCache = cache[settings.bridge];
 
         // Check if the selected light or group is in the cache
         if (!(lightID in bridgeCache.lights || lightID in bridgeCache.groups)) {
@@ -75,7 +75,7 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         }
 
         // Get light or group cache
-        var lightCache;
+        let lightCache;
 
         if (lightID.indexOf('l') !== -1) {
             lightCache = bridgeCache.lights[lightID];
@@ -85,21 +85,25 @@ function ColorPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         }
 
         // Add full color picker or only temperature slider
-        var colorPicker;
+        let colorPicker;
 
-        if (lightCache.xy != null) {
-            colorPicker = "<div type='color' class='sdpi-item'> \
-                                  <div class='sdpi-item-label' id='color-label'>" + instance.localization['Color'] + "</div> \
-                                  <input type='color' class='sdpi-item-value' id='color-input' value='" + settings.color + "'> \
-                               </div>";
+        if (lightCache.xy !== null) {
+            colorPicker = `
+              <div type="color" class="sdpi-item">
+                <div class="sdpi-item-label" id="color-label">${instance.localization['Color']}</div>
+                <input type="color" class="sdpi-item-value" id="color-input" value="${settings.color}">
+              </div>
+            `;
         }
         else {
-            colorPicker = "<div type='range' class='sdpi-item'> \
-                                   <div class='sdpi-item-label' id='temperature-label'>" + instance.localization['Temperature'] + "</div> \
-                                   <div class='sdpi-item-value'> \
-                                        <input class='temperature floating-tooltip' data-suffix='K' type='range' id='color-input' min='2000' max='6500' value='" + settings.color + "'> \
-                                   </div> \
-                              </div>";
+            colorPicker = `
+              <div type="range" class="sdpi-item">
+                <div class="sdpi-item-label" id="temperature-label">${instance.localization['Temperature']}</div>
+                <div class="sdpi-item-value">
+                  <input class="temperature floating-tooltip" data-suffix="K" type="range" id="color-input" min="2000" max="6500" value="${settings.color}">
+                </div>
+              </div>
+            `;
         }
 
         // Add color picker
