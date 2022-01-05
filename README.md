@@ -1,11 +1,11 @@
 # Philips Hue Plugin for Elgato Stream Deck
-This sample plugin allows controlling `Philips Hue` lights in your Network. It's a demonstration ot the [Stream Deck SDK](https://developer.elgato.com/documentation/stream-deck/).
+This sample plugin allows controlling `Philips Hue` lights in your network. It's a demonstration of the [Stream Deck SDK](https://developer.elgato.com/documentation/stream-deck/).
 
 
 # Features
-- code written in JavaScript
-- cross-platform (macOS, Windows)
-- localized
+- Code written in JavaScript
+- Cross-platform (macOS, Windows)
+- Localized
 
 ![](screenshot.png)
 
