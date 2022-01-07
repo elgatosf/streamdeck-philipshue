@@ -1,11 +1,9 @@
-//==============================================================================
 /**
-@file       cache.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      cache.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Prototype for a data cache
 function Cache() {
@@ -24,26 +22,6 @@ function Cache() {
     // Public variable containing the cached data
     this.data = {};
 
-    // Public function to start polling
-    this.startPolling = function() {
-        // Log to the global log file
-        log('Start polling to create cache');
-
-        // Start a timer
-        instance.refresh();
-        timer = setInterval(instance.refresh, autoRefreshTime * 1000);
-    }
-
-    // Public function to stop polling
-    this.stopPolling = function() {
-        // Log to the global log file
-        log('Stop polling to create cache');
-
-        // Invalidate the timer
-        clearInterval(timer);
-        timer = null;
-    }
-
     // Private function to discover all bridges on the network
     function buildDiscovery(inCallback) {
         // Check if discovery ran already
@@ -56,7 +34,7 @@ function Cache() {
         discovery = {};
 
         // Run discovery
-        Bridge.discover(function(inSuccess, inBridges) {
+        Bridge.discover((inSuccess, inBridges) => {
             // If the discovery was not successful
             if (!inSuccess) {
                 log(inBridges);
@@ -65,27 +43,16 @@ function Cache() {
             }
 
             // For all discovered bridges
-            inBridges.forEach(function(inBridge) {
+            inBridges.forEach(inBridge => {
                 // Add new bridge to discovery object
                 discovery[inBridge.getID()] = {
-                    ip: inBridge.getIP(),
-                    id: inBridge.getID(),
+                    ip: inBridge.getIP()
                 };
             });
 
             inCallback(true);
         });
     }
-
-    // Private function to build a cache
-    this.refresh = function() {
-        // Build discovery if necessary
-        buildDiscovery(() => {
-            if (globalSettings.bridges) {
-                Object.keys(globalSettings.bridges).forEach(bridgeID => refreshBridge(bridgeID, globalSettings.bridges[bridgeID]));
-            }
-        })
-    };
 
     // Gather all required information by a Bridge via ID
     function refreshBridge(pairedBridgeID, pairedBridge) {
@@ -214,4 +181,34 @@ function Cache() {
             });
         });
     }
+
+    // Public function to start polling
+    this.startPolling = () => {
+        // Log to the global log file
+        log('Start polling to create cache');
+
+        // Start a timer
+        instance.refresh();
+        timer = setInterval(instance.refresh, autoRefreshTime * 1000);
+    }
+
+    // Public function to stop polling
+    this.stopPolling = () => {
+        // Log to the global log file
+        log('Stop polling to create cache');
+
+        // Invalidate the timer
+        clearInterval(timer);
+        timer = null;
+    }
+
+    // Private function to build a cache
+    this.refresh = () => {
+        // Build discovery if necessary
+        buildDiscovery(() => {
+            if (globalSettings.bridges) {
+                Object.keys(globalSettings.bridges).forEach(bridgeID => refreshBridge(bridgeID, globalSettings.bridges[bridgeID]));
+            }
+        })
+    };
 }
