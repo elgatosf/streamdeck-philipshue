@@ -58,35 +58,18 @@ function loadManualView() {
             return;
         }
 
-        // try reaching bridge
-        let url = `http://${ip}/api/config`;
-        let xhr = new XMLHttpRequest();
-        xhr.responseType = 'json';
-        xhr.open('GET', url, true);
-        xhr.timeout = 10000;
-
-        xhr.onload = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200 &&
-                xhr.response !== undefined && xhr.response != null &&
-                xhr.response.hasOwnProperty('bridgeid')
-            ) {
+        Bridge.check(ip, null, (success, data) => {
+            if (success) {
                 bridges = [
-                    new Bridge(ip, xhr.response.bridgeid.toLowerCase())
+                    new Bridge(data.ip, data.id),
                 ];
 
-                // at this point the bridge has been found and added to list
                 pair();
-                return;
             }
-
-            printError(localization['Manual']['Error']['Unreachable']);
-        };
-
-        xhr.onerror = xhr.ontimeout = function() {
-            printError(localization['Manual']['Error']['Unreachable']);
-        };
-
-        xhr.send();
+            else {
+                printError(localization['Manual']['Error']['Unreachable']);
+            }
+        });
     }
 
     // Open pairing view

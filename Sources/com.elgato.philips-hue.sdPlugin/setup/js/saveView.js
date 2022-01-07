@@ -26,15 +26,14 @@ function loadSaveView() {
     document.getElementById('close').addEventListener('click', close);
     document.addEventListener('enterPressed', close);
 
-    // Safe the bridge
-    let detail = {
-        'detail': {
-            'id': bridge.getID(),
-            'username': bridge.getUsername()
+    // Save the bridge
+    let event = new CustomEvent('saveBridge', {
+        detail: {
+            ip: bridge.getIP(),
+            id: bridge.getID(),
+            username: bridge.getUsername(),
         }
-    };
-
-    let event = new CustomEvent('saveBridge', detail);
+    });
     window.opener.document.dispatchEvent(event);
 
     // Close this window

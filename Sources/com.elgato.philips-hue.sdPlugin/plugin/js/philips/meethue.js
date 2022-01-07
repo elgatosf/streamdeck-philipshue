@@ -244,6 +244,38 @@ Bridge.discover = function(callback) {
     xhr.send();
 };
 
+// Check if a Bridge is available under a certain IP address
+// If a username is set it will check that too
+Bridge.check = function(ip, username, callback) {
+    let url = username ? `http://${ip}/api/${username}config` : `http://${ip}/api/config`;
+    let xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.open('GET', url, true);
+    xhr.timeout = 10000;
+
+    xhr.onload = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200 &&
+            xhr.response !== undefined && xhr.response != null &&
+            xhr.response.hasOwnProperty('bridgeid') &&
+            (!username || xhr.response.hasOwnProperty('ipaddress'))
+        ) {
+            // at this point the bridge has been found and added to list
+            callback(true, {
+                ip: ip,
+                id: xhr.response.bridgeid.toLowerCase(),
+            });
+        }
+
+        callback(false);
+    };
+
+    xhr.onerror = xhr.ontimeout = function() {
+        callback(false);
+    };
+
+    xhr.send();
+};
+
 // Static function to convert hex to rgb
 Bridge.hex2rgb = function(inHex) {
     // Remove hash if it exists
