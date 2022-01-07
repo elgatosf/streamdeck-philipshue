@@ -1,11 +1,9 @@
-//==============================================================================
 /**
-@file       saveView.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      saveView.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Load the save view
 function loadSaveView() {
@@ -27,14 +25,13 @@ function loadSaveView() {
     document.addEventListener('enterPressed', close);
 
     // Save the bridge
-    let event = new CustomEvent('saveBridge', {
+    window.opener.document.dispatchEvent(new CustomEvent('saveBridge', {
         detail: {
             ip: bridge.getIP(),
             id: bridge.getID(),
             username: bridge.getUsername(),
         }
-    });
-    window.opener.document.dispatchEvent(event);
+    }));
 
     // Close this window
     function close() {
