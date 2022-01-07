@@ -1,6 +1,13 @@
+/**
+@file      sdpi.css
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
+
 :root {
-  --sdpi-bgcolor: #2D2D2D;
-  --sdpi-background: #3D3D3D;
+  --sdpi-bgcolor: #2d2d2d;
+  --sdpi-background: #3d3d3d;
   --sdpi-color: #d8d8d8;
   --sdpi-bordercolor: #3a3a3a;
   --sdpi-buttonbordercolor: #969696;
@@ -11,8 +18,8 @@
 }
 
 html {
-  --sdpi-bgcolor: #2D2D2D;
-  --sdpi-background: #3D3D3D;
+  --sdpi-bgcolor: #2d2d2d;
+  --sdpi-background: #3d3d3d;
   --sdpi-color: #d8d8d8;
   --sdpi-bordercolor: #3a3a3a;
   --sdpi-buttonbordercolor: #969696;
@@ -64,7 +71,7 @@ hr2,
   align-items: center;
   color: inherit;
   font-size: 9pt;
-  margin: 8px 0px;
+  margin: 8px 0;
 }
 
 .sdpi-heading::before,
@@ -73,9 +80,9 @@ hr2,
   flex-grow: 1;
   background: var(--sdpi-background);
   height: 1px;
-  font-size: 0px;
-  line-height: 0px;
-  margin: 0px 16px;
+  font-size: 0;
+  line-height: 0;
+  margin: 0 16px;
 }
 
 hr2 {
@@ -127,7 +134,7 @@ meter::-webkit-meter-bar {
 ::-webkit-progress-bar:active,
 meter::-webkit-meter-bar:active {
   border-radius: 3px;
-  background: #222222;
+  background: #222;
 }
 ::-webkit-progress-value:active,
 meter::-webkit-meter-optimum-value:active {
@@ -172,7 +179,7 @@ progress.full {
    * as in the above "Stepper input" example.
    */
   display: flex;
-  border-bottom: 1px solid #D7DBDD;
+  border-bottom: 1px solid #d7dbdd;
 }
 
 .tab {
@@ -192,7 +199,7 @@ select {
   -moz-appearance: none;
   -o-appearance: none;
   appearance: none;
-  background: url(caret.svg) no-repeat 97% center;
+  background: url(../images/caret.svg) no-repeat 97% center;
 }
 
 label.sdpi-file-label,
@@ -262,17 +269,17 @@ option {
 }
 
 .sdpi-item:last-child {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .sdpi-item > *:not(.sdpi-item-label):not(meter):not(details):not(canvas) {
   min-height: 26px;
-  padding: 0px 4px 0px 4px;
+  padding: 0 4px 0 4px;
 }
 
 .sdpi-item > *:not(.sdpi-item-label.empty):not(meter) {
   min-height: 26px;
-  padding: 0px 4px 0px 4px;
+  padding: 0 4px 0 4px;
 }
 
 .sdpi-item-group {
@@ -304,7 +311,7 @@ meter.sdpi-item-value {
 dl,
 ul,
 ol {
-  -webkit-margin-before: 0px;
+  -webkit-margin-before: 0;
   -webkit-margin-after: 4px;
   -webkit-padding-start: 1em;
   max-height: 90px;
@@ -385,7 +392,7 @@ button.sdpi-item-value {
 }
 
 .sdpi-item-value.range {
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 table,
@@ -476,7 +483,7 @@ td:hover,
 .sdpi-item-value > ul > li:hover:nth-child(even),
 .sdpi-item-value > ol > li:hover:nth-child(even),
 li:hover:nth-child(even),
-li:hover { 
+li:hover {
   background-color: rgba(255,255,255,.1);
 }
 
@@ -484,7 +491,7 @@ td.selected,
 td.selected:hover,
 li.selected:hover,
 li.selected {
-  color: white;
+  color: #fff;
   background-color: #77f;
 }
 
@@ -525,13 +532,13 @@ td:last-child {
   display: flex;
   flex: 1 1 0;
   margin-bottom: 4px;
-  margin-left: 0px;
+  margin-left: 0;
   width: 100%;
   justify-content: space-evenly;
 }
 
 .sdpi-item-group > .sdpi-item > input[type="color"] {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 ::-webkit-calendar-picker-indicator:focus,
@@ -619,9 +626,9 @@ details.message h1 {
 
 .sdpi-more-info {
   position: fixed;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   min-height:16px;
   padding-right: 16px;
   text-align: right;
@@ -637,11 +644,11 @@ details.message h1 {
 
 .sdpi-more-info-button {
   display: flex;
-  align-self: right;
+  align-self: flex-end;
   margin-left: auto;
   position: fixed;
   right: 17px;
-  bottom: 0px;
+  bottom: 0;
   user-select: none;
 }
 
@@ -685,7 +692,7 @@ input[type="checkbox"] + label {
   -webkit-user-select: none;
 }
 
-input[type="radio"] + label:after, 
+input[type="radio"] + label:after,
 input[type="checkbox"] + label:after {
   content: " " !important;
 }
@@ -777,7 +784,6 @@ legend {
 }
 
 .sdpi-item-value > textarea {
-  padding: 0px;
   width: 219px;
   margin-left: 1px;
   margin-top: 3px;
@@ -833,7 +839,7 @@ input[type="range"] {
   margin-left: 2px;
   max-width: var(--sdpi-width);
   width: var(--sdpi-width);
-  padding: 0px;
+  padding: 0;
   margin-top: 2px;
 }
 
@@ -849,7 +855,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   height: 5px;
   background: #979797;
   border-radius: 3px;
-  padding:0px !important;
+  padding: 0 !important;
   border: 1px solid var(--sdpi-background);
 }
 
@@ -899,7 +905,7 @@ textarea {
 }
 
 .textarea {
-  padding: 0px !important;
+  padding: 0 !important;
 }
 
 textarea {
@@ -913,7 +919,7 @@ textarea {
 /* CAROUSEL */
 
 .sdpi-item[type="carousel"]{
-  
+
 }
 
 .sdpi-item.card-carousel-wrapper,
@@ -977,7 +983,7 @@ textarea {
 .card-carousel-cards {
   display: flex;
   transition: transform 150ms ease-out;
-  transform: translatex(0px);
+  transform: translatex(0);
 }
 
 .card-carousel-cards .card-carousel--card {
@@ -1020,8 +1026,7 @@ textarea {
 
 .card-carousel-cards .card-carousel--card--footer p {
   padding: 3px 0;
-  margin: 0;
-  margin-bottom: 2px;
+  margin: 0 0 2px 0;
   font-size: 15px;
   font-weight: 500;
   color: #2c3e50;
@@ -1041,12 +1046,11 @@ h1 {
   margin-bottom: 12px;
 }
 
-::-webkit-datetime-edit { 
+::-webkit-datetime-edit {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  background: url(elg_calendar_inv.svg) no-repeat left center;
   padding-right: 1em;
   padding-left: 25px;
-  background-position: 4px 0px;
+  background: url(elg_calendar_inv.svg) no-repeat 4px 0;
 }
 
 ::-webkit-datetime-edit-fields-wrapper {
@@ -1069,9 +1073,9 @@ h1 {
   /* display: none; */
 }
 
-::-webkit-calendar-picker-indicator { 
+::-webkit-calendar-picker-indicator {
   background: transparent;
-  font-size: 17px; 
+  font-size: 17px;
 }
 
 ::-webkit-calendar-picker-indicator:focus {
@@ -1147,9 +1151,9 @@ label.sdpi-file-label {
   min-height: 21px !important;
   height: 21px !important;
   line-height: 20px;
-  padding: 0px 4px;
+  padding: 0 4px;
   margin: auto;
-  margin-right: 0px;
+  margin-right: 0;
   float:right;
 }
 
@@ -1158,7 +1162,7 @@ label.sdpi-file-label {
 label.sdpi-file-label:active,
 label.sdpi-file-info:active,
 input[type="file"]::-webkit-file-upload-button:active,
-button:active { 
+button:active {
   background-color: var(--sdpi-color);
   color:#303030;
 }
@@ -1231,7 +1235,7 @@ input:required:valid {
   min-width: 132px;
   max-width: 144px;
   max-height: 32px;
-  margin-top: 0px;
+  margin-top: 0;
   margin-left: 5px;
   display: inline-block;
   overflow: hidden;
@@ -1274,7 +1278,7 @@ input[type=range] {
   overflow: visible;
 }
 
-/* 
+/*
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background-color: var(--sdpi-color);
@@ -1292,7 +1296,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 16px;
   border-radius: 20px;
   margin-top: -6px;
-  border: 1px solid #999999;
+  border: 1px solid #999;
 }
 
 .sdpi-item[type="range"] .sdpi-item-group {
@@ -1305,7 +1309,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .sdpi-item[type="range"] .sdpi-item-group span {
-  margin-left: 0px !important;
+  margin-left: 0 !important;
 }
 
 .sdpi-item[type="range"] .sdpi-item-group > .sdpi-item-child {
@@ -1320,7 +1324,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 :disabled {
-  color: #993333;
+  color: #933;
 }
 
 select,
@@ -1464,7 +1468,7 @@ div {
 
 .sdpi-item-value + .icon-cooler,
 .sdpi-item-value + .icon-warmer {
-  margin-left: 0px !important;
+  margin-left: 0 !important;
   margin-top: 15px !important;
 }
 
@@ -1474,9 +1478,8 @@ div {
 input[type="range"].colorbrightness::-webkit-slider-runnable-track,
 input[type="range"].colortemperature::-webkit-slider-runnable-track {
   height: 8px;
-  background: #979797;
   border-radius: 4px;
-  background-image: linear-gradient(to right,#94d0ec,  #ffb165);
+  background: #979797 linear-gradient(to right, #94d0ec, #ffb165);
 }
 
 input[type="range"].colorbrightness::-webkit-slider-runnable-track {
@@ -1491,7 +1494,7 @@ input[type="range"].colortemperature::-webkit-slider-thumb {
   border-radius: 20px;
   margin-top: -5px;
   background-color: #86c6e8;
-  box-shadow: 0px 0px 1px #000000;
+  box-shadow: 0 0 1px #000;
   border: 1px solid #d8d8d8;
 }
 
@@ -1505,11 +1508,11 @@ input[type="range"].colortemperature::-webkit-slider-thumb {
   border-radius: 4px;
   min-width: 44px;
   max-width: 80px;
-  background: white;
+  background: #fff;
   font-size: 11px;
   color: black;
   z-index: 1000;
-  box-shadow: 0px 0px 12px rgba(0,0,0,.8);
+  box-shadow: 0 0 12px rgba(0,0,0,.8);
   padding: 2px;
 }
 
