@@ -73,15 +73,15 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
         let event = jsonObj['event'];
         let jsonPayload = jsonObj['payload'];
 
-        if(event === 'didReceiveGlobalSettings') {
+        if (event === 'didReceiveGlobalSettings') {
             // Set global plugin settings
             globalSettings = jsonPayload['settings'];
         }
-        else if(event === 'didReceiveSettings') {
+        else if (event === 'didReceiveSettings') {
             // Save global settings after default was set
             settings = jsonPayload['settings'];
         }
-        else if(event === 'sendToPropertyInspector') {
+        else if (event === 'sendToPropertyInspector') {
             // Save global cache
             cache = jsonPayload;
 

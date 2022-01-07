@@ -29,7 +29,7 @@ function loadDiscoveryView() {
     // Discover all bridges
     function autoDiscovery() {
         Bridge.discover((status, data) => {
-            if(status) {
+            if (status) {
                 // Bridge discovery request was successful
                 bridges = data;
 

@@ -116,7 +116,7 @@ function CyclePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
                     `;
                 }
             }
-            else if(i > 0) {
+            else if (i > 0) {
                 return `
                   <div type="range" class="sdpi-item" id="color-input-container-${colorIndex}">
                     <div class="sdpi-item-label" id="temperature-label">${instance.localization['Temperature']} ${i}</div>
