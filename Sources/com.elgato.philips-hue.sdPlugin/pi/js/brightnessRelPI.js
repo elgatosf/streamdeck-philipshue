@@ -1,21 +1,19 @@
-//==============================================================================
 /**
-@file       brightnessRelPI.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      brightnessRelPI.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 function BrightnessRelPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init BrightnessPI
-    var instance = this;
+    let instance = this;
 
     // Inherit from PI
     PI.call(this, inContext, inLanguage, inStreamDeckVersion, inPluginVersion);
 
     // Before overwriting parent method, save a copy of it
-    var piLocalize = this.localize;
+    let piLocalize = this.localize;
 
     // Localize the UI
     this.localize = function() {
@@ -27,13 +25,14 @@ function BrightnessRelPI(inContext, inLanguage, inStreamDeckVersion, inPluginVer
     };
 
     // Add steps slider
-    var brightnessStepsSlider = "<div type='range' class='sdpi-item'> \
-                                <div class='sdpi-item-label' id='brightness-rel-label'></div> \
-                                <div class='sdpi-item-value'> \
-                                    <input class='floating-tooltip' data-suffix='%' type='range' id='brightness-rel-input' min='-50' max='50' value='" + settings.brightnessRel + "'> \
-                                </div> \
-                           </div>";
-    document.getElementById('placeholder').innerHTML = brightnessStepsSlider;
+    document.getElementById('placeholder').innerHTML = `
+      <div type="range" class="sdpi-item">
+        <div class="sdpi-item-label" id="brightness-rel-label"></div>
+        <div class="sdpi-item-value">
+          <input class="floating-tooltip" data-suffix="%" type="range" id="brightness-rel-input" min="-50" max="50" value="${settings.brightnessRel}">
+        </div>
+      </div>
+    `;
 
     // Initialize the tooltips
     initToolTips();
