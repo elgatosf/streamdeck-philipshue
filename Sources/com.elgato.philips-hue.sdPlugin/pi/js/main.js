@@ -66,6 +66,9 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     else if (action === 'com.elgato.philips-hue.scene') {
         pi = new ScenePI(inUUID, language, streamDeckVersion, pluginVersion);
     }
+    else if (action === 'com.elgato.philips-hue.brightness-rel') {
+        pi = new BrightnessRelPI(inUUID, language, streamDeckVersion, pluginVersion);
+    }
 
     websocket.onmessage = msg => {
         // Received message from Stream Deck
