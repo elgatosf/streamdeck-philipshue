@@ -111,7 +111,7 @@ function BrightnessRelAction(inContext, inSettings) {
             // Set light or group state
             obj.setBrightness(brightness, (inSuccess, inError) => {
                 if (inSuccess) {
-                    objCache.birghtness = brightness;
+                    objCache.brightness = brightness;
                 }
                 else {
                     log(inError);
