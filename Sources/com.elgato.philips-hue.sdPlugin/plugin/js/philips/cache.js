@@ -32,6 +32,14 @@ function Cache() {
 
         // Init discovery variable to indicate that it ran already
         discovery = {};
+        
+        // init discovery from previously paired bridges
+        Object.keys(globalSettings.bridges).forEach(function(id) {
+            if (globalSettings.bridges[id].hasOwnProperty('ip')) {
+                log('restoring cached bridge: ' + id + ' - ' + globalSettings.bridges[id].ip);
+                discovery[id] = { 'ip': globalSettings.bridges[id].ip };
+            }
+        });
 
         // Run discovery
         Bridge.discover((inSuccess, inBridges) => {
@@ -45,6 +53,7 @@ function Cache() {
             // For all discovered bridges
             inBridges.forEach(inBridge => {
                 // Add new bridge to discovery object
+                log('discovered bridge: ' + inBridge.getID() + ' - ' + inBridge.getIP());
                 discovery[inBridge.getID()] = {
                     ip: inBridge.getIP()
                 };
