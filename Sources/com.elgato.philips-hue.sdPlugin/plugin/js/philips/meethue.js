@@ -151,10 +151,10 @@ function Bridge(ip = null, id = null, username = null) {
                             let value = result[key];
 
                             if (type === 'light') {
-                                objects.push(new Light(instance, key, value.name, value.type, value.state.on, value.state.bri, value.state.xy, value.state.ct));
+                                objects.push(new Light(instance, key, value.name, value.type, value.state.on, value.state.bri, value.state.colormode == 'xy' ? value.state.xy : null, value.state.ct));
                             }
                             else if (type === 'group') {
-                                objects.push(new Group(instance, key, value.name, value.type, value.state.all_on, value.action.bri, value.action.xy, value.action.ct));
+                                objects.push(new Group(instance, key, value.name, value.type, value.state.all_on, value.action.bri, value.action.colormode == 'xy' ? value.action.xy : null, value.action.ct));
                             }
                             else if (type === 'scene') {
                                 objects.push(new Scene(instance, key, value.name, value.type, value.group));
