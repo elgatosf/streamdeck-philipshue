@@ -54,6 +54,14 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
             document.getElementById('groups').label = instance.localization['GroupsTitle'];
         }
     };
+    
+    // Save IP addresses for bridges into global settings
+    this.saveCachedBridges = function(cache) {
+        Object.keys(cache).forEach(function(id) {
+            globalSettings.bridges[id].ip = cache[id].ip;
+        });
+        saveGlobalSettings(inContext);
+    }
 
     // Show all paired bridges
     this.loadBridges = () => {
