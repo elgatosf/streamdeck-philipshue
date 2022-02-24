@@ -34,12 +34,14 @@ function Cache() {
         discovery = {};
         
         // init discovery from previously paired bridges
-        Object.keys(globalSettings.bridges).forEach(id => {
-            if (globalSettings.bridges[id].hasOwnProperty('ip')) {
-                log('restoring cached bridge: ' + id + ' - ' + globalSettings.bridges[id].ip);
-                discovery[id] = { 'ip': globalSettings.bridges[id].ip };
-            }
-        });
+        if (globalSettings.bridges !== undefined) {
+            Object.keys(globalSettings.bridges).forEach(id => {
+                if (globalSettings.bridges[id].hasOwnProperty('ip')) {
+                    log('restoring cached bridge: ' + id + ' - ' + globalSettings.bridges[id].ip);
+                    discovery[id] = { 'ip': globalSettings.bridges[id].ip };
+                }
+            });
+        }
 
         // Run discovery
         Bridge.discover((inSuccess, inBridges) => {
