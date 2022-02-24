@@ -57,10 +57,16 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     
     // Save IP addresses for bridges into global settings
     this.saveCachedBridges = function(cache) {
+        let changed = false;
         Object.keys(cache).forEach(function(id) {
-            globalSettings.bridges[id].ip = cache[id].ip;
+            if (globalSettings.bridges[id].ip != cache[id].ip) {
+                globalSettings.bridges[id].ip = cache[id].ip;
+                changed = true;
+            }
         });
-        saveGlobalSettings(inContext);
+        if (changed) {
+            saveGlobalSettings(inContext);
+        }
     }
 
     // Show all paired bridges
