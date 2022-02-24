@@ -56,9 +56,9 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     };
     
     // Save IP addresses for bridges into global settings
-    this.saveCachedBridges = function(cache) {
+    this.saveCachedBridges = cache => {
         let changed = false;
-        Object.keys(cache).forEach(function(id) {
+        Object.keys(cache).forEach(id => {
             if (globalSettings.bridges[id].ip != cache[id].ip) {
                 globalSettings.bridges[id].ip = cache[id].ip;
                 changed = true;
