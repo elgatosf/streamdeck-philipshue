@@ -5,14 +5,12 @@
   "com.elgato.philips-hue.power": {
     "Name": "开/关",
     "Tooltip": "打开或关闭灯。",
-    "States": [
-      {
-        "Name": "开"
-      },
-      {
-        "Name": "关"
-      }
-    ]
+    "States": [{
+      "Name": "开"
+    },
+    {
+      "Name": "关"
+    }]
   },
   "com.elgato.philips-hue.color": {
     "Name": "颜色",
@@ -26,15 +24,19 @@
     "Name": "亮度",
     "Tooltip": "设置灯的亮度。"
   },
+  "com.elgato.philips-hue.brightness-rel": {
+    "Name": "相对亮度",
+    "Tooltip": "相对于当前亮度，调节照明亮度。"
+  },
   "com.elgato.philips-hue.scene": {
     "Name": "场景",
     "Tooltip": "设置场景。"
   },
   "Localization": {
     "PI": {
-      "Bridge": "桥接器",
-      "NoBridges": "没有桥接器",
-      "AddBridge": "添加",
+      "Bridge": "桥接",
+      "NoBridges": "无需桥接",
+      "AddBridge": "新增",
       "Lights": "灯",
       "Group": "组",
       "LightsTitle": "灯",
@@ -45,49 +47,50 @@
       "Colors": "颜色",
       "Temperature": "温度",
       "Brightness": "亮度",
+      "Steps": "步长",
       "Scene": "场景",
       "NoScenes": "没有场景"
     },
     "Setup": {
       "Intro": {
-        "Title": "添加桥接器",
-        "Description": "与 Philips Hue 桥接器配对以控制您的灯。",
-        "Start": "寻找桥接器",
-        "Manual": "Add Bridge manually",
-        "Close": "不是现在"
+        "Title" : "添加桥接",
+        "Description": "与 Philips Hue 桥接配对以控制您的灯。",
+        "Start": "发现桥接",
+        "Manual": "手动添加桥接",
+        "Close": "现在不"
       },
       "Discovery": {
-        "Title": "正在寻找桥接器...",
-        "TitleNone": "没有找到桥接器",
-        "TitleOne": "找到一个桥接器",
-        "TitleMultiple": "找到 {{ number }} 个桥接器",
-        "DescriptionFound": "要现在开始配对吗？",
-        "DescriptionNone": "确保桥接器已打开并已联网。",
+        "Title" : "正在发现桥接...",
+        "TitleNone" : "没有找到桥接",
+        "TitleOne" : "找到一个桥接",
+        "TitleMultiple" : "找到 {{ number }} 个桥接",
+        "DescriptionFound": "现在开始配对？",
+        "DescriptionNone": "确保桥接打开并已联网。",
         "Pair": "配对",
         "Close": "关闭",
         "Retry": "重试"
       },
       "Manual": {
-        "Title": "Bridge manuell hinzufügen",
-        "Description": "Fügen Sie Ihre Philips Hue-Bridge manuell über die IP-Adresse in Ihrem Netzwerk hinzu, falls Auto-Discovery bei Ihnen nicht unterstützt wird.",
-        "IPAddress": "IP Adresse der Bridge",
-        "Check": "Eingabe überprüfen",
-        "Close": "Schließen",
+        "Title": "手动添加桥接",
+        "Description": "如果不支持自动发现，则需要通过 IP 地址手动将 Philips Hue 桥接添加到您的网络中。",
+        "IPAddress": "桥接的 IP 地址",
+        "Check": "验证输入",
+        "Close": "关闭",
         "Error": {
-          "Empty": "Bitte tragen Sie eine IP Adresse in das Eingabefeld ein.",
-          "Invalid": "Die eingetragene IP Adresse hat ein ungültiges Format. Bitte überprüfen Sie Ihre Eingabe.",
-          "Unreachable": "Die Bridge ist unter der IP Adresse nicht erreichbar. Bitte überprüfen Sie Ihre Eingabe."
+          "Empty": "请添加桥接的 IP 地址。",
+          "Invalid": "输入的 IP 地址格式无效。请检查输入。",
+          "Unreachable": "桥接无法接通。请检查 IP 地址。"
         }
       },
       "Pairing": {
-        "Title": "正在配对...",
-        "Description": "现在请按下桥接器上的连接按钮。",
+        "Title" : "正在配对...",
+        "Description": "现在请按桥接上的链接按钮。",
         "Close": "关闭",
         "Retry": "重试"
       },
       "Save": {
-        "Title": "桥接器已添加",
-        "Description": "已与桥接器配对成功。",
+        "Title" : "桥接已添加",
+        "Description": "桥接配对成功。",
         "Save": "完成"
       }
     }

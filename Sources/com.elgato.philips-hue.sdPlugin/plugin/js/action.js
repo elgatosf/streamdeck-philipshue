@@ -66,6 +66,9 @@ function Action(inContext, inSettings) {
         else if (instance instanceof BrightnessAction) {
             action = 'com.elgato.philips-hue.brightness';
         }
+		else if (instance instanceof BrightnessRelAction) {
+            action = 'com.elgato.philips-hue.brightness-rel';
+        }
         else if (instance instanceof SceneAction) {
             action = 'com.elgato.philips-hue.scene';
         }
