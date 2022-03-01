@@ -5,14 +5,12 @@
   "com.elgato.philips-hue.power": {
     "Name": "On / Off",
     "Tooltip": "Turn lights on or off.",
-    "States": [
-      {
-        "Name": "On"
-      },
-      {
-        "Name": "Off"
-      }
-    ]
+    "States": [{
+      "Name": "On"
+    },
+    {
+      "Name": "Off"
+    }]
   },
   "com.elgato.philips-hue.color": {
     "Name": "Color",
@@ -55,17 +53,17 @@
     },
     "Setup": {
       "Intro": {
-        "Title": "Add Bridge",
+        "Title" : "Add Bridge",
         "Description": "Pair with a Philips Hue bridge to control your lights.",
         "Start": "Discover Bridges",
         "Manual": "Add Bridge manually",
         "Close": "Not Now"
       },
       "Discovery": {
-        "Title": "Discovering Bridges...",
-        "TitleNone": "No Bridges Found",
-        "TitleOne": "One Bridge Found",
-        "TitleMultiple": "{{ number }} Bridges Found",
+        "Title" : "Discovering Bridges …",
+        "TitleNone" : "No Bridges Found",
+        "TitleOne" : "One Bridge Found",
+        "TitleMultiple" : "{{ number }} Bridges Found",
         "DescriptionFound": "Start pairing now?",
         "DescriptionNone": "Make sure your bridge is switched on and connected to the network.",
         "Pair": "Pair",
@@ -74,7 +72,7 @@
       },
       "Manual": {
         "Title": "Add bridge manually",
-        "Description": "Add your Philips Hue-Bridge manually (via IP-Address)to your network, in cases where Auto-Discovery is not supported.",
+        "Description": "Add your Philips Hue-Bridge manually (via IP-Address) to your network, in cases where Auto-Discovery is not supported.",
         "IPAddress": "IP address of the bridge",
         "Check": "Validate input",
         "Close": "Close",
@@ -85,13 +83,13 @@
         }
       },
       "Pairing": {
-        "Title": "Pairing...",
+        "Title" : "Pairing...",
         "Description": "Please press the link button on the bridge now.",
         "Close": "Close",
         "Retry": "Try Again"
       },
       "Save": {
-        "Title": "Bridge Added",
+        "Title" : "Bridge Added",
         "Description": "The bridge has been paired sucessfully.",
         "Save": "Done"
       }
