@@ -60,7 +60,7 @@
         "Close": "Not Now"
       },
       "Discovery": {
-        "Title" : "Discovering Bridges...",
+        "Title" : "Discovering Bridges …",
         "TitleNone" : "No Bridges Found",
         "TitleOne" : "One Bridge Found",
         "TitleMultiple" : "{{ number }} Bridges Found",

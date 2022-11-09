@@ -24,6 +24,10 @@
     "Name": "亮度",
     "Tooltip": "设置灯的亮度。"
   },
+  "com.elgato.philips-hue.brightness-rel": {
+    "Name": "Brightness Relative",
+    "Tooltip": "Adjust the brightness of the light relative to the current brightness."
+  },
   "com.elgato.philips-hue.scene": {
     "Name": "场景",
     "Tooltip": "设置场景。"
@@ -43,6 +47,7 @@
       "Colors": "颜色",
       "Temperature": "温度",
       "Brightness": "亮度",
+      "Steps": "Steps",
       "Scene": "场景",
       "NoScenes": "没有场景"
     },
@@ -66,15 +71,15 @@
         "Retry": "重试"
       },
       "Manual": {
-        "Title": "Bridge manuell hinzufügen",
-        "Description": "Fügen Sie Ihre Philips Hue-Bridge manuell über die IP-Adresse in Ihrem Netzwerk hinzu, falls Auto-Discovery bei Ihnen nicht unterstützt wird.",
-        "IPAddress": "IP Adresse der Bridge",
-        "Check": "Eingabe überprüfen",
-        "Close": "Schließen",
+        "Title": "Add bridge manually",
+        "Description": "Add your Philips Hue-Bridge manually (via IP-Address) to your network, in cases where Auto-Discovery is not supported.",
+        "IPAddress": "IP address of the bridge",
+        "Check": "Validate input",
+        "Close": "Close",
         "Error": {
-          "Empty": "Bitte tragen Sie eine IP Adresse in das Eingabefeld ein.",
-          "Invalid": "Die eingetragene IP Adresse hat ein ungültiges Format. Bitte überprüfen Sie Ihre Eingabe.",
-          "Unreachable": "Die Bridge ist unter der IP Adresse nicht erreichbar. Bitte überprüfen Sie Ihre Eingabe."
+          "Empty": "Please add the ip address of your bridge.",
+          "Invalid": "The entered IP address has an invalid format. Please check your input.",
+          "Unreachable": "Bridge is not reachable. Please check the ip address."
         }
       },
       "Pairing": {

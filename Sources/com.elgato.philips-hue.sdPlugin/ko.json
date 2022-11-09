@@ -24,6 +24,10 @@
     "Name": "밝기",
     "Tooltip": "조명의 밝기를 조절합니다"
   },
+  "com.elgato.philips-hue.brightness-rel": {
+    "Name": "Brightness Relative",
+    "Tooltip": "Adjust the brightness of the light relative to the current brightness."
+  },
   "com.elgato.philips-hue.scene": {
     "Name": "장면",
     "Tooltip": "장면을 설정합니다."
@@ -43,6 +47,7 @@
       "Colors": "색상",
       "Temperature": "온도",
       "Brightness": "밝기",
+      "Steps": "Steps",
       "Scene": "장면",
       "NoScenes": "장면 없음"
     },
@@ -69,11 +74,11 @@
         "Title": "Add bridge manually",
         "Description": "Add your Philips Hue-Bridge manually (via IP-Address)to your network, in cases where Auto-Discovery is not supported.",
         "IPAddress": "IP address of the bridge",
-        "Check": "Check input",
+        "Check": "Validate input",
         "Close": "Close",
         "Error": {
           "Empty": "Please add the ip address of your bridge.",
-          "Invalid": "The entered ip address is in an invalid format. Please check your entry.",
+          "Invalid": "The entered IP address has an invalid format. Please check your input.",
           "Unreachable": "Bridge is not reachable. Please check the ip address."
         }
       },
