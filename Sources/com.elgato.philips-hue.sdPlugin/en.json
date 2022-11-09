@@ -72,7 +72,7 @@
       },
       "Manual": {
         "Title": "Add bridge manually",
-        "Description": "Add your Philips Hue-Bridge manually (via IP-Address)to your network, in cases where Auto-Discovery is not supported.",
+        "Description": "Add your Philips Hue-Bridge manually (via IP-Address) to your network, in cases where Auto-Discovery is not supported.",
         "IPAddress": "IP address of the bridge",
         "Check": "Validate input",
         "Close": "Close",

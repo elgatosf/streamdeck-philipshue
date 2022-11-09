@@ -5,12 +5,10 @@
   "com.elgato.philips-hue.power": {
     "Name": "Ein/Aus",
     "Tooltip": "Schalte das Licht ein oder aus.",
-    "States": [{
-      "Name": "Ein"
-    },
-    {
-      "Name": "Aus"
-    }]
+    "States": [
+		{"Name": "Ein"},
+		{"Name": "Aus"}
+	  ]
   },
   "com.elgato.philips-hue.color": {
     "Name": "Farbe",
@@ -25,7 +23,7 @@
     "Tooltip": "Stelle die Helligkeit des Lichts ein."
   },
   "com.elgato.philips-hue.brightness-rel": {
-    "Name": "Rel. Helligkeit",
+    "Name": "Relative Helligkeit",
     "Tooltip": "Stelle die Helligkeit des Lichts relativ zur aktuellen Helligkeit ein."
   },
   "com.elgato.philips-hue.scene": {
@@ -72,14 +70,14 @@
       },
       "Manual": {
         "Title": "Bridge manuell hinzufügen",
-        "Description": "Fügen Sie Ihre Philips Hue-Bridge manuell über die IP-Adresse in Ihrem Netzwerk hinzu, falls Auto-Discovery bei Ihnen nicht unterstützt wird.",
-        "IPAddress": "IP Adresse der Bridge",
+        "Description": "Füge deine Philips Hue-Bridge deinem Netzwerk manuell über die IP-Adresse hinzu, falls Auto-Discovery nicht unterstützt wird.",
+        "IPAddress": "IP-Adresse der Bridge",
         "Check": "Eingabe überprüfen",
         "Close": "Schließen",
         "Error": {
-          "Empty": "Bitte tragen Sie eine IP Adresse in das Eingabefeld ein.",
-          "Invalid": "Die eingetragene IP Adresse hat ein ungültiges Format. Bitte überprüfen Sie Ihre Eingabe.",
-          "Unreachable": "Die Bridge ist unter der IP Adresse nicht erreichbar. Bitte überprüfen Sie Ihre Eingabe."
+          "Empty": "Bitte trage eine IP-Adresse in das Eingabefeld ein.",
+          "Invalid": "Die eingetragene IP-Adresse hat ein ungültiges Format. Bitte überprüfe deine Eingabe.",
+          "Unreachable": "Die Bridge ist unter der IP-Adresse nicht erreichbar. Bitte überprüfe die IP-Adresse."
         }
       },
       "Pairing": {

@@ -1,11 +1,9 @@
-//==============================================================================
 /**
-@file       discoveryView.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      discoveryView.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Load the discovery view
 function loadDiscoveryView() {
@@ -30,13 +28,13 @@ function loadDiscoveryView() {
 
     // Discover all bridges
     function autoDiscovery() {
-        Bridge.discover(function(status, data) {
-            if(status) {
+        Bridge.discover((status, data) => {
+            if (status) {
                 // Bridge discovery request was successful
                 bridges = data;
 
                 // Delay displaying the result
-                setTimeout(function() {
+                setTimeout(() => {
                     if (bridges.length === 0) {
                         // No bridges were found
 

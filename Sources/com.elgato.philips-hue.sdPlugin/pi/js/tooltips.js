@@ -24,32 +24,33 @@ function initToolTip(element, tooltip) {
     const tw = tooltip.getBoundingClientRect().width;
     const suffix = element.getAttribute('data-suffix') || '';
 
-    const fn = function() {
+    const updateTooltip = () => {
         const elementRect = element.getBoundingClientRect();
         const w = elementRect.width - tw / 2;
-        const percnt = rangeToPercent(
+        const percent = rangeToPercent(
             element.value,
             element.min,
             element.max,
         );
 
         tooltip.textContent = suffix !== '' ? `${element.value} ${suffix}` : String(element.value);
-        tooltip.style.left = `${elementRect.left + Math.round(w * percnt) - tw / 4}px`;
+        tooltip.style.left = `${elementRect.left + Math.round(w * percent) - tw / 4}px`;
         tooltip.style.top = `${elementRect.top - 32}px`;
     };
 
     if (element) {
-        element.addEventListener('mouseenter', function() {
+        element.addEventListener('mouseenter', () => {
             tooltip.classList.remove('hidden');
             tooltip.classList.add('shown');
-            fn();
+            updateTooltip();
         }, false);
 
-        element.addEventListener('mouseout', function() {
+        element.addEventListener('mouseout', () => {
             tooltip.classList.remove('shown');
             tooltip.classList.add('hidden');
-            fn();
+            updateTooltip();
         }, false);
-        element.addEventListener('input', fn, false);
+
+		element.addEventListener('input', updateTooltip, false);
     }
 }

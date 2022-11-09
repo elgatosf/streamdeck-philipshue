@@ -27,6 +27,8 @@
   "com.elgato.philips-hue.brightness-rel": {
     "Name": "Brightness Relative",
     "Tooltip": "Adjust the brightness of the light relative to the current brightness."
+    "Name": "明るさ (相対的)",
+    "Tooltip": "現在の明るさを基準にして照明の明るさを調整します。"
   },
   "com.elgato.philips-hue.scene": {
     "Name": "シーン",
@@ -48,6 +50,7 @@
       "Temperature": "温度",
       "Brightness": "明るさ",
       "Steps": "Steps",
+      "Steps": "ステップ",
       "Scene": "シーン",
       "NoScenes": "シーンがありません"
     },
@@ -57,6 +60,7 @@
         "Description": "照明をコントロールするには、Philips Hueのブリッジを使ってペアリングしてください。",
         "Start": "ブリッジを検出",
         "Manual": "Add Bridge manually",
+        "Manual": "ブリッジを手動で追加",
         "Close": "今はしない"
       },
       "Discovery": {
@@ -76,10 +80,18 @@
         "IPAddress": "IP address of the bridge",
         "Check": "Validate input",
         "Close": "Close",
+        "Title": "ブリッジを手動で追加",
+        "Description": "自動検出がサポートされていない場合、Philips Hueブリッジをお使いのネットワークに (IPアドレスを使って) 手動で追加してください。",
+        "IPAddress": "ブリッジのIPアドレス",
+        "Check": "入力を検証",
+        "Close": "閉じる",
         "Error": {
           "Empty": "Please add the ip address of your bridge.",
           "Invalid": "The entered IP address has an invalid format. Please check your input.",
           "Unreachable": "Bridge is not reachable. Please check the ip address."
+          "Empty": "ブリッジのIPアドレスを追加してください。",
+          "Invalid": "入力されたIPアドレスは無効なフォーマットです。入力を確認してください。",
+          "Unreachable": "ブリッジに接続できません。IPアドレスを確認してください。"
         }
       },
       "Pairing": {

@@ -1,11 +1,9 @@
-//==============================================================================
 /**
-@file       main.js
-@brief      Philips Hue Plugin
-@copyright  (c) 2019, Corsair Memory, Inc.
-            This source code is licensed under the MIT-style license found in the LICENSE file.
-**/
-//==============================================================================
+@file      main.js
+@brief     Philips Hue Plugin
+@copyright (c) 2019, Corsair Memory, Inc.
+@license   This source code is licensed under the MIT-style license found in the LICENSE file.
+*/
 
 // Global variable containing the localizations
 var localization = null;
@@ -20,7 +18,7 @@ var bridge = null;
 function setStatusBar(view) {
     // Remove active status from all status cells
     let statusCells = document.getElementsByClassName('status-cell');
-    Array.from(statusCells).forEach(function(cell) {
+    Array.from(statusCells).forEach((cell) => {
         cell.classList.remove('active');
     });
 
@@ -29,9 +27,9 @@ function setStatusBar(view) {
 }
 
 // Main function run after the page is fully loaded
-window.onload = function() {
+window.onload = () => {
     // Bind enter and ESC keys
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             let event = new CustomEvent('enterPressed');
             document.dispatchEvent(event);
@@ -47,7 +45,7 @@ window.onload = function() {
     let language = url.searchParams.get('language');
 
     // Load the localizations
-    getLocalization(language, function(inStatus, inLocalization) {
+    getLocalization(language, (inStatus, inLocalization) => {
         if (inStatus) {
             // Save the localizations globally
             localization = inLocalization['Setup'];

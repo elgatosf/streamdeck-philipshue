@@ -23,10 +23,13 @@
   "com.elgato.philips-hue.brightness": {
     "Name": "밝기",
     "Tooltip": "조명의 밝기를 조절합니다"
+    "Tooltip": "조명의 밝기를 조절합니다."
   },
   "com.elgato.philips-hue.brightness-rel": {
     "Name": "Brightness Relative",
     "Tooltip": "Adjust the brightness of the light relative to the current brightness."
+    "Name": "상대적 밝기",
+    "Tooltip": "현재 밝기에 비례하여 밝기를 조절합니다."
   },
   "com.elgato.philips-hue.scene": {
     "Name": "장면",
@@ -48,6 +51,7 @@
       "Temperature": "온도",
       "Brightness": "밝기",
       "Steps": "Steps",
+      "Steps": "단계",
       "Scene": "장면",
       "NoScenes": "장면 없음"
     },
@@ -57,6 +61,7 @@
         "Description": "Philips Hue 브릿지와 연결하여 조명을 조절하세요.",
         "Start": "브릿지 탐색",
         "Manual": "Add Bridge manually",
+        "Manual": "수동으로 브릿지 추가",
         "Close": "나중에"
       },
       "Discovery": {
@@ -76,10 +81,18 @@
         "IPAddress": "IP address of the bridge",
         "Check": "Validate input",
         "Close": "Close",
+        "Title": "수동으로 브릿지 추가",
+        "Description": "자동 탐색이 지원되지 않는 경우, (IP 주소를 통해) Philips Hue 브릿지를 수동으로 네트워크에 추가하십시오.",
+        "IPAddress": "브릿지의 IP 주소",
+        "Check": "입력 유효성 검사",
+        "Close": "닫기",
         "Error": {
           "Empty": "Please add the ip address of your bridge.",
           "Invalid": "The entered IP address has an invalid format. Please check your input.",
           "Unreachable": "Bridge is not reachable. Please check the ip address."
+          "Empty": "브릿지의 IP 주소를 추가하십시오.",
+          "Invalid": "입력한 IP 주소가 유효한 형식이 아닙니다. 입력을 확인하십시오.",
+          "Unreachable": "브릿지에 도달할 수 없습니다. IP 주소를 확인하십시오."
         }
       },
       "Pairing": {

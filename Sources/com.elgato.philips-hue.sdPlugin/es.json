@@ -2,6 +2,7 @@
   "Name": "Philips Hue",
   "Category": "Philips Hue",
   "Description": "Controle sus luces Philips Hue.",
+  "Description": "Controla tus luces Philips Hue.",
   "com.elgato.philips-hue.power": {
     "Name": "On / Off",
     "Tooltip": "Encender o apagar las luces.",
@@ -15,6 +16,7 @@
   "com.elgato.philips-hue.color": {
     "Name": "Color",
     "Tooltip": "Ajuste el color de su luz."
+    "Tooltip": "Ajusta el color de tu luz."
   },
   "com.elgato.philips-hue.cycle": {
     "Name": "Transición de color",
@@ -23,10 +25,13 @@
   "com.elgato.philips-hue.brightness": {
     "Name": "Brillo",
     "Tooltip": "Ajuste el brillo de su luz."
+    "Tooltip": "Ajusta el brillo de tu luz."
   },
   "com.elgato.philips-hue.brightness-rel": {
     "Name": "Brightness Relative",
     "Tooltip": "Adjust the brightness of the light relative to the current brightness."
+    "Name": "Brillo relativo",
+    "Tooltip": "Ajusta el brillo de la luz con respecto al brillo actual."
   },
   "com.elgato.philips-hue.scene": {
     "Name": "Escena",
@@ -36,6 +41,8 @@
     "PI": {
       "Bridge": "Puente",
       "NoBridges": "No hay puentes",
+      "Bridge": "Bridge",
+      "NoBridges": "No hay Bridges",
       "AddBridge": "Añadir",
       "Lights": "Luces",
       "Group": "Grupo",
@@ -48,6 +55,7 @@
       "Temperature": "Temperatura",
       "Brightness": "Brillo",
       "Steps": "Steps",
+      "Steps": "Pasos",
       "Scene": "Escena",
       "NoScenes": "No hay escenas"
     },
@@ -57,6 +65,10 @@
         "Description": "Enlácese a un puente Philips Hue para controlar sus luces.",
         "Start": "Detectar puentes",
         "Manual": "Add Bridge manually",
+        "Title" : "Añadir Bridge",
+        "Description": "Enlaza con un Bridge Philips Hue para controlar tus luces.",
+        "Start": "Detectar Bridge",
+        "Manual": "Añadir Bridge a mano",
         "Close": "Ahora no"
       },
       "Discovery": {
@@ -64,8 +76,13 @@
         "TitleNone" : "No se han detectado puentes",
         "TitleOne" : "Se ha detectado un puente",
         "TitleMultiple" : "{{ number }} puentes detectados",
+        "Title" : "Detectando Bridges …",
+        "TitleNone" : "No se han detectado Bridges",
+        "TitleOne" : "Se ha detectado un Bridge",
+        "TitleMultiple" : "{{ number }} Bridges detectados",
         "DescriptionFound": "¿Empezar a enlazar ahora?",
         "DescriptionNone": "Compruebe que el puente está encendido y conectado a la red.",
+        "DescriptionNone": "Comprueba que el Bridge está encendido y conectado a la red.",
         "Pair": "Enlazar",
         "Close": "Cerrar",
         "Retry": "Volver a intentar"
@@ -76,21 +93,32 @@
         "IPAddress": "IP address of the bridge",
         "Check": "Validate input",
         "Close": "Close",
+        "Title": "Añadir Bridge a mano",
+        "Description": "Añade tu Philips Hue Bridge manualmente (mediante la dirección IP) a tu red, en los casos en los que la detección automática no se puede usar.",
+        "IPAddress": "Dirección IP del Bridge",
+        "Check": "Validar entrada",
+        "Close": "Cerrar",
         "Error": {
           "Empty": "Please add the ip address of your bridge.",
           "Invalid": "The entered IP address has an invalid format. Please check your input.",
           "Unreachable": "Bridge is not reachable. Please check the ip address."
+          "Empty": "Añade la dirección IP de tu Bridge.",
+          "Invalid": "El formato de la dirección IP no es válido. Comprueba lo que has introducido.",
+          "Unreachable": "Nose puede conectar con el Bridge. Comprueba la dirección IP."
         }
       },
       "Pairing": {
         "Title" : "Enlazando...",
         "Description": "Pulse ahora el botón de enlace en el puente.",
+        "Description": "Pulsa ahora el botón de enlace en el Bridge.",
         "Close": "Cerrar",
         "Retry": "Volver a intentar"
       },
       "Save": {
         "Title" : "Puente añadido",
         "Description": "El puente se ha enlazado correctamente.",
+        "Title" : "Bridge añadido",
+        "Description": "El Bridge se ha enlazado correctamente.",
         "Save": "OK"
       }
     }
