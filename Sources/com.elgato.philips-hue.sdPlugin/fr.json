@@ -22,11 +22,15 @@
   },
   "com.elgato.philips-hue.brightness": {
     "Name": "Luminosité",
-    "Tooltip": "Réglez la luminosité de la lumière."
+    "Tooltip": "Réglez la luminosité de la lumière.",
+    "Encoder": {
+      "TriggerDescription": {
+          "Rotate": "Adjust Brightness",
+          "Touch": "Toggle Lights on/off"
+      }
+    }
   },
   "com.elgato.philips-hue.brightness-rel": {
-    "Name": "Brightness Relative",
-    "Tooltip": "Adjust the brightness of the light relative to the current brightness."
     "Name": "Luminosité relative",
     "Tooltip": "Permet de régler la luminosité de l’éclairage par rapport à la luminosité actuelle."
   },
@@ -49,7 +53,6 @@
       "Colors": "Couleurs",
       "Temperature": "Température",
       "Brightness": "Luminosité",
-      "Steps": "Steps",
       "Steps": "Pas",
       "Scene": "Scène",
       "NoScenes": "Aucune scène"
@@ -59,7 +62,6 @@
         "Title" : "Ajouter un pont",
         "Description": "Jumelez l’application à un pont Philips Hue pour contrôler vos lumières.",
         "Start": "Découvrir des ponts",
-        "Manual": "Add Bridge manually",
         "Manual": "Ajouter un pont manuellement",
         "Close": "Pas maintenant"
       },
@@ -75,20 +77,12 @@
         "Retry": "Réessayer"
       },
       "Manual": {
-        "Title": "Add bridge manually",
-        "Description": "Add your Philips Hue-Bridge manually (via IP-Address)to your network, in cases where Auto-Discovery is not supported.",
-        "IPAddress": "IP address of the bridge",
-        "Check": "Validate input",
-        "Close": "Close",
         "Title": "Ajouter un pont manuellement",
         "Description": "Ajoutez votre pont Philips Hue manuellement (à partir de son adresse IP) à votre réseau, au cas où la découverte automatique serait impossible.",
         "IPAddress": "Adresse IP du pont",
         "Check": "Valider la saisie",
         "Close": "Fermer",
         "Error": {
-          "Empty": "Please add the ip address of your bridge.",
-          "Invalid": "The entered IP address has an invalid format. Please check your input.",
-          "Unreachable": "Bridge is not reachable. Please check the ip address."
           "Empty": "Veuillez ajouter l’adresse IP de votre pont.",
           "Invalid": "Le format de l’adresse IP saisie n’est pas valide. Veuillez vérifier votre saisie.",
           "Unreachable": "Le pont est injoignable. Veuillez vérifier l’adresse IP."

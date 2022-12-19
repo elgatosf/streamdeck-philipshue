@@ -20,7 +20,12 @@
   },
   "com.elgato.philips-hue.brightness": {
     "Name": "Helligkeit",
-    "Tooltip": "Stelle die Helligkeit des Lichts ein."
+    "Tooltip": "Stelle die Helligkeit des Lichts ein.",
+    "Encoder": {
+      "TriggerDescription": {
+          "Rotate": "Helligkeit einstellen",
+          "Touch": "Licht ein/aus"
+      }
   },
   "com.elgato.philips-hue.brightness-rel": {
     "Name": "Relative Helligkeit",
