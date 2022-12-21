@@ -46,8 +46,41 @@
           "Image": "plugin/images/icons/brightness"
         }
       ],
+      "Controllers": [
+        "Keypad",
+        "Encoder"
+      ],
+      "Encoder": {
+        "layout": "$B1",
+        "TriggerDescription": {
+          "Rotate": "Adjust Brightness",
+          "Touch": "Toggle Light on/off"
+        }
+      },
       "Tooltip": "Set the brightness of your light.",
       "UUID": "com.elgato.philips-hue.brightness"
+    },
+    {
+      "Icon": "plugin/images/actions/temperature",
+      "Name": "Temperature",
+      "States": [
+        {
+          "Image": "plugin/images/icons/temperature"
+        }
+      ],
+      "Controllers": [
+        "Keypad",
+        "Encoder"
+      ],
+      "Encoder": {
+        "layout": "$B1",
+        "TriggerDescription": {
+          "Rotate": "Adjust Temperature",
+          "Touch": "Toggle Light on/off"
+        }
+      },
+      "Tooltip": "Set the temperature of your light.",
+      "UUID": "com.elgato.philips-hue.temperature"
     },
     {
       "Icon": "plugin/images/actions/brightness",
@@ -82,7 +115,7 @@
   "CategoryIcon": "plugin/images/actions/category",
   "PropertyInspectorPath": "pi/index.html",
   "URL": "https://www.elgato.com/gaming/stream-deck",
-  "Version": "1.5",
+  "Version": "1.6.2",
   "DefaultWindowSize": [
     500,
     650
@@ -98,6 +131,6 @@
     }
   ],
   "Software": {
-    "MinimumVersion": "4.2"
+    "MinimumVersion": "5.0"
   }
 }

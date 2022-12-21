@@ -13,7 +13,7 @@ function CyclePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     let maxColors = 10;
 
     // Current amount of Colors
-    let curColors = settings.colors.length;
+    let curColors = settings?.colors?.length || 0;
 
     // Default color for new pickers
     let defaultColor = "#ffffff";

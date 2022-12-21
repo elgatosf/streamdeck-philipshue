@@ -16,50 +16,27 @@ function PowerAction(inContext, inSettings) {
     // Update the state
     updateState();
 
+    this.updateAction = function() {
+      updateState();
+    };
+
     // Public function called on key up event
     this.onKeyUp = (inContext, inSettings, inCoordinates, inUserDesiredState, inState) => {
-        // Check if any bridge is configured
-        if (!('bridge' in inSettings)) {
-            log('No bridge configured');
-            showAlert(inContext);
-            return;
-        }
-
-        // Check if the configured bridge is in the cache
-        if (!(inSettings.bridge in cache.data)) {
-            log('Bridge ' + inSettings.bridge + ' not found in cache');
-            showAlert(inContext);
-            return;
-        }
-
-        // Find the configured bridge
-        let bridgeCache = cache.data[inSettings.bridge];
-
-        // Check if any light is configured
-        if (!('light' in inSettings)) {
-            log('No light or group configured');
-            showAlert(inContext);
-            return;
-        }
-
-        // Check if the configured light or group is in the cache
-        if (!(inSettings.light in bridgeCache.lights || inSettings.light in bridgeCache.groups)) {
-            log(`Light or group ${inSettings.light} not found in cache`);
-            showAlert(inContext);
-            return;
-        }
-
+        const settings = this.getVerifiedSettings(inContext);
+        if(false === settings) return;
+  
+        let bridgeCache = cache.data[settings.bridge];
         // Create a bridge instance
         let bridge = new Bridge(bridgeCache.ip, bridgeCache.id, bridgeCache.username);
 
         // Create a light or group object
         let objCache, obj;
-        if (inSettings.light.indexOf('l-') !== -1) {
-            objCache = bridgeCache.lights[inSettings.light];
+        if (settings.light.indexOf('l-') !== -1) {
+            objCache = bridgeCache.lights[settings.light];
             obj = new Light(bridge, objCache.id);
         }
         else {
-            objCache = bridgeCache.groups[inSettings.light];
+            objCache = bridgeCache.groups[settings.light];
             obj = new Group(bridge, objCache.id);
         }
 
@@ -77,6 +54,7 @@ function PowerAction(inContext, inSettings) {
             if (success) {
                 setActionState(inContext, targetState ? 0 : 1);
                 objCache.power = targetState;
+                cache.refresh();
             }
             else {
                 log(error);

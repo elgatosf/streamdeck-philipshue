@@ -5,12 +5,14 @@
   "com.elgato.philips-hue.power": {
     "Name": "开/关",
     "Tooltip": "打开或关闭灯。",
-    "States": [{
-      "Name": "开"
-    },
-    {
-      "Name": "关"
-    }]
+    "States": [
+      {
+        "Name": "开"
+      },
+      {
+        "Name": "关"
+      }
+    ]
   },
   "com.elgato.philips-hue.color": {
     "Name": "颜色",
@@ -25,8 +27,8 @@
     "Tooltip": "设置灯的亮度。",
     "Encoder": {
       "TriggerDescription": {
-          "Rotate": "Adjust Brightness",
-          "Touch": "Toggle Lights on/off"
+        "Rotate": "调整亮度",
+        "Touch": "打开/关闭灯光"
       }
     }
   },
@@ -59,17 +61,17 @@
     },
     "Setup": {
       "Intro": {
-        "Title" : "添加桥接",
+        "Title": "添加桥接",
         "Description": "与 Philips Hue 桥接配对以控制您的灯。",
         "Start": "发现桥接",
         "Manual": "手动添加桥接",
         "Close": "现在不"
       },
       "Discovery": {
-        "Title" : "正在发现桥接...",
-        "TitleNone" : "没有找到桥接",
-        "TitleOne" : "找到一个桥接",
-        "TitleMultiple" : "找到 {{ number }} 个桥接",
+        "Title": "正在发现桥接...",
+        "TitleNone": "没有找到桥接",
+        "TitleOne": "找到一个桥接",
+        "TitleMultiple": "找到 {{ number }} 个桥接",
         "DescriptionFound": "现在开始配对？",
         "DescriptionNone": "确保桥接打开并已联网。",
         "Pair": "配对",
@@ -89,13 +91,13 @@
         }
       },
       "Pairing": {
-        "Title" : "正在配对...",
+        "Title": "正在配对...",
         "Description": "现在请按桥接上的链接按钮。",
         "Close": "关闭",
         "Retry": "重试"
       },
       "Save": {
-        "Title" : "桥接已添加",
+        "Title": "桥接已添加",
         "Description": "桥接配对成功。",
         "Save": "完成"
       }

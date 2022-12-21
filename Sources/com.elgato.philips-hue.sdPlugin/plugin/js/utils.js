@@ -49,12 +49,9 @@ function requestGlobalSettings(inUUID) {
 }
 
 // Log to the global log file
-function log(inMessage) {
+function logToFile(inMessage) {
     // Log to the developer console
-    let time = new Date();
-    let timeString = time.toLocaleDateString() + ' ' + time.toLocaleTimeString();
-    console.log(timeString, inMessage);
-
+    let timeString = new Date().toLocaleString();
     // Log to the Stream Deck log file
     if (websocket) {
         websocket.send(JSON.stringify({
@@ -65,6 +62,30 @@ function log(inMessage) {
         }));
     }
 }
+
+const log = console.log.bind(
+  console,
+  '%c [HUE]',
+  'color: #66c',
+);
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// const debug = true;
+// Object.defineProperty(this, "log", {
+//   get: function () {
+//     return debug ? console.log.bind(window.console, test(), '[DEBUG]') : function(){};
+//    }
+// });
+
+
+const debounce = (callback, time = 800) => {
+  let timer;
+  return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => callback(...args), time);
+  };
+};
 
 // Show alert icon on the key
 function showAlert(inUUID) {
@@ -113,6 +134,17 @@ function sendToPlugin(inAction, inContext, inData) {
     }
 }
 
+// Send feedback to the Stream Deck+ panel (SD+)
+function setFeedback(inContext, inPayload) {
+  if (websocket) {
+      websocket.send(JSON.stringify({
+           event: 'setFeedback',
+           context: inContext,
+           payload: inPayload,
+       }));
+  }
+}
+
 // Load the localizations
 function getLocalization(inLanguage, inCallback) {
     let url = `../${inLanguage}.json`;
@@ -145,3 +177,39 @@ function getLocalization(inLanguage, inCallback) {
 
     xhr.send();
 }
+
+const Utils = {};
+Utils.debounce = function(func, wait = 100) {
+  let timeout;
+  return function(...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+          func.apply(this, args);
+      }, wait);
+  };
+};
+
+
+Utils.throttle = function(fn, threshold = 250, context) {
+  let last, timer;
+  return function() {
+      var ctx = context || this;
+      var now = new Date().getTime(),
+          args = arguments;
+      if(last && now < last + threshold) {
+          clearTimeout(timer);
+          timer = setTimeout(function() {
+              last = now;
+              fn.apply(ctx, args);
+          }, threshold);
+      } else {
+          last = now;
+          fn.apply(ctx, args);
+      }
+  };
+};
+
+Utils.capitalize = function(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+

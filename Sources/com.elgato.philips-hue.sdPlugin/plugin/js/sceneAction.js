@@ -18,48 +18,10 @@ function SceneAction(inContext, inSettings) {
 
     // Public function called on key up event
     this.onKeyUp = (inContext, inSettings, inCoordinates, inUserDesiredState, inState) => {
-        // If onKeyUp was triggered manually, load settings
-        if (inSettings === undefined) {
-            inSettings = instance.getSettings();
-        }
-
-        // Check if any bridge is configured
-        if (!('bridge' in inSettings)) {
-            log('No bridge configured');
-            showAlert(inContext);
-            return;
-        }
-
-        // Check if the configured bridge is in the cache
-        if (!(inSettings.bridge in cache.data)) {
-            log(`Bridge ${inSettings.bridge} not found in cache`);
-            showAlert(inContext);
-            return;
-        }
-
-        // Find the configured bridge
-        let bridgeCache = cache.data[inSettings.bridge];
-
-        // Check if any light is configured
-        if (!('light' in inSettings)) {
-            log('No group configured');
-            showAlert(inContext);
-            return;
-        }
-
-        // Check if the light was set to a group
-        if (!(inSettings.light.indexOf('g-') !== -1)) {
-            log('A light is set, not a group');
-            showAlert(inContext);
-            return;
-        }
-
-        // Check if the configured group is in the cache
-        if (!(inSettings.light in bridgeCache.groups)) {
-            log(`Group ${inSettings.light} not found in cache`);
-            showAlert(inContext);
-            return;
-        }
+       
+        const settings = this.getVerifiedSettings(inContext, 'scene');
+        if(false === settings) return;
+        let bridgeCache = cache.data[settings.bridge];
 
         // Find the configured group
         let groupCache = bridgeCache.groups[inSettings.light];
@@ -72,8 +34,8 @@ function SceneAction(inContext, inSettings) {
         }
 
         // Check if the configured scene is in the group cache
-        if (!(inSettings.scene in groupCache.scenes)) {
-            log(`Scene ${inSettings.scene} not found in cache`);
+        if (!(settings.scene in groupCache.scenes)) {
+            log(`Scene ${settings.scene} not found in cache`);
             showAlert(inContext);
             return;
         }

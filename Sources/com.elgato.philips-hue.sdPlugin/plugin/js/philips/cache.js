@@ -96,7 +96,7 @@ function Cache() {
             bridgeCache.name = inName;
 
             // Add bridge to the cache
-            instance.data[bridge.getID()] = bridgeCache;
+            // instance.data[bridge.getID()] = bridgeCache;
 
             // Request all lights of the bridge
             bridge.getLights((inSuccess, inLights) => {
@@ -109,7 +109,7 @@ function Cache() {
                 // Create cache for each light
                 inLights.forEach(inLight => {
                     // Add light to cache
-                    instance.data[bridge.getID()].lights['l-' + inLight.getID()] = {
+                    bridgeCache.lights['l-' + inLight.getID()] = {
                         id: inLight.getID(),
                         name: inLight.getName(),
                         type: inLight.getType(),
@@ -131,7 +131,7 @@ function Cache() {
                     // Create cache for each group
                     inGroups.forEach(inGroup => {
                         // Add group to cache
-                        instance.data[bridge.getID()].groups['g-' + inGroup.getID()] = {
+                        bridgeCache.groups['g-' + inGroup.getID()] = {
                             id: inGroup.getID(),
                             name: inGroup.getName(),
                             type: inGroup.getType(),
@@ -143,7 +143,7 @@ function Cache() {
                         };
 
                         // If this is the last group
-                        if (Object.keys(instance.data[bridge.getID()].groups).length === inGroups.length) {
+                        if (Object.keys(bridgeCache.groups).length === inGroups.length) {
                             // Request all scenes of the bridge
                             bridge.getScenes((inSuccess, inScenes) => {
                                 // If getScenes was not successful
@@ -160,9 +160,9 @@ function Cache() {
                                     }
 
                                     // If scenes group is in cache
-                                    if ('g-' + inScene.getGroup() in instance.data[bridge.getID()].groups) {
+                                    if ('g-' + inScene.getGroup() in bridgeCache.groups) {
                                         // Add scene to cache
-                                        instance.data[bridge.getID()].groups['g-' + inScene.getGroup()].scenes[inScene.getID()] = {
+                                        bridgeCache.groups['g-' + inScene.getGroup()].scenes[inScene.getID()] = {
                                             id: inScene.getID(),
                                             name: inScene.getName(),
                                             type: inScene.getType(),
@@ -170,7 +170,8 @@ function Cache() {
                                         };
                                     }
                                 });
-
+                                // console.log(bridgeCache);
+                                instance.data[bridge.getID()] = bridgeCache;
                                 // Inform keys that updated cache is available
                                 let event = new CustomEvent('newCacheAvailable');
                                 document.dispatchEvent(event);
@@ -202,8 +203,17 @@ function Cache() {
         timer = null;
     }
 
+    this.refresh = Utils.debounce(function () {
+        // Build discovery if necessary
+        buildDiscovery(() => {
+            if (globalSettings.bridges) {
+                Object.keys(globalSettings.bridges).forEach(bridgeID => refreshBridge(bridgeID, globalSettings.bridges[bridgeID]));
+            }
+        })
+    }, 200); // avoid multiple calls in a short time
+
     // Private function to build a cache
-    this.refresh = () => {
+    this.refresh2 = () => {
         // Build discovery if necessary
         buildDiscovery(() => {
             if (globalSettings.bridges) {

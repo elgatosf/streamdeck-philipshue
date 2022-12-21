@@ -5,12 +5,14 @@
   "com.elgato.philips-hue.power": {
     "Name": "Activer/Désactiver",
     "Tooltip": "Allumez ou éteignez les lumières.",
-    "States": [{
-      "Name": "Activer"
-    },
-    {
-      "Name": "Désactiver"
-    }]
+    "States": [
+      {
+        "Name": "Activer"
+      },
+      {
+        "Name": "Désactiver"
+      }
+    ]
   },
   "com.elgato.philips-hue.color": {
     "Name": "Couleur",
@@ -25,8 +27,8 @@
     "Tooltip": "Réglez la luminosité de la lumière.",
     "Encoder": {
       "TriggerDescription": {
-          "Rotate": "Adjust Brightness",
-          "Touch": "Toggle Lights on/off"
+        "Rotate": "Ajuster la luminosité",
+        "Touch": "Allumer ou éteindre les lumières"
       }
     }
   },
@@ -59,17 +61,17 @@
     },
     "Setup": {
       "Intro": {
-        "Title" : "Ajouter un pont",
+        "Title": "Ajouter un pont",
         "Description": "Jumelez l’application à un pont Philips Hue pour contrôler vos lumières.",
         "Start": "Découvrir des ponts",
         "Manual": "Ajouter un pont manuellement",
         "Close": "Pas maintenant"
       },
       "Discovery": {
-        "Title" : "Découverte des ponts…",
-        "TitleNone" : "Aucun pont trouvé",
-        "TitleOne" : "1 pont trouvé",
-        "TitleMultiple" : "{{ number }} ponts trouvés",
+        "Title": "Découverte des ponts…",
+        "TitleNone": "Aucun pont trouvé",
+        "TitleOne": "1 pont trouvé",
+        "TitleMultiple": "{{ number }} ponts trouvés",
         "DescriptionFound": "Lancer le jumelage ?",
         "DescriptionNone": "Vérifiez que votre pont est allumé et connecté au réseau.",
         "Pair": "Jumeler",
@@ -89,13 +91,13 @@
         }
       },
       "Pairing": {
-        "Title" : "Jumelage…",
+        "Title": "Jumelage…",
         "Description": "Veuillez appuyer sur le bouton de jumelage du pont.",
         "Close": "Fermer",
         "Retry": "Réessayer"
       },
       "Save": {
-        "Title" : "Pont ajouté",
+        "Title": "Pont ajouté",
         "Description": "Le pont a bien été jumelé à l’application.",
         "Save": "Terminé"
       }

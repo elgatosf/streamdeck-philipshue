@@ -17,68 +17,30 @@ function ColorAction(inContext, inSettings) {
     setDefaults();
 
     // Public function called on key up event
-    this.onKeyUp = (inContext, inSettings, inCoordinates, inUserDesiredState, inState) => {
-        // If onKeyUp was triggered manually, load settings
-        if (inSettings === undefined) {
-            inSettings = instance.getSettings();
-        }
+    this.onKeyUp = (inContext) => {
 
-        // Check if any bridge is configured
-        if (!('bridge' in inSettings)) {
-            log('No bridge configured');
-            showAlert(inContext);
-            return;
-        }
-
-        // Check if the configured bridge is in the cache
-        if (!(inSettings.bridge in cache.data)) {
-            log(`Bridge ${inSettings.bridge} not found in cache`);
-            showAlert(inContext);
-            return;
-        }
-
-        // Find the configured bridge
-        let bridgeCache = cache.data[inSettings.bridge];
-
-        // Check if any light is configured
-        if (!('light' in inSettings)) {
-            log('No light or group configured');
-            showAlert(inContext);
-            return;
-        }
-
-        // Check if the configured light or group is in the cache
-        if (!(inSettings.light in bridgeCache.lights || inSettings.light in bridgeCache.groups)) {
-            log(`Light or group ${inSettings.light} not found in cache`);
-            showAlert(inContext);
-            return;
-        }
-
-        // Check if any color is configured
-        if (!('color' in inSettings)) {
-            log('No color configured');
-            showAlert(inContext);
-            return;
-        }
+      const settings = this.getVerifiedSettings(inContext, 'color');
+      if(false === settings) return;
+      let bridgeCache = cache.data[settings.bridge];
 
         // Create a bridge instance
         let bridge = new Bridge(bridgeCache.ip, bridgeCache.id, bridgeCache.username);
 
         // Create a light or group object
         let objCache, obj;
-        if (inSettings.light.indexOf('l') !== -1) {
-            objCache = bridgeCache.lights[inSettings.light];
+        if (settings.light.indexOf('l') !== -1) {
+            objCache = bridgeCache.lights[settings.light];
             obj = new Light(bridge, objCache.id);
         }
         else {
-            objCache = bridgeCache.groups[inSettings.light];
+            objCache = bridgeCache.groups[settings.light];
             obj = new Group(bridge, objCache.id);
         }
 
         // Check if this is a color or temperature light
-        if (inSettings.color.indexOf('#') !== -1) {
+        if (settings.color.indexOf('#') !== -1) {
             // Convert light color to hardware independent XY color
-            let xy = Bridge.hex2xy(inSettings.color);
+            let xy = Bridge.hex2xy(settings.color);
 
             // Set light or group state
             obj.setXY(xy, (inSuccess, inError) => {
@@ -100,7 +62,7 @@ function ColorAction(inContext, inSettings) {
             let maxK = 6500.0;
 
             // Convert light color
-            let percentage = (inSettings.color - minK) / (maxK - minK);
+            let percentage = (settings.color - minK) / (maxK - minK);
             let invertedPercentage = -1 * (percentage - 1.0);
             let temperature = Math.round(invertedPercentage * (max - min) + min);
 

@@ -5,6 +5,8 @@
 @license   This source code is licensed under the MIT-style license found in the LICENSE file.
 */
 
+const MDEBOUNCEDELAYMS = 80;
+
 // Prototype which represents a Philips Hue bridge
 function Bridge(ip = null, id = null, username = null) {
     // Init Bridge
@@ -18,6 +20,7 @@ function Bridge(ip = null, id = null, username = null) {
             xhr.responseType = 'json';
             xhr.open('POST', url, true);
             xhr.timeout = 2500;
+            
             xhr.onload = () => {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     if (xhr.response !== undefined && xhr.response != null) {
@@ -138,7 +141,7 @@ function Bridge(ip = null, id = null, username = null) {
         xhr.responseType = 'json';
         xhr.open('GET', url, true);
         xhr.timeout = 5000;
-
+    
         xhr.onload = () => {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 let result = xhr.response;
@@ -590,17 +593,16 @@ function Illumination(bridge = null, id = null, name = null, type = null, power 
     };
 
     // Public function to set the brightness
-    this.setBrightness = (brightness, callback) => {
-        // Define state object
-        let state = {};
-        state.bri = brightness;
+    this.setBrightness = Utils.debounce((brightness, callback) => {
+      // Define state object
+      let state = {};
+      state.bri = brightness;
 
-        // To modify the brightness, the light needs to be on
-        state.on = true;
-
-        // Send new state
-        instance.setState(state, callback);
-    };
+      // To modify the brightness, the light needs to be on
+      state.on = true;
+      // Send new state
+      instance.setState(state, callback);
+  }, MDEBOUNCEDELAYMS);
 
     // Public function set the xy value
     this.setXY = (xy, callback) => {
@@ -616,7 +618,7 @@ function Illumination(bridge = null, id = null, name = null, type = null, power 
     };
 
     // Public function set the temperature value
-    this.setTemperature = (temperature, callback) => {
+    this.setTemperature = Utils.debounce((temperature, callback) => {
         // Define state object
         let state = {};
         state.ct = temperature;
@@ -626,7 +628,7 @@ function Illumination(bridge = null, id = null, name = null, type = null, power 
 
         // Send new state
         instance.setState(state, callback);
-    };
+    }, MDEBOUNCEDELAYMS);
 }
 
 // Prototype which represents a light

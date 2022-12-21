@@ -286,6 +286,9 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         else if (instance instanceof BrightnessPI) {
             action = 'com.elgato.philips-hue.brightness';
         }
+        else if (instance instanceof TemperaturePI) {
+          action = 'com.elgato.philips-hue.temperature';
+      }
         else if (instance instanceof BrightnessRelPI) {
             action = 'com.elgato.philips-hue.brightness-rel';
         }

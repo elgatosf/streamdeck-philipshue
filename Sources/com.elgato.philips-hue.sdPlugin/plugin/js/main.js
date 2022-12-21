@@ -14,11 +14,19 @@ var cache = {};
 // Global settings
 var globalSettings = {};
 
+const throttleDialRotate = Utils.throttle((fn) => {
+  if (fn) fn();
+}, 60);
+
+const debounceDialRotate = Utils.debounce((jsonObj) => {
+  console.log('debounceDialRotate', jsonObj);
+}, 300);
+
 // Setup the websocket and handle communication
 function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
     // Create array of currently used actions
     let actions = {};
-
+    window.MACTIONS = actions;
     // Create a cache
     cache = new Cache();
 
@@ -34,6 +42,18 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
         // Request the global settings of the plugin
         requestGlobalSettings(inPluginUUID);
     }
+
+    document.addEventListener('updateActions', (e) => {
+      // updateAction carries the sender of the event so we can skip it
+      const sender = e.detail?.sender;
+      Object.keys(actions).forEach(inContext => {
+        if(actions[inContext].updateAction) {
+          // don't update the sender
+          if(actions[inContext] === sender) return;
+          actions[inContext].updateAction();
+        }
+      });
+    }, false);
 
     // Add event listener
     document.addEventListener('newCacheAvailable', () => {
@@ -55,7 +75,16 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
                 }
                 else if (actions[inContext] instanceof BrightnessAction) {
                     action = 'com.elgato.philips-hue.brightness';
+                    if(actions[inContext].updateAction) {
+                      actions[inContext].updateAction();
+                    }
                 }
+                else if (actions[inContext] instanceof TemperatureAction) {
+                  action = 'com.elgato.philips-hue.temperature';
+                  if(actions[inContext].updateAction) {
+                    actions[inContext].updateAction();
+                  }
+              }
                 else if (actions[inContext] instanceof BrightnessRelAction) {
                     action = 'com.elgato.philips-hue.brightness-rel';
                 }
@@ -81,8 +110,23 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
         let jsonPayload = jsonObj['payload'];
         let settings;
 
-        // Key up event
-        if (event === 'keyUp') {
+        if(event === 'dialRotate') {
+          if(actions[context]?.onDialRotate) {
+            throttleDialRotate(() => {
+              actions[context].onDialRotate(jsonObj);
+            });
+            // debounceDialRotate(jsonObj);
+            // actions[context].onDialRotate(jsonObj);
+          }
+        } else if(event === 'dialPress') {
+          if(actions[context]?.onDialPress) {
+            actions[context].onDialPress(jsonObj);
+          }
+        } else if(event === 'touchTap') {
+          if(actions[context]?.onTouchTap) {
+            actions[context].onTouchTap(jsonObj);
+          }
+        } else if (event === 'keyUp') {
             settings = jsonPayload['settings'];
             let coordinates = jsonPayload['coordinates'];
             let userDesiredState = jsonPayload['userDesiredState'];
@@ -118,8 +162,11 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
                     actions[context] = new CycleAction(context, settings);
                 }
                 else if (action === 'com.elgato.philips-hue.brightness') {
-                    actions[context] = new BrightnessAction(context, settings);
+                    actions[context] = new BrightnessAction(context, settings, jsonObj);
                 }
+                else if (action === 'com.elgato.philips-hue.temperature') {
+                  actions[context] = new TemperatureAction(context, settings, jsonObj);
+              }
                 else if (action === 'com.elgato.philips-hue.brightness-rel') {
                     actions[context] = new BrightnessRelAction(context, settings);
                 }

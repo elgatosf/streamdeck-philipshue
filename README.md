@@ -1,11 +1,12 @@
 # Philips Hue Plugin for Elgato Stream Deck
 This sample plugin allows controlling `Philips Hue` lights in your network. It's a demonstration of the [Stream Deck SDK](https://developer.elgato.com/documentation/stream-deck/).
-
+Since version 1.6.0, it also supports the Stream Deck +. The brightness-action contains an example of how to change the display of the dial-control's touch-panel.
 
 # Features
 - Code written in JavaScript
 - Cross-platform (macOS, Windows)
 - Localized
+- Basic support for Stream Deck +
 
 ![](screenshot.png)
 
@@ -16,3 +17,22 @@ In the [Release](./Release) folder, you can find the file `com.elgato.philips-hu
 
 # Source code
 The [Sources](./Sources) folder contains the source code of the plugin.
+
+# Changes
+## 1.6.0
+- fixed broken localizations
+- changed versioning to semver
+- added basic support for Stream Deck +
+
+# How it works (since 1.6.0)
+![](touchpanel.png)
+ You can now drag a brightness-/ or temperature-action to a SD+ dial-control. It supports these actions:
+ - Turn the dial to change the brightness/temperature
+ - Press the dial to:
+ - - set the brightness/temperature to the configured value - if the light is on
+ - - turn the light on - if the light is off
+ - Long-Press the dial to toggle the light on/off
+ - Tap the touch-panel to toggle the light on/off
+  
+ DialStacks are not properly supported yet.
+

@@ -5,12 +5,14 @@
   "com.elgato.philips-hue.power": {
     "Name": "オン/オフ",
     "Tooltip": "照明をオン、またはオフにします。",
-    "States": [{
-      "Name": "オン"
-    },
-    {
-      "Name": "オフ"
-    }]
+    "States": [
+      {
+        "Name": "オン"
+      },
+      {
+        "Name": "オフ"
+      }
+    ]
   },
   "com.elgato.philips-hue.color": {
     "Name": "カラー",
@@ -25,8 +27,8 @@
     "Tooltip": "照明の明るさを調整します。",
     "Encoder": {
       "TriggerDescription": {
-          "Rotate": "Adjust Brightness",
-          "Touch": "Toggle Lights on/off"
+        "Rotate": "明るさを調整",
+        "Touch": "照明のオン/オフを切り替え"
       }
     }
   },
@@ -59,17 +61,17 @@
     },
     "Setup": {
       "Intro": {
-        "Title" : "ブリッジを追加",
+        "Title": "ブリッジを追加",
         "Description": "照明をコントロールするには、Philips Hueのブリッジを使ってペアリングしてください。",
         "Start": "ブリッジを検出",
         "Manual": "ブリッジを手動で追加",
         "Close": "今はしない"
       },
       "Discovery": {
-        "Title" : "ブリッジを検出中…",
-        "TitleNone" : "ブリッジが見つかりません",
-        "TitleOne" : "１件のブリッジを検出しました",
-        "TitleMultiple" : "{{ number }}件のブリッジを検出しました",
+        "Title": "ブリッジを検出中…",
+        "TitleNone": "ブリッジが見つかりません",
+        "TitleOne": "１件のブリッジを検出しました",
+        "TitleMultiple": "{{ number }}件のブリッジを検出しました",
         "DescriptionFound": "今すぐペアリングしますか？",
         "DescriptionNone": "ブリッジがオンになっていて、ネットワークに接続されていることを確認してください。",
         "Pair": "ペアリング",
@@ -89,13 +91,13 @@
         }
       },
       "Pairing": {
-        "Title" : "ペアリング中…",
+        "Title": "ペアリング中…",
         "Description": "今すぐブリッジの接続ボタンを押してください。",
         "Close": "閉じる",
         "Retry": "やり直す"
       },
       "Save": {
-        "Title" : "ブリッジが追加されました",
+        "Title": "ブリッジが追加されました",
         "Description": "ブリッジのペアリングを完了しました。",
         "Save": "完了"
       }
