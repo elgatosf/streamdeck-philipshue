@@ -22,7 +22,7 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     // Parse parameter from string to object
     let actionInfo = JSON.parse(inActionInfo);
     let info = JSON.parse(inInfo);
-
+    let isEncoder = actionInfo?.payload?.controller == 'Encoder';
     let streamDeckVersion = info['application']['version'];
     let pluginVersion = info['plugin']['version'];
 
@@ -61,10 +61,10 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
         pi = new CyclePI(inUUID, language, streamDeckVersion, pluginVersion);
     }
     else if (action === 'com.elgato.philips-hue.brightness') {
-        pi = new BrightnessPI(inUUID, language, streamDeckVersion, pluginVersion);
+        pi = new BrightnessPI(inUUID, language, streamDeckVersion, pluginVersion, isEncoder);
     }
     else if (action === 'com.elgato.philips-hue.temperature') {
-      pi = new TemperaturePI(inUUID, language, streamDeckVersion, pluginVersion);
+      pi = new TemperaturePI(inUUID, language, streamDeckVersion, pluginVersion, isEncoder);
   }
     else if (action === 'com.elgato.philips-hue.scene') {
         pi = new ScenePI(inUUID, language, streamDeckVersion, pluginVersion);

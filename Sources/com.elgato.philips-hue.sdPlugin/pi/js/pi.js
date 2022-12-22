@@ -9,6 +9,18 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init PI
     let instance = this;
 
+    const values = [1,2,3,4,5,10];
+    this.getEncoderOptions = (settingsValue, forEncoder) => {
+      const selectedIndex = values.indexOf(Number(settingsValue));
+      return forEncoder === true ? `<div type="select" class="sdpi-item">
+    <div class="sdpi-item-label" id="scaleticks-label"></div>
+    <select id="scaleticks-input" class="sdpi-item-value select" selectedIndex="${selectedIndex}">
+      ${values.map((value, index) => `<option value="${value}" ${index === selectedIndex ? 'selected' : ''}>${value}x</option>`).join('')}
+  </select>
+    </select>
+  </div>`: ''
+    };
+
     // Public localizations for the UI
     this.localization = {};
 

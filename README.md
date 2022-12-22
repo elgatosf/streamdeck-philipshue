@@ -19,6 +19,10 @@ In the [Release](./Release) folder, you can find the file `com.elgato.philips-hu
 The [Sources](./Sources) folder contains the source code of the plugin.
 
 # Changes
+## 1.6.3
+- updated CSS to the latest versions of our SDK-libs
+- added an option to the PI to allow larger steps if you rotate dials (1,2,3,4,5,10).
+
 ## 1.6.0
 - fixed broken localizations
 - changed versioning to semver
@@ -26,6 +30,7 @@ The [Sources](./Sources) folder contains the source code of the plugin.
 
 # How it works (since 1.6.0)
 ![](touchpanel.png)
+
  You can now drag a brightness-/ or temperature-action to a SD+ dial-control. It supports these actions:
  - Turn the dial to change the brightness/temperature
  - Press the dial to:

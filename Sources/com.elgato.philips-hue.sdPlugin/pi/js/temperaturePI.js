@@ -5,7 +5,7 @@
 @license   This source code is licensed under the MIT-style license found in the LICENSE file.
 */
 
-function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
+function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion, isEncoder) {
     // Init TemperaturePI
     let instance = this;
 
@@ -22,6 +22,9 @@ function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersi
 
         // Localize the brightness label
         document.getElementById('temperature-label').innerHTML = instance.localization['Temperature'];
+        if(isEncoder) {
+          document.getElementById('scaleticks-label').innerHTML = instance.localization['Scale Ticks'] || 'Scale Ticks';
+        }
     };
 
     // Add brightness slider
@@ -32,6 +35,7 @@ function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersi
             <input class="floating-tooltip" data-suffix="%" type="range" id="temperature-input" min="1" max="100" value="${settings.temperature}">
         </div>
       </div>
+      ${this.getEncoderOptions(settings.scaleTicks, isEncoder)}
     `;
 
     // Initialize the tooltips
@@ -39,6 +43,9 @@ function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersi
 
     // Add event listener
     document.getElementById('temperature-input').addEventListener('change', temperatureChanged);
+    if(isEncoder) {
+      document.getElementById('scaleticks-input').addEventListener('change', scaleticksChanged);
+    }
 
     // Brightness changed
     function temperatureChanged(inEvent) {
@@ -50,5 +57,10 @@ function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersi
         instance.sendToPlugin({
             piEvent: 'valueChanged',
         });
+    }
+
+    function scaleticksChanged(inEvent) {
+      settings.scaleTicks = inEvent.target.value;
+      instance.saveSettings();
     }
 }

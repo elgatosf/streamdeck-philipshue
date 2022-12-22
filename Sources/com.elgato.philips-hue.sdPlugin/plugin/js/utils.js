@@ -213,3 +213,6 @@ Utils.capitalize = function(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+Utils.minmax = function(v = 0, min = 0, max = 100) {
+  return Math.min(max, Math.max(min, v));
+};

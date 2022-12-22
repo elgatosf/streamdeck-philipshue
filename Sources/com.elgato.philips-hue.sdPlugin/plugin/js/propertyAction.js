@@ -58,15 +58,19 @@ function PropertyAction(inContext, inSettings, jsn) {
     if(target) {
       if(target.objCache.power === false) return;
       let value = inValue ? inValue : target.objCache[this.property];
-      
+
       if(jsn?.payload?.ticks) {
-        value = parseInt(value + jsn.payload.ticks * 2.55);
+        let settings = this.getSettings();
+        const scaleTicks = settings?.scaleTicks || 1;
+        const multiplier = scaleTicks * jsn.payload.ticks;
+        value = Utils.minmax(parseInt(value + multiplier * 2.55), 0,255);
+        // value = parseInt(value + jsn.payload.ticks * 2.55);
       }
 
       // just update the panel optimistically
       // note: this didn't work well for me, so I'm not using it
       // this.setFeedback(inContext, parseInt(value / 2.54), 1);
-  
+
       target.obj[setStateFunction](value, (inSuccess, inError) => {
         if(inSuccess) {
           target.objCache[this.property] = value;
@@ -78,23 +82,23 @@ function PropertyAction(inContext, inSettings, jsn) {
         }
       });
     }
- 
+
   };
 
   this.onDialPress = function(jsn) {
-    if(this.getVerifiedSettings(inContext) === false) return; 
+    if(this.getVerifiedSettings(inContext) === false) return;
     if(jsn?.payload?.pressed === true) {  // dial pressed == down
       // temporarily set a flag to mark that the key is down
       this.keyIsDown = true;
       this.actionTriggered = false;
       setTimeout(function() {
-          if(instance.keyIsDown) {
-            // console.log("***** long keypress detected:", instance.keyIsDown,inContext);
-            const target = instance.togglePower(inContext);
-            instance.updateDisplay(target.objCache, 'power');
-            instance.actionTriggered = true;
-          }
-          instance.keyIsDown = false;
+        if(instance.keyIsDown) {
+          // console.log("***** long keypress detected:", instance.keyIsDown,inContext);
+          const target = instance.togglePower(inContext);
+          instance.updateDisplay(target.objCache, 'power');
+          instance.actionTriggered = true;
+        }
+        instance.keyIsDown = false;
       }, 500);
     } else { // dial released == up
       this.keyIsDown = false;
@@ -113,11 +117,11 @@ function PropertyAction(inContext, inSettings, jsn) {
   };
 
   this.onDialRotate = function(jsn) {
-      this.setValue(null, jsn);
+    this.setValue(null, jsn);
   };
 
   this.onTouchTap = function(jsn) {
-      this.togglePower(inContext);
+    this.togglePower(inContext);
   };
 
   // Public function called on key up event

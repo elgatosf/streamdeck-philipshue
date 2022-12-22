@@ -5,7 +5,7 @@
 @license   This source code is licensed under the MIT-style license found in the LICENSE file.
 */
 
-function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
+function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion, isEncoder) {
     // Init BrightnessPI
     let instance = this;
 
@@ -22,7 +22,14 @@ function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersio
 
         // Localize the brightness label
         document.getElementById('brightness-label').innerHTML = instance.localization['Brightness'];
+        if(isEncoder) {
+          document.getElementById('scaleticks-label').innerHTML = instance.localization['Scale Ticks'] || 'Scale Ticks';
+        }
+
     };
+
+    const values = [1,2,3,4,5,10];
+    const selectedIndex = values.indexOf(Number(settings.scaleTicks));
 
     // Add brightness slider
     document.getElementById('placeholder').innerHTML = `
@@ -32,13 +39,20 @@ function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersio
             <input class="floating-tooltip" data-suffix="%" type="range" id="brightness-input" min="1" max="100" value="${settings.brightness}">
         </div>
       </div>
-    `;
+      ${this.getEncoderOptions(settings.scaleTicks, isEncoder)}
+      `;
+
+      console.log("value:", selectedIndex, settings.scaleTicks, typeof settings.scaleTicks, document.getElementById('placeholder').innerHTML);
+
 
     // Initialize the tooltips
     initToolTips();
 
     // Add event listener
     document.getElementById('brightness-input').addEventListener('change', brightnessChanged);
+    if(isEncoder) {
+      document.getElementById('scaleticks-input').addEventListener('change', scaleticksChanged);
+    }
 
     // Brightness changed
     function brightnessChanged(inEvent) {
@@ -51,4 +65,10 @@ function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersio
             piEvent: 'valueChanged',
         });
     }
+
+    function scaleticksChanged(inEvent) {
+      settings.scaleTicks = inEvent.target.value;
+      instance.saveSettings();
+    }
+
 }
