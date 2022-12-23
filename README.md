@@ -2,6 +2,8 @@
 This sample plugin allows controlling `Philips Hue` lights in your network. It's a demonstration of the [Stream Deck SDK](https://developer.elgato.com/documentation/stream-deck/).
 Since version 1.6.0, it also supports the Stream Deck +. The brightness-action contains an example of how to change the display of the dial-control's touch-panel.
 
+## Version 1.6.3 is also available in the Stream Deck Store!
+
 # Features
 - Code written in JavaScript
 - Cross-platform (macOS, Windows)
