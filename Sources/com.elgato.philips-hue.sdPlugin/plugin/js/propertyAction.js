@@ -129,7 +129,8 @@ function PropertyAction(inContext, inSettings, jsn) {
     const settings = this.getVerifiedSettings(inContext);
     if(settings === false) return;
     // Convert value
-    let value = Math.round(settings[this.property] * 2.54);
+    // Hack to circumvent original code that converts values from 0-255
+    let value = this.property == 'temperature' ? Number(settings[this.property]) : Math.round(settings[this.property] * 2.54);
     this.setValue(value);
   };
 

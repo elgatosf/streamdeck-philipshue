@@ -117,6 +117,7 @@ function Cache() {
                         brightness: inLight.getBrightness(),
                         xy: inLight.getXY(),
                         temperature: inLight.getTemperature(),
+                        originalValue: inLight.originalValue,
                     };
                 });
 

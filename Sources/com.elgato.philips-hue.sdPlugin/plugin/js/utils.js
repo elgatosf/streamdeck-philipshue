@@ -216,3 +216,7 @@ Utils.capitalize = function(str) {
 Utils.minmax = function(v = 0, min = 0, max = 100) {
   return Math.min(max, Math.max(min, v));
 };
+
+Utils.percent = (value, min, max) => {
+  return ((value - min) / (max - min)) * 100;
+};

@@ -154,7 +154,10 @@ function Bridge(ip = null, id = null, username = null) {
                             let value = result[key];
 
                             if (type === 'light') {
-                                objects.push(new Light(instance, key, value.name, value.type, value.state.on, value.state.bri, value.state.xy, value.state.ct));
+                              // console.log("Light", value.name, value.capabilities?.control);
+                              let light = new Light(instance, key, value.name, value.type, value.state.on, value.state.bri, value.state.xy, value.state.ct);
+                              light.originalValue = value;
+                                objects.push(light);
                             }
                             else if (type === 'group') {
                                 objects.push(new Group(instance, key, value.name, value.type, value.state.all_on, value.action.bri, value.action.xy, value.action.ct));
@@ -453,6 +456,7 @@ function MeetHue(bridge = null, id = null, name = null, type = null) {
 
     // Override in child prototype
     let url = null;
+    this.originalValue = null;
 
     // Public function to retrieve the type
     this.getType = () => {

@@ -94,8 +94,14 @@ function Action(inContext, inSettings, jsn) {
       this.savedValue = actionValue;
       this.savedPower = powerHue;
   
-      // values in hue are 0-254, convert to 0-100
-      const value = parseInt(actionValue/2.54);
+      // values in hue are 0-254, convert to 0-100 // !this is not true for temperature
+      let value;
+      if(this.property == 'temperature') {
+        const ct = lightOrGroup.originalValue?.capabilities?.control?.ct;
+        value = parseInt(Utils.percent(lightOrGroup.temperature, ct.min, ct.max));
+      } else {
+        value = parseInt(actionValue / 2.54);
+      }
       // if the light is off, set the opacity to 0.5
       const opacity = powerHue ? 1 :0.5;
       this.setFeedback(inContext, value, opacity);

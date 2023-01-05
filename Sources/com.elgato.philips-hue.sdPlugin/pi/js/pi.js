@@ -133,6 +133,8 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
             lights[0].parentNode.removeChild(lights[0]);
         }
 
+        let requireTemperature = instance instanceof ColorPI || instance instanceof TemperaturePI;
+
         // Check if the bridge has at least one light
         if (Object.keys(bridgeCache.lights).length > 0) {
             // Hide the 'No Light' option
@@ -148,7 +150,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
                 let light = bridgeCache.lights[inLightID];
 
                 // Check if this is a color action and the lights supports colors
-                if (!(instance instanceof ColorPI && light.temperature == null && light.xy == null)) {
+                if (!(requireTemperature && light.temperature == null && light.xy == null)) {
                     // Add the light
                     let option = `
                       <option value='l-${light.id}' class='lights'>${light.name}</option>
@@ -278,6 +280,10 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
                 //Load the scenes
                 instance.loadScenes();
             }
+
+            instance.sendToPlugin({
+              piEvent: 'lightsChanged',
+          });
         }
     }
 

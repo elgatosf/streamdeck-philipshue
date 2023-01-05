@@ -14,7 +14,7 @@ function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersi
 
     // Before overwriting parent method, save a copy of it
     let piLocalize = this.localize;
-
+    
     // Localize the UI
     this.localize = () => {
         // Call PIs localize method
@@ -32,7 +32,9 @@ function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersi
       <div type="range" class="sdpi-item">
         <div class="sdpi-item-label" id="temperature-label"></div>
         <div class="sdpi-item-value">
+            <span class="clickable" value=0>0%</span>
             <input class="floating-tooltip" data-suffix="%" type="range" id="temperature-input" min="1" max="100" value="${settings.temperature}">
+            <span class="clickable" value="100">100%</span>
         </div>
       </div>
       ${this.getEncoderOptions(settings.scaleTicks, isEncoder)}
@@ -42,7 +44,7 @@ function TemperaturePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersi
     initToolTips();
 
     // Add event listener
-    document.getElementById('temperature-input').addEventListener('change', temperatureChanged);
+    document.getElementById('temperature-input').addEventListener('input', temperatureChanged);
     if(isEncoder) {
       document.getElementById('scaleticks-input').addEventListener('change', scaleticksChanged);
     }
