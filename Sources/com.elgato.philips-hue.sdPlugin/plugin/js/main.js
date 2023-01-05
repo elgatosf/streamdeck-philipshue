@@ -223,6 +223,13 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
                         actions[context].onKeyUp(context);
                     }
                 }
+            } else if (piEvent === 'lightsChanged') {
+                // console.log("lightsChanged", action, context, jsonPayload);
+                if (context in actions) {
+                  if(actions[context].updateDisplay) {
+                    actions[context].updateDisplay();
+                  };
+                }
             }
         }
     };

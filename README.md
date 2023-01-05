@@ -21,6 +21,10 @@ In the [Release](./Release) folder, you can find the file `com.elgato.philips-hu
 The [Sources](./Sources) folder contains the source code of the plugin.
 
 # Changes
+## 1.6.4
+- fixed/improved support for temperature actions
+- PI now lets you only select lights for a temperature action if they support color temperature
+
 ## 1.6.3
 - updated CSS to the latest versions of our SDK-libs
 - added an option to the PI to allow larger steps if you rotate dials (1,2,3,4,5,10).

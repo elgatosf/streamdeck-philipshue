@@ -82,6 +82,15 @@ function Action(inContext, inSettings, jsn) {
     };
 
     this.updateDisplay = (lightOrGroup, property) => {
+      if(!lightOrGroup) {
+        const curLightOrGroup = this.getCurrentLightOrGroup();
+        if(curLightOrGroup) {
+          lightOrGroup = curLightOrGroup.objCache;
+          this.savedValue = -1; // force update
+        }
+        console.assert(lightOrGroup, 'no light or group', curLightOrGroup);
+        if(!lightOrGroup) return;
+      };
       if(this.isInMultiAction || !this.isEncoder) return;
       const powerHue = property == 'power' ? !lightOrGroup?.power : lightOrGroup?.power;
       let actionValue = lightOrGroup?.[this.property];
@@ -98,6 +107,8 @@ function Action(inContext, inSettings, jsn) {
       let value;
       if(this.property == 'temperature') {
         const ct = lightOrGroup.originalValue?.capabilities?.control?.ct;
+        console.assert(ct, 'no ct in capabilities', lightOrGroup);
+        if(!ct) return;
         value = parseInt(Utils.percent(lightOrGroup.temperature, ct.min, ct.max));
       } else {
         value = parseInt(actionValue / 2.54);
