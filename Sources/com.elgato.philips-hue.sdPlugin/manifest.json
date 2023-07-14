@@ -1,136 +1,138 @@
 {
-  "Actions": [
-    {
-      "Icon": "plugin/images/actions/power",
-      "Name": "On / Off",
-      "States": [
+    "Actions": [
         {
-          "Image": "plugin/images/icons/on",
-          "Name": "On"
+            "Icon": "plugin/images/actions/power",
+            "Name": "On / Off",
+            "States": [
+                {
+                    "Image": "plugin/images/icons/on",
+                    "Name": "On"
+                },
+                {
+                    "Image": "plugin/images/icons/off",
+                    "Name": "Off"
+                }
+            ],
+            "Tooltip": "Turn lights on or off.",
+            "UUID": "com.elgato.philips-hue.power"
         },
         {
-          "Image": "plugin/images/icons/off",
-          "Name": "Off"
-        }
-      ],
-      "Tooltip": "Turn lights on or off.",
-      "UUID": "com.elgato.philips-hue.power"
-    },
-    {
-      "Icon": "plugin/images/actions/color",
-      "Name": "Color",
-      "States": [
+            "Icon": "plugin/images/actions/color",
+            "Name": "Color",
+            "States": [
+                {
+                    "Image": "plugin/images/icons/color"
+                }
+            ],
+            "Tooltip": "Set the color of your light.",
+            "UUID": "com.elgato.philips-hue.color"
+        },
         {
-          "Image": "plugin/images/icons/color"
-        }
-      ],
-      "Tooltip": "Set the color of your light.",
-      "UUID": "com.elgato.philips-hue.color"
-    },
-    {
-      "Icon": "plugin/images/actions/cycle",
-      "Name": "Color Cycle",
-      "States": [
+            "Icon": "plugin/images/actions/cycle",
+            "Name": "Color Cycle",
+            "States": [
+                {
+                    "Image": "plugin/images/icons/cycle"
+                }
+            ],
+            "Tooltip": "Cycle between colors of your light.",
+            "UUID": "com.elgato.philips-hue.cycle"
+        },
         {
-          "Image": "plugin/images/icons/cycle"
-        }
-      ],
-      "Tooltip": "Cycle between colors of your light.",
-      "UUID": "com.elgato.philips-hue.cycle"
-    },
-    {
-      "Icon": "plugin/images/actions/brightness",
-      "Name": "Brightness",
-      "States": [
+            "Controllers": [
+                "Keypad",
+                "Encoder"
+            ],
+            "Encoder": {
+                "TriggerDescription": {
+                    "Rotate": "Adjust Brightness",
+                    "Touch": "Toggle Light on/off"
+                },
+                "layout": "$B1"
+            },
+            "Icon": "plugin/images/actions/brightness",
+            "Name": "Brightness",
+            "States": [
+                {
+                    "Image": "plugin/images/icons/brightness"
+                }
+            ],
+            "Tooltip": "Set the brightness of your light.",
+            "UUID": "com.elgato.philips-hue.brightness"
+        },
         {
-          "Image": "plugin/images/icons/brightness"
-        }
-      ],
-      "Controllers": [
-        "Keypad",
-        "Encoder"
-      ],
-      "Encoder": {
-        "layout": "$B1",
-        "TriggerDescription": {
-          "Rotate": "Adjust Brightness",
-          "Touch": "Toggle Light on/off"
-        }
-      },
-      "Tooltip": "Set the brightness of your light.",
-      "UUID": "com.elgato.philips-hue.brightness"
-    },
-    {
-      "Icon": "plugin/images/actions/temperature",
-      "Name": "Temperature",
-      "States": [
+            "Controllers": [
+                "Keypad",
+                "Encoder"
+            ],
+            "Encoder": {
+                "TriggerDescription": {
+                    "Rotate": "Adjust Temperature",
+                    "Touch": "Toggle Light on/off"
+                },
+                "layout": "$B1"
+            },
+            "Icon": "plugin/images/actions/temperature",
+            "Name": "Temperature",
+            "States": [
+                {
+                    "Image": "plugin/images/icons/temperature"
+                }
+            ],
+            "Tooltip": "Set the temperature of your light.",
+            "UUID": "com.elgato.philips-hue.temperature"
+        },
         {
-          "Image": "plugin/images/icons/temperature"
-        }
-      ],
-      "Controllers": [
-        "Keypad",
-        "Encoder"
-      ],
-      "Encoder": {
-        "layout": "$B1",
-        "TriggerDescription": {
-          "Rotate": "Adjust Temperature",
-          "Touch": "Toggle Light on/off"
-        }
-      },
-      "Tooltip": "Set the temperature of your light.",
-      "UUID": "com.elgato.philips-hue.temperature"
-    },
-    {
-      "Icon": "plugin/images/actions/brightness",
-      "Name": "Brightness Relative",
-      "States": [
+            "Icon": "plugin/images/actions/brightness",
+            "Name": "Brightness Relative",
+            "States": [
+                {
+                    "Image": "plugin/images/icons/brightness_relative"
+                }
+            ],
+            "Tooltip": "Set the brightness of your light.",
+            "UUID": "com.elgato.philips-hue.brightness-rel"
+        },
         {
-          "Image": "plugin/images/icons/brightness"
+            "Icon": "plugin/images/actions/scene",
+            "Name": "Scene",
+            "States": [
+                {
+                    "Image": "plugin/images/icons/scene"
+                }
+            ],
+            "Tooltip": "Set a scene.",
+            "UUID": "com.elgato.philips-hue.scene"
         }
-      ],
-      "Tooltip": "Set the brightness of your light.",
-      "UUID": "com.elgato.philips-hue.brightness-rel"
-    },
-    {
-      "Icon": "plugin/images/actions/scene",
-      "Name": "Scene",
-      "States": [
+    ],
+    "Author": "Elgato",
+    "Category": "Philips Hue",
+    "CategoryIcon": "plugin/images/actions/category",
+    "CodePath": "plugin/index.html",
+    "DefaultWindowSize": [
+        500,
+        650
+    ],
+    "Description": "Control your Philips Hue lights.",
+    "Icon": "plugin/images/icons/plugin",
+    "MpProductID": "a670a2ef-a203-4567-92d7-8e7b914fe59a",
+    "MpVariantID": "7a686802-a8ce-4aeb-84d4-f933503c5138",
+    "Name": "Philips Hue",
+    "OS": [
         {
-          "Image": "plugin/images/icons/scene"
+            "MinimumVersion": "10.11",
+            "Platform": "mac"
+        },
+        {
+            "MinimumVersion": "10",
+            "Platform": "windows"
         }
-      ],
-      "Tooltip": "Set a scene.",
-      "UUID": "com.elgato.philips-hue.scene"
-    }
-  ],
-  "SDKVersion": 2,
-  "Author": "Elgato",
-  "CodePath": "plugin/index.html",
-  "Description": "Control your Philips Hue lights.",
-  "Name": "Philips Hue",
-  "Icon": "plugin/images/icons/plugin",
-  "Category": "Philips Hue",
-  "CategoryIcon": "plugin/images/actions/category",
-  "PropertyInspectorPath": "pi/index.html",
-  "URL": "https://www.elgato.com/gaming/stream-deck",
-  "Version": "1.6.4",
-  "DefaultWindowSize": [
-    500,
-    650
-  ],
-  "OS": [
-    {
-      "Platform": "mac",
-      "MinimumVersion": "10.11"
+    ],
+    "PropertyInspectorPath": "pi/index.html",
+    "SDKVersion": 2,
+    "Software": {
+        "MinimumVersion": "5.0"
     },
-    {
-      "Platform": "windows",
-      "MinimumVersion": "10"
-    }
-  ],
-  "Software": {
-    "MinimumVersion": "5.0"
-  }
+    "URL": "https://www.elgato.com/gaming/stream-deck",
+    "Version": "1.6.5"
 }
