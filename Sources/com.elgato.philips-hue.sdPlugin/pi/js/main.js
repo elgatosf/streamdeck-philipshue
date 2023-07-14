@@ -23,17 +23,17 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     let actionInfo = JSON.parse(inActionInfo);
     let info = JSON.parse(inInfo);
     let isEncoder = actionInfo?.payload?.controller == 'Encoder';
-    let streamDeckVersion = info['application']['version'];
-    let pluginVersion = info['plugin']['version'];
+    let streamDeckVersion = info[ 'application' ][ 'version' ];
+    let pluginVersion = info[ 'plugin' ][ 'version' ];
 
     // Save global settings
-    settings = actionInfo['payload']['settings'];
+    settings = actionInfo[ 'payload' ][ 'settings' ];
 
     // Retrieve language
-    let language = info['application']['language'];
+    let language = info[ 'application' ][ 'language' ];
 
     // Retrieve action identifier
-    let action = actionInfo['action'];
+    let action = actionInfo[ 'action' ];
 
     // Open the web socket to Stream Deck
     // Use 127.0.0.1 because Windows needs 300ms to resolve localhost
@@ -51,43 +51,43 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     // Create actions
     let pi;
 
-    if (action === 'com.elgato.philips-hue.power') {
+    if(action === 'com.elgato.philips-hue.power') {
         pi = new PowerPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
-    else if (action === 'com.elgato.philips-hue.color') {
+    else if(action === 'com.elgato.philips-hue.color') {
         pi = new ColorPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
-    else if (action === 'com.elgato.philips-hue.cycle') {
+    else if(action === 'com.elgato.philips-hue.cycle') {
         pi = new CyclePI(inUUID, language, streamDeckVersion, pluginVersion);
     }
-    else if (action === 'com.elgato.philips-hue.brightness') {
+    else if(action === 'com.elgato.philips-hue.brightness') {
         pi = new BrightnessPI(inUUID, language, streamDeckVersion, pluginVersion, isEncoder);
     }
-    else if (action === 'com.elgato.philips-hue.temperature') {
-      pi = new TemperaturePI(inUUID, language, streamDeckVersion, pluginVersion, isEncoder);
-  }
-    else if (action === 'com.elgato.philips-hue.scene') {
+    else if(action === 'com.elgato.philips-hue.temperature') {
+        pi = new TemperaturePI(inUUID, language, streamDeckVersion, pluginVersion, isEncoder);
+    }
+    else if(action === 'com.elgato.philips-hue.scene') {
         pi = new ScenePI(inUUID, language, streamDeckVersion, pluginVersion);
     }
-    else if (action === 'com.elgato.philips-hue.brightness-rel') {
+    else if(action === 'com.elgato.philips-hue.brightness-rel') {
         pi = new BrightnessRelPI(inUUID, language, streamDeckVersion, pluginVersion);
     }
 
     websocket.onmessage = msg => {
         // Received message from Stream Deck
         let jsonObj = JSON.parse(msg.data);
-        let event = jsonObj['event'];
-        let jsonPayload = jsonObj['payload'];
+        let event = jsonObj[ 'event' ];
+        let jsonPayload = jsonObj[ 'payload' ];
 
-        if (event === 'didReceiveGlobalSettings') {
+        if(event === 'didReceiveGlobalSettings') {
             // Set global plugin settings
-            globalSettings = jsonPayload['settings'];
+            globalSettings = jsonPayload[ 'settings' ];
         }
-        else if (event === 'didReceiveSettings') {
+        else if(event === 'didReceiveSettings') {
             // Save global settings after default was set
-            settings = jsonPayload['settings'];
+            settings = jsonPayload[ 'settings' ];
         }
-        else if (event === 'sendToPropertyInspector') {
+        else if(event === 'sendToPropertyInspector') {
             // Save global cache
             cache = jsonPayload;
 
