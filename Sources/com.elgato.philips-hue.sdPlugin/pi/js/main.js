@@ -96,3 +96,10 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
         }
     };
 }
+
+
+function showSettings() {
+    const ta = document.querySelector('#info');
+    const s = JSON.stringify(globalSettings, null, 2);
+    if(ta) ta.value = s;
+}
