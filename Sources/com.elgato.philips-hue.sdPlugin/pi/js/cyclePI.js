@@ -138,10 +138,10 @@ function CyclePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
             picker.innerHTML = getColorPicker(i);
 
             if (lightCache.xy != null) {
-                document.querySelector('#color-input-container .sdpi-item-value').append(picker.firstChild);
+                document.querySelector('#color-input-container .sdpi-item-value').append(picker.firstElementChild);
             }
             else {
-                placeholder.insertBefore(picker.firstChild, document.getElementById('cycle-buttons'));
+                placeholder.insertBefore(picker.firstElementChild, document.getElementById('cycle-buttons'));
             }
 
             document.getElementById('color-input-' + (i - 1)).addEventListener('change', colorChanged);
