@@ -135,7 +135,9 @@ function CyclePI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
         // Add a new color picker to document
         let addColorPicker = i => {
             let picker = document.createElement('div');
-            picker.innerHTML = getColorPicker(i);
+            const cphtml = getColorPicker(i).trim();
+            picker.innerHTML = cphtml;
+
 
             if (lightCache.xy != null) {
                 document.querySelector('#color-input-container .sdpi-item-value').append(picker.firstChild);
