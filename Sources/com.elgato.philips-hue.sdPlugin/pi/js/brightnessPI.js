@@ -28,7 +28,7 @@ function BrightnessPI(inContext, inLanguage, inStreamDeckVersion, inPluginVersio
 
     };
 
-    const values = [1,2,3,4,5,10];
+    const values = [1,2,3,4,5,10,20];
     const selectedIndex = values.indexOf(Number(settings.scaleTicks));
 
     // Add brightness slider

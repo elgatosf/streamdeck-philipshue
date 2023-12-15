@@ -9,7 +9,7 @@ function PI(inContext, inLanguage, inStreamDeckVersion, inPluginVersion) {
     // Init PI
     let instance = this;
 
-    const values = [1,2,3,4,5,10];
+    const values = [1,2,3,4,5,10,20];
     this.getEncoderOptions = (settingsValue, forEncoder) => {
       const selectedIndex = values.indexOf(Number(settingsValue));
       return forEncoder === true ? `<div type="select" class="sdpi-item">
