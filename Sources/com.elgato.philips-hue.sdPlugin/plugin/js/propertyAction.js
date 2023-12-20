@@ -85,34 +85,49 @@ function PropertyAction(inContext, inSettings, jsn) {
 
   };
 
+  this.onDialUp = function(jsn) {
+    // console.log('onDialUp', jsn);
+    if(this.getVerifiedSettings(inContext) === false) return;
+    this.keyIsDown = false;
+    if(!this.actionTriggered) {
+      if(this.isEncoder) {
+        return this.togglePower(inContext);
+      }
+      const target = this.getCurrentLightOrGroup();
+      // check if light is off, and if it is, turn it on
+      if(target.objCache.power === false) {
+        this.togglePower(inContext);
+        this.updateDisplay(target.objCache, 'power');
+      } else {
+        // otherwise, just change the property to the configured value
+        this.onKeyUp(inContext);
+      }
+    }
+  };
+
+  this.onDialDown = function(jsn) {
+    // console.log('onDialDown', jsn);
+    if(this.getVerifiedSettings(inContext) === false) return;
+    // temporarily set a flag to mark that the key is down
+    this.keyIsDown = true;
+    this.actionTriggered = false;
+    setTimeout(function() {
+      if(instance.keyIsDown) {
+        // console.log("***** long keypress detected:", instance.keyIsDown,inContext);
+        const target = instance.togglePower(inContext);
+        instance.updateDisplay(target.objCache, 'power');
+        instance.actionTriggered = true;
+      }
+      instance.keyIsDown = false;
+    }, 500);
+  };
+
   this.onDialPress = function(jsn) {
     if(this.getVerifiedSettings(inContext) === false) return;
     if(jsn?.payload?.pressed === true) {  // dial pressed == down
-      // temporarily set a flag to mark that the key is down
-      this.keyIsDown = true;
-      this.actionTriggered = false;
-      setTimeout(function() {
-        if(instance.keyIsDown) {
-          // console.log("***** long keypress detected:", instance.keyIsDown,inContext);
-          const target = instance.togglePower(inContext);
-          instance.updateDisplay(target.objCache, 'power');
-          instance.actionTriggered = true;
-        }
-        instance.keyIsDown = false;
-      }, 500);
+      this.onDialDown(jsn);
     } else { // dial released == up
-      this.keyIsDown = false;
-      if(!this.actionTriggered) {
-        const target = this.getCurrentLightOrGroup();
-        // check if light is off, and if it is, turn it on
-        if(target.objCache.power === false) {
-          this.togglePower(inContext);
-          this.updateDisplay(target.objCache, 'power');
-        } else {
-          // otherwise, just change the property to the configured value
-          this.onKeyUp(inContext);
-        }
-      }
+      this.onDialUp(jsn);
     }
   };
 

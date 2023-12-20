@@ -33,6 +33,9 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
     // Open the web socket to Stream Deck
     // Use 127.0.0.1 because Windows needs 300ms to resolve localhost
     websocket = new WebSocket(`ws://127.0.0.1:${inPort}`);
+    const _info = JSON.parse(inInfo);
+    const [ version, major, minor, build ] = _info.application.version.split(".").map(e => parseInt(e, 10));
+    const hasDialPress = version == 6 && major < 4;
 
     // Web socket is connected
     websocket.onopen = () => {
@@ -41,7 +44,7 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
 
         // Request the global settings of the plugin
         requestGlobalSettings(inPluginUUID);
-    }
+    };
 
     document.addEventListener('updateActions', (e) => {
       // updateAction carries the sender of the event so we can skip it
@@ -118,7 +121,15 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
             // debounceDialRotate(jsonObj);
             // actions[context].onDialRotate(jsonObj);
           }
-        } else if(event === 'dialPress') {
+        } else if(!hasDialPress && event === 'dialUp') {
+            if(actions[ context ]?.onDialUp) {
+                actions[ context ].onDialUp(jsonObj);
+            }
+        } else if(!hasDialPress && event === 'dialDown') {
+            if(actions[ context ]?.onDialDown) {
+                actions[ context ].onDialDown(jsonObj);
+            }
+        } else if(hasDialPress && event === 'dialPress') {
           if(actions[context]?.onDialPress) {
             actions[context].onDialPress(jsonObj);
           }

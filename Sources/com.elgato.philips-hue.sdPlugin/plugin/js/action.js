@@ -83,7 +83,7 @@ function Action(inContext, inSettings, jsn) {
 
     this.updateDisplay = (lightOrGroup, property) => {
       if(!lightOrGroup) {
-        if(!getCurrentLightOrGroup) return;
+        if(!this.getCurrentLightOrGroup) return;
         const curLightOrGroup = this.getCurrentLightOrGroup();
         if(curLightOrGroup) {
           lightOrGroup = curLightOrGroup.objCache;
