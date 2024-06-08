@@ -13,6 +13,9 @@ It should work with all recent Philips Hue Bridges (sold like 6-7 years ago).
 
 You can install both versions (old and new) in parallel without problems.
 
+<img width="952" alt="CleanShot_2024-06-08_08 35 59" src="https://github.com/elgatosf/streamdeck-philipshue/assets/80752/621322d9-5e19-42fb-aec4-7fce9a11aac6">
+
+
 ----
 
 (The notes below are kept for reference)
