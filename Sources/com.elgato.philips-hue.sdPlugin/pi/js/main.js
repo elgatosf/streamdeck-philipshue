@@ -90,6 +90,9 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
         else if (event === 'sendToPropertyInspector') {
             // Save global cache
             cache = jsonPayload;
+            
+            // Save Cached Bridges
+            pi.saveCachedBridges(cache);
 
             // Load bridges and lights
             pi.loadBridges();
